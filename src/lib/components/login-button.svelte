@@ -1,11 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import auth from "../../auth/authService";
-  import { isAuthenticated, user } from "../../store";
+  import { isAuthenticated } from "../../store";
+  import { IconLogin, IconLogout } from "$lib";
 
   onMount(async () => {
-    const client = await auth.createClient();
-
     if (
       window.location.search.includes("code=") ||
       window.location.search.includes("state=")
@@ -29,15 +28,15 @@
 {#if $isAuthenticated}
   <button
     on:click={logout}
-    class="rounded-full bg-tint text-[16px] font-bold py-3 px-5 text-secondary"
+    class="flex items-center gap-2 rounded-full bg-tint text-[16px] font-bold py-3 px-5 text-secondary"
   >
-    Ausloggen
+    Ausloggen <IconLogout />
   </button>
 {:else}
   <button
     on:click={login}
-    class="rounded-full bg-tint text-[16px] font-bold py-3 px-5 text-secondary"
+    class="flex items-center gap-2 rounded-full bg-tint text-[16px] font-bold py-3 px-5 text-secondary"
   >
-    Einloggen
+    Einloggen <IconLogin />
   </button>
 {/if}
