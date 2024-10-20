@@ -1,6 +1,6 @@
 const config = {
-  domain: import.meta.env.VITE_AUTH0_DOMAIN,
-  clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
+  domain: "auth.hochfrequenz.de",
+  clientId: "VApHBZSAshARYgBYM01rgxhJupbnYgXa",
 };
 
 export default config as {
