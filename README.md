@@ -19,13 +19,3 @@ $ npm run lint # lints the whole project (eslint)
 $ npm run format # formats the whole project (prettier)
 $ npm run test # runs E2E tests (playwright) assuming the dev server is up and running
 ```
-
-### required project settings to deploy to Github Pages
-
-`Settings → Actions → General`: Workflow Permissions<br>
-✔ Read and write permissions<br>
-✔ Allow GitHub Actions to create and approve pull requests
-
-`Settings → Pages`: Build and deployment → Source: **Github Actions**
-
-`Settings → Environments → github-pages`: Deployment branches and tags → **No restriction**
