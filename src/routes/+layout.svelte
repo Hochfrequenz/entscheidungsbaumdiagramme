@@ -14,6 +14,7 @@
   let isLoading = true;
 
   onMount(async () => {
+    await auth.createClient();
 
     if (
       window.location.search.includes("code=") ||

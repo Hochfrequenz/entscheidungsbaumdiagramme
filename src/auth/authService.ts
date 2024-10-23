@@ -1,7 +1,7 @@
 import type { LogoutOptions } from "@auth0/auth0-spa-js";
 import { Auth0Client, createAuth0Client, User } from "@auth0/auth0-spa-js";
 
-import { isAuthenticated,user } from "../store";
+import { isAuthenticated, user } from "../store";
 import config from "./auth_config";
 
 let auth0Client: Auth0Client;
@@ -55,15 +55,15 @@ async function updateAuthStore(): Promise<void> {
   if (authenticated) {
     const userData = await auth0Client.getUser();
     user.set(userData as User);
-    localStorage.setItem("isLoggedIn", "true");
+    window.localStorage.setItem("isLoggedIn", "true");
   } else {
     user.set({});
-    localStorage.removeItem("isLoggedIn");
+    window.localStorage.removeItem("isLoggedIn");
   }
 }
 
 async function checkAuth(): Promise<boolean> {
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const isLoggedIn = window.localStorage.getItem("isLoggedIn") === "true";
   if (isLoggedIn) {
     await updateAuthStore();
   }
