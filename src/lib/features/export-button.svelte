@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { base } from "$app/paths";
   import { onMount } from "svelte";
+
+  import { base } from "$app/paths";
 
   export let currentFormatVersion: string = "";
   export let currentEbd: string = "";
