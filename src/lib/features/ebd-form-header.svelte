@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { base } from "$app/paths";
   import { goto } from "$app/navigation";
+  import { base } from "$app/paths";
   import { EbdSelect, ExportButton, FormatVersionSelect, IconLogo } from "$lib";
 
   type FormatVersion = {

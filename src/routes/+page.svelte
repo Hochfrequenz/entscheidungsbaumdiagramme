@@ -1,5 +1,6 @@
 <script lang="ts">
   import "../app.scss";
+
   import { base } from "$app/paths";
   import { LoginButton, ToolsBanner } from "$lib";
   import { isAuthenticated } from "../store";

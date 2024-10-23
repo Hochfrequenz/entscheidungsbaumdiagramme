@@ -1,5 +1,6 @@
 <script lang="ts">
   import "../app.scss";
+
   import { Footer } from "$lib";
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
