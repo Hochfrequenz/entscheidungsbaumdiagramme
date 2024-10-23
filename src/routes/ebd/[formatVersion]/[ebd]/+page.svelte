@@ -1,7 +1,10 @@
 <script lang="ts">
+  /* eslint-disable svelte/no-at-html-tags */
+
   import { onMount } from "svelte";
-  import { page } from "$app/stores";
+
   import { base } from "$app/paths";
+  import { page } from "$app/stores";
 
   let svgContainer: HTMLDivElement;
   let svgContent = "";

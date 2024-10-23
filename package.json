@@ -1,5 +1,5 @@
 {
-  "name": "sveltekit-static-template",
+  "name": "ebd.hochfrequenz.de",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -11,7 +11,7 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "format": "prettier '**/*.{svelte,js,jsx,ts,tsx,html,css,scss,json,yml,md}' --write",
     "format:check": "prettier '**/*.{svelte,js,jsx,ts,tsx,html,css,scss,json,yml,md}' --check",
-    "lint": "eslint .",
+    "lint": "eslint 'src/**/*.{js,ts,svelte}'",
     "postinstall": "npx playwright install",
     "test": "npx playwright test"
   },

@@ -1,5 +1,6 @@
 <script>
   import "../app.scss";
+
   import { base } from "$app/paths";
   import { ToolsBanner } from "$lib";
 </script>
