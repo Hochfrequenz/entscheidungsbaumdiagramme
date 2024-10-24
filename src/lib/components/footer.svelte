@@ -1,6 +1,7 @@
 <script>
   import { base } from "$app/paths";
   import { IconLogo } from "$lib";
+
   export let background = "bg-secondary";
 
   let currentYear = new Date().getFullYear();

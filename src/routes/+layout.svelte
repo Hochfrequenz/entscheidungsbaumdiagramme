@@ -1,5 +1,6 @@
 <script>
   import "../app.scss";
+
   import { Footer } from "$lib";
 </script>
 

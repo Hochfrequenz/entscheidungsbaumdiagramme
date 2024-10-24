@@ -1,7 +1,8 @@
 <script lang="ts">
   import "../../../../app.scss";
-  import { EbdFormHeader } from "$lib";
+
   import { page } from "$app/stores";
+  import { EbdFormHeader } from "$lib";
 
   $: ({ formatVersions, ebds } = $page.data);
   $: ({ formatVersion, ebd } = $page.params);
