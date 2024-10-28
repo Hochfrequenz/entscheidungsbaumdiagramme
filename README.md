@@ -20,12 +20,9 @@ $ npm run format # formats the whole project (prettier)
 $ npm run test # runs E2E tests (playwright) assuming the dev server is up and running
 ```
 
-### required project settings to deploy to Github Pages
+### auth0 authentication
 
-`Settings → Actions → General`: Workflow Permissions<br>
-✔ Read and write permissions<br>
-✔ Allow GitHub Actions to create and approve pull requests
+> [!NOTE]
+> During local development, authentication is currently not required. Instead, a dummy account `local@development.com` will be already logged in at both local dev server startup as well as build preview.
 
-`Settings → Pages`: Build and deployment → Source: **Github Actions**
-
-`Settings → Environments → github-pages`: Deployment branches and tags → **No restriction**
+To get past the landing page when navigating through the staging environment `https://ebd.stage.hochfrequenz.de` and production environment `https://ebd.hochfrequenz.de`, users need to authenticate using their Hochfrequenz login credentials.
