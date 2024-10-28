@@ -1,7 +1,10 @@
 // shared components
 export { default as Footer } from "./components/footer.svelte";
 export { default as Header } from "./components/header.svelte";
+export { default as IconLogin } from "./components/icon-login.svelte";
 export { default as IconLogo } from "./components/icon-logo.svelte";
+export { default as IconLogout } from "./components/icon-logout.svelte";
+export { default as LoginButton } from "./components/login-button.svelte";
 export { default as ToolsBanner } from "./components/tools-banner.svelte";
 
 // features
