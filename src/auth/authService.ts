@@ -6,7 +6,17 @@ import config from "./auth_config";
 
 let auth0Client: Auth0Client;
 
+function isDevelopmentEnvironment(): boolean {
+  return import.meta.env.DEV || window.location.hostname === "localhost";
+}
+
 async function createClient(): Promise<Auth0Client> {
+  // set status = "authenticated" for local development
+  if (isDevelopmentEnvironment()) {
+    isAuthenticated.set(true);
+    user.set({ email: "local@development.com" });
+  }
+
   auth0Client = await createAuth0Client({
     domain: config.domain,
     clientId: config.clientId,
