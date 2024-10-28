@@ -19,3 +19,10 @@ $ npm run lint # lints the whole project (eslint)
 $ npm run format # formats the whole project (prettier)
 $ npm run test # runs E2E tests (playwright) assuming the dev server is up and running
 ```
+
+### auth0 authentication
+
+> [!NOTE]
+> During local development, authentication is currently not required. Instead, a dummy account `local@development.com` will be already logged in at both local dev server startup as well as build preview.
+
+To get past the landing page when navigating through the staging environment `https://ebd.stage.hochfrequenz.de` and production environment `https://ebd.hochfrequenz.de`, users need to authenticate using their Hochfrequenz login credentials.

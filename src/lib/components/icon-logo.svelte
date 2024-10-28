@@ -1,7 +1,7 @@
 <script>
   import { base } from "$app/paths";
 
-  export let size = 46;
+  export let size = 24;
 </script>
 
 <img
@@ -10,6 +10,6 @@
   style:height="{size}px"
   width={size}
   height={size}
-  src="{base}/logo.png"
+  src="{base}/logo.svg"
   alt="Hochfrequenz-Logo"
 />
