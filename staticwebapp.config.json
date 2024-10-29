@@ -1,6 +1,6 @@
 {
   "navigationFallback": {
-    "rewrite": "/index.html",
+    "rewrite": "/404.html",
     "exclude": [
       "/images/*.{png,jpg,gif,ico}",
       "/*.{css,scss,js,png,jpg,gif,ico,svg}"
@@ -11,10 +11,21 @@
       "route": "/ebd/*",
       "serve": "/index.html",
       "statusCode": 200
+    },
+    {
+      "route": "/*",
+      "serve": "/404.html",
+      "statusCode": 404
     }
   ],
   "mimeTypes": {
     ".json": "text/json",
     ".svg": "image/svg+xml"
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/404.html",
+      "statusCode": 404
+    }
   }
 }
