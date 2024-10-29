@@ -8,24 +8,9 @@
   },
   "routes": [
     {
-      "route": "/ebd/*",
+      "route": "/*",
       "serve": "/index.html",
       "statusCode": 200
-    },
-    {
-      "route": "/*",
-      "serve": "/404.html",
-      "statusCode": 404
     }
-  ],
-  "mimeTypes": {
-    ".json": "text/json",
-    ".svg": "image/svg+xml"
-  },
-  "responseOverrides": {
-    "404": {
-      "rewrite": "/404.html",
-      "statusCode": 404
-    }
-  }
+  ]
 }
