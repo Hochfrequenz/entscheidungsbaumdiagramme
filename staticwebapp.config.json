@@ -3,14 +3,34 @@
     "rewrite": "/404.html",
     "exclude": [
       "/images/*.{png,jpg,gif,ico}",
-      "/*.{css,scss,js,png,jpg,gif,ico,svg}"
+      "/*.{css,scss,js,png,jpg,gif,ico,svg}",
+      "/_app/*",
+      "/ebd/*/*.svg"
     ]
   },
   "routes": [
     {
-      "route": "/*",
+      "route": "/",
       "serve": "/index.html",
       "statusCode": 200
+    },
+    {
+      "route": "/ebd/*",
+      "serve": "/index.html",
+      "statusCode": 200
+    },
+    {
+      "route": "/_app/*",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
     }
-  ]
+  ],
+  "mimeTypes": {
+    ".json": "application/json",
+    ".svg": "image/svg+xml"
+  },
+  "globalHeaders": {
+    "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data:; connect-src 'self' https://auth.hochfrequenz.de;"
+  }
 }
