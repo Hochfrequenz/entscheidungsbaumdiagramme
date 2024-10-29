@@ -18,10 +18,14 @@
   },
   "routes": [
     {
-      "route": "/ebd/*/*.svg",
+      "route": "/ebd/*/*",
       "headers": {
+        "Cache-Control": "no-cache",
         "Content-Type": "image/svg+xml"
       }
     }
-  ]
+  ],
+  "globalHeaders": {
+    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'"
+  }
 }
