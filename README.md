@@ -5,9 +5,9 @@
 ![Prettier status badge](https://github.com/Hochfrequenz/ebd.hochfrequenz.de/workflows/Formatting/badge.svg)
 ![PlayWright status badge](https://github.com/Hochfrequenz/ebd.hochfrequenz.de/workflows/E2E-Testing/badge.svg)
 
-### setting up development environment
+### Setting up development environment
 
-make sure you have the latest version of [node](https://nodejs.org/en) installed (recommended via node version manager [nvm](https://github.com/nvm-sh/nvm)).
+Make sure you have the latest version of [node](https://nodejs.org/en) installed (recommended via node version manager [nvm](https://github.com/nvm-sh/nvm)).
 
 ```sh
 $ npm install
@@ -20,13 +20,13 @@ $ npm run format # formats the whole project (prettier)
 $ npm run test # runs E2E tests (playwright) assuming the dev server is up and running
 ```
 
-to serve the built built site locally, run
+To serve the built site locally, run
 
 ```sh
 $ npm run build && npx http-server ./build
 ```
 
-to start a http server at http://127.0.0.1:8080, providing a local view roughly similar to how Azure will render the project.
+This starts an HTTP server at http://127.0.0.1:8080, providing a local view roughly similar to how Azure will render the project.
 
 ### auth0 authentication
 
