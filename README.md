@@ -20,6 +20,14 @@ $ npm run format # formats the whole project (prettier)
 $ npm run test # runs E2E tests (playwright) assuming the dev server is up and running
 ```
 
+to serve the built built site locally, run
+
+```sh
+$ npm run build && npx http-server ./build
+```
+
+to start a http server at http://127.0.0.1:8080, providing a local view roughly similar to how Azure will render the project.
+
 ### auth0 authentication
 
 > [!NOTE]
