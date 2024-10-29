@@ -28,7 +28,7 @@ $ npm run build && npx http-server ./build
 
 This starts an HTTP server at http://127.0.0.1:8080, providing a local view roughly similar to how Azure will render the project.
 
-### auth0 authentication
+### Auth0 authentication
 
 > [!NOTE]
 > During local development, authentication is currently not required. Instead, a dummy account `local@development.com` will be already logged in at both local dev server startup as well as build preview.
