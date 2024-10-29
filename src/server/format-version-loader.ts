@@ -28,15 +28,28 @@ function formatVersion(version: string): FormatVersion {
   };
 }
 
-export function getFormatVersions(): FormatVersion[] {
-  const ebdPath = join(process.cwd(), "static", "ebd");
+function tryReadDir(path: string) {
   try {
-    return readdirSync(ebdPath, { withFileTypes: true })
-      .filter((dirent) => dirent.isDirectory())
-      .map((dirent) => formatVersion(dirent.name))
-      .sort((a, b) => b.code.localeCompare(a.code)); // descending order
-  } catch (error) {
-    console.error("No format version directories available.", error);
+    return readdirSync(path, { withFileTypes: true });
+  } catch {
+    return null;
+  }
+}
+
+// fetch submodule data from either /static/ebd (sveltekit "dev server") or /build/ebd (sveltekit "preview")
+export function getFormatVersions(): FormatVersion[] {
+  const staticPath = join(process.cwd(), "static", "ebd");
+  const buildPath = join(process.cwd(), "build", "ebd");
+
+  const dirents = tryReadDir(staticPath) || tryReadDir(buildPath);
+
+  if (!dirents) {
+    console.error("submodule data not found.");
     return [];
   }
+
+  return dirents
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => formatVersion(dirent.name))
+    .sort((a, b) => b.code.localeCompare(a.code));
 }

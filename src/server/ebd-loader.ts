@@ -1,21 +1,39 @@
 import { readdirSync } from "fs";
 import { join } from "path";
 
+function tryReadDir(path: string) {
+  try {
+    return readdirSync(path);
+  } catch {
+    return null;
+  }
+}
+
+// fetch submodule data from either /static/ebd (sveltekit "dev server") or /build/ebd (sveltekit "preview")
 export function getEbds(): Record<string, string[]> {
-  const ebdPath = join(process.cwd(), "static", "ebd");
+  const staticPath = join(process.cwd(), "static", "ebd");
+  const buildPath = join(process.cwd(), "build", "ebd");
   const ebds: Record<string, string[]> = {};
 
-  try {
-    const formatVersions = readdirSync(ebdPath, { withFileTypes: true })
-      .filter((dirent) => dirent.isDirectory())
-      .map((dirent) => dirent.name);
+  const basePath = tryReadDir(staticPath) ? staticPath : buildPath;
+  const formatVersions = tryReadDir(basePath);
 
+  if (!formatVersions) {
+    console.error("submodule data not found.");
+    return {};
+  }
+
+  try {
     for (const formatVersion of formatVersions) {
-      const versionPath = join(ebdPath, formatVersion);
-      ebds[formatVersion] = readdirSync(versionPath)
-        .filter((file) => file.endsWith(".svg"))
-        .map((file) => file.replace(".svg", ""))
-        .sort((a, b) => a.localeCompare(b));
+      const versionPath = join(basePath, formatVersion);
+      const files = tryReadDir(versionPath);
+
+      if (files) {
+        ebds[formatVersion] = files
+          .filter((file) => file.endsWith(".svg"))
+          .map((file) => file.replace(".svg", ""))
+          .sort((a, b) => a.localeCompare(b));
+      }
     }
 
     return ebds;
