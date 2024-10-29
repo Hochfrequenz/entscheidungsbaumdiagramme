@@ -1,0 +1,35 @@
+{
+  "trailingSlash": "auto",
+  "routes": [
+    {
+      "route": "/*",
+      "serve": "/index.html",
+      "statusCode": 200
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "index.html",
+    "exclude": ["/images/*.{png,jpg,gif}", "/css/*", "/js/*", "/fonts/*"]
+  },
+  "responseOverrides": {
+    "400": {
+      "rewrite": "/"
+    },
+    "401": {
+      "redirect": "/",
+      "statusCode": 302
+    },
+    "403": {
+      "rewrite": "/"
+    },
+    "404": {
+      "rewrite": "/"
+    }
+  },
+  "globalHeaders": {
+    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'"
+  },
+  "mimeTypes": {
+    ".json": "text/json"
+  }
+}
