@@ -53,8 +53,10 @@ flowchart TD
     & rebdhuhn 🐥| B("machine-readable-
     entscheidungsbaumdiagramme")
     B -->|synced submodule 🔄| C("entscheidungsbaumdiagramm frontend 🌳")
-    C -->|Github Actions| D("ebd.stage.hochfrequenz.de")
-    C -->|Github release| E("ebd.hochfrequenz.de")
+    C -->|Github Actions
+    trigger: pre-release| D("ebd.stage.hochfrequenz.de")
+    C -->|Github Actions
+    trigger: release| E("ebd.hochfrequenz.de")
 ```
 
 ### 🔐 Auth0 authentication
