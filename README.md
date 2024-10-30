@@ -28,6 +28,22 @@ $ npm run build && npx http-server ./build
 
 This starts an HTTP server at http://127.0.0.1:8080, providing a local view roughly similar to how Azure will render the project.
 
+### Semantic commit messages
+
+To meet the pull request title convention [requirements](https://github.com/Hochfrequenz/entscheidungsbaumdiagramm/blob/main/.github/workflows/conventional-commit-validation.yml) enforced by Github Actions, here is a brief guide to help choosing the appropriate tag for each purpose:
+
+- `build:` - changes that affect the build system or external dependencies
+- `chore:` - miscellaneous commits and routine tasks
+- `ci:` - changes to the CI/CD configuration
+- `docs:` - updating the documentation
+- `feat:` - adding or removing a feature feature
+- `fix:` - bug fixes
+- `perf:` - performance improvement
+- `refactor:` - improve code structure, readability, or maintainability
+- `revert:` - reverts a previous commit
+- `style:` - code formatting and styling that do not affect functionality
+- `test:` - adding or updating tests
+
 ### Auth0 authentication
 
 > [!NOTE]
