@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "vite dev --open",
+    "serve": "npm run build && npx http-server ./build -a localhost -p 8080 --single",
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",

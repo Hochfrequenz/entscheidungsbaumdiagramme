@@ -20,10 +20,16 @@ $ npm run format # formats the whole project (prettier)
 $ npm run test # runs E2E tests (playwright) assuming the dev server is up and running
 ```
 
-To serve the built site locally, run
+To serve the built site as SPA locally, run either
 
 ```sh
-$ npm run build && npx http-server ./build
+$ npm run serve
+```
+
+or
+
+```sh
+$ npm run build && npx http-server ./build -a localhost -p 8080 --single
 ```
 
 This starts an HTTP server at http://127.0.0.1:8080, providing a local view roughly similar to how Azure will render the project.
