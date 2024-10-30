@@ -63,3 +63,15 @@ flowchart TD
 > During local development, authentication is currently not required. Instead, a dummy account `local@development.com` will be already logged in at both local dev server startup as well as build preview.
 
 To get past the landing page when navigating through the staging environment `https://ebd.stage.hochfrequenz.de` and production environment `https://ebd.hochfrequenz.de`, users need to authenticate using their Hochfrequenz login credentials.
+
+### 🔗 Links
+
+[Marktgut](https://hochfrequenz-marktplatz.atlassian.net/browse/HFMP-67)<br>
+[Azure](https://portal.azure.com/#@hochfrequenz.net/resource/subscriptions/1cdc65f0-62d2-4770-be11-9ec1da950c81/resourceGroups/entscheidungsbaumdiagramm/providers/Microsoft.Web/staticSites/entscheidungsbaumdiagramm-frontend-stage/staticsite)
+
+[ebdamame](https://github.com/Hochfrequenz/ebdamame)<br>
+[rebdhuhn](https://github.com/Hochfrequenz/rebdhuhn)<br>
+[EBD toolchain](https://github.com/Hochfrequenz/ebd_toolchain)<br>
+[machine-readable EBDs](https://github.com/Hochfrequenz/machine-readable_entscheidungsbaumdiagramme/)
+
+[BDEW](https://www.edi-energy.de/index.php?id=38&tx_bdew_bdew%5Bview%5D=future&tx_bdew_bdew%5Baction%5D=list&tx_bdew_bdew%5Bcontroller%5D=Dokument&cHash=325de212fe24061e83e018a2223e6185)
