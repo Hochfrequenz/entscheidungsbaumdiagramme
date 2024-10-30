@@ -1,6 +1,11 @@
 import { readdirSync } from "fs";
 import { join } from "path";
 
+const skippedFormatVersionToInsteadFormatVersionMap: Record<string, string> = {
+  // key = skipped format version; value = previous (still valid) format version
+  FV2410: "FV2404",
+};
+
 function tryReadDir(path: string) {
   try {
     return readdirSync(path);
@@ -25,6 +30,10 @@ export function getEbds(): Record<string, string[]> {
 
   try {
     for (const formatVersion of formatVersions) {
+      if (skippedFormatVersionToInsteadFormatVersionMap[formatVersion]) {
+        continue;
+      }
+
       const versionPath = join(basePath, formatVersion);
       const files = tryReadDir(versionPath);
 
