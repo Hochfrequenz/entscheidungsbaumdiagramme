@@ -54,9 +54,12 @@ flowchart TD
     entscheidungsbaumdiagramme")
     B -->|synced submodule 🔄| C("entscheidungsbaumdiagramm frontend 🌳")
     C -->|Github Actions
-    trigger: pre-release| D("ebd.stage.hochfrequenz.de")
+    trigger: PR created/updated| D("deployment preview")
     C -->|Github Actions
-    trigger: release| E("ebd.hochfrequenz.de")
+    trigger: PR merged
+    into main| E("ebd.stage.hochfrequenz.de")
+    C -->|Github Actions
+    trigger: release| F("ebd.hochfrequenz.de")
 ```
 
 ### 🔐 Auth0 authentication
