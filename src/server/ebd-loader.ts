@@ -1,7 +1,8 @@
 import { readdirSync } from "fs";
 import { join } from "path";
 
-const skippedFormatVersionMap: Record<string, string> = {
+const skippedFormatVersionToInsteadFormatVersionMap: Record<string, string> = {
+  // key = skipped format version; value = previous (still valid) format version
   FV2410: "FV2404",
 };
 
@@ -29,7 +30,7 @@ export function getEbds(): Record<string, string[]> {
 
   try {
     for (const formatVersion of formatVersions) {
-      if (skippedFormatVersionMap[formatVersion]) {
+      if (skippedFormatVersionToInsteadFormatVersionMap[formatVersion]) {
         continue;
       }
 
