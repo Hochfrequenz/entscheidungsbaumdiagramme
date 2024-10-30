@@ -1,8 +1,21 @@
 {
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/*.png", "/*.jpg", "/*.gif", "/*.svg"]
+  },
+  "routes": [
+    {
+      "route": "/",
+      "rewrite": "/index.html"
+    },
+    {
+      "route": "/ebd",
+      "rewrite": "/index.html"
+    }
+  ],
   "responseOverrides": {
     "404": {
-      "rewrite": "/404.html",
-      "statusCode": 404
+      "rewrite": "/index.html"
     }
   }
 }
