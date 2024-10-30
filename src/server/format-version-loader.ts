@@ -19,12 +19,21 @@ const formatVersionMap: Record<string, string> = {
   "2510": "Oktober 2025",
 };
 
+// mapping of FVs where the BDEW skipped EBD related updates
+const skippedFormatVersionMap: Record<string, string> = {
+  FV2410: "FV2404",
+};
+
 function formatVersion(version: string): FormatVersion {
-  const versionNumber = version.slice(2);
+  const formattedVersion = version.startsWith("FV") ? version : `FV${version}`;
+  const mappedVersion =
+    skippedFormatVersionMap[formattedVersion] || formattedVersion;
+  const versionNumber = mappedVersion.replace("FV", "");
   const formatVersionDate = formatVersionMap[versionNumber];
+
   return {
-    code: version,
-    detailedFormatVersion: `${formatVersionDate} (${version})`,
+    code: mappedVersion,
+    detailedFormatVersion: `${formatVersionDate} (${mappedVersion})`,
   };
 }
 
@@ -48,8 +57,19 @@ export function getFormatVersions(): FormatVersion[] {
     return [];
   }
 
+  const uniqueFormatVersion = new Set<string>();
   return dirents
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => formatVersion(dirent.name))
+    .filter((version) => {
+      if (Object.keys(skippedFormatVersionMap).includes(version.code)) {
+        return false;
+      }
+      if (uniqueFormatVersion.has(version.code)) {
+        return false;
+      }
+      uniqueFormatVersion.add(version.code);
+      return true;
+    })
     .sort((a, b) => b.code.localeCompare(a.code));
 }
