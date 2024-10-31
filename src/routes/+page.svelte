@@ -1,17 +1,14 @@
 <script lang="ts">
   import "../app.scss";
 
-  import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import { LoginButton, ToolsBanner } from "$lib";
 
   import auth from "../auth/authService";
   import { isAuthenticated } from "../store";
 
-  async function checkAuthentication() {
-    if ($isAuthenticated) {
-      goto(`${base}/ebd`);
-    } else {
+  async function handleClick() {
+    if (!$isAuthenticated) {
       await auth.loginWithRedirect();
     }
   }
@@ -32,15 +29,25 @@
       - aber es sind actually Diagramme.
     </h2>
     <div class="mt-10 flex justify-center">
-      <button
-        on:click={checkAuthentication}
-        class="rounded-full bg-secondary text-white px-5 py-2 shadow-md inline-block no-underline transition-transform duration-300 ease-in-out hover:scale-110"
-      >
-        Jetzt öffnen
-      </button>
+      {#if $isAuthenticated}
+        <a
+          href="{base}/ebd"
+          class="rounded-full bg-secondary text-white px-5 py-2 shadow-md inline-block no-underline transition-transform duration-300 ease-in-out hover:scale-110"
+        >
+          Jetzt öffnen
+        </a>
+      {:else}
+        <button
+          on:click={handleClick}
+          class="rounded-full bg-secondary text-white px-5 py-2 shadow-md inline-block no-underline transition-transform duration-300 ease-in-out hover:scale-110"
+        >
+          Jetzt öffnen
+        </button>
+      {/if}
     </div>
   </div>
 </section>
+
 <section class="pb-8">
   <ToolsBanner />
 </section>
