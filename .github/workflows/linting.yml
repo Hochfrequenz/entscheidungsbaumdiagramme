@@ -26,7 +26,7 @@ jobs:
         run: npm ci
 
       - name: Linting
-        run: npm run lint
+        run: npm run lint:check
 
       - name: Type-Checking
         run: npm run check

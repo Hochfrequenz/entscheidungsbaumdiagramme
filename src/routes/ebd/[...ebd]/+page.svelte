@@ -1,6 +1,5 @@
 <script lang="ts">
   /* eslint-disable svelte/no-at-html-tags */
-
   import { onMount } from "svelte";
 
   import { base } from "$app/paths";
@@ -12,14 +11,16 @@
   let error: string | null = null;
   let mounted = false;
 
-  $: ({ formatVersion, ebd } = $page.params);
+  $: params = $page.params.ebd?.split("/") || [];
+  $: formatVersion = params[0];
+  $: ebdKey = params[1];
 
   async function loadSvg() {
-    if (!mounted) return;
+    if (!mounted || !formatVersion || !ebdKey) return;
 
     isLoading = true;
     error = null;
-    const ebdFile = `E_${ebd.slice(1)}`;
+    const ebdFile = `E_${ebdKey.slice(1)}`;
     const ebdPath = `${base}/ebd/${formatVersion}/${ebdFile}.svg`;
 
     try {
@@ -45,7 +46,7 @@
     }
   }
 
-  $: if (mounted && formatVersion && ebd) {
+  $: if (mounted && formatVersion && ebdKey) {
     loadSvg();
   }
 
@@ -55,7 +56,7 @@
 
   onMount(() => {
     mounted = true;
-    if (formatVersion && ebd) {
+    if (formatVersion && ebdKey) {
       loadSvg();
     }
   });
