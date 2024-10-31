@@ -13,14 +13,14 @@
 
   $: params = $page.params.ebd?.split("/") || [];
   $: formatVersion = params[0];
-  $: ebd = params[1];
+  $: ebdKey = params[1];
 
   async function loadSvg() {
-    if (!mounted || !formatVersion || !ebd) return;
+    if (!mounted || !formatVersion || !ebdKey) return;
 
     isLoading = true;
     error = null;
-    const ebdFile = `E_${ebd.slice(1)}`;
+    const ebdFile = `E_${ebdKey.slice(1)}`;
     const ebdPath = `${base}/ebd/${formatVersion}/${ebdFile}.svg`;
 
     try {
@@ -46,7 +46,7 @@
     }
   }
 
-  $: if (mounted && formatVersion && ebd) {
+  $: if (mounted && formatVersion && ebdKey) {
     loadSvg();
   }
 
@@ -56,7 +56,7 @@
 
   onMount(() => {
     mounted = true;
-    if (formatVersion && ebd) {
+    if (formatVersion && ebdKey) {
       loadSvg();
     }
   });
