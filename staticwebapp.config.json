@@ -1,7 +1,13 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/*.png", "/*.jpg", "/*.gif", "/*.svg"]
+    "exclude": [
+      "/static/*",
+      "/favicon.ico",
+      "/favicon/*",
+      "/*.{png,jpg,gif,svg}",
+      "/logo.svg"
+    ]
   },
   "routes": [
     {
@@ -11,11 +17,18 @@
     {
       "route": "/ebd",
       "rewrite": "/index.html"
+    },
+    {
+      "route": "/ebd/*",
+      "rewrite": "/index.html"
     }
   ],
   "responseOverrides": {
     "404": {
       "rewrite": "/index.html"
     }
+  },
+  "mimeTypes": {
+    ".svg": "image/svg+xml"
   }
 }

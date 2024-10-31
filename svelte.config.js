@@ -9,15 +9,18 @@ const config = {
       pages: "build",
       assets: "build",
       fallback: "index.html",
-      paths: {
-        base: process.env.BASE_PATH || "",
-      },
-      files: {
-        assets: "static",
-      },
       precompress: false,
-      strict: true,
+      strict: false,
     }),
+    paths: {
+      base: process.env.BASE_PATH || "",
+    },
+    files: {
+      assets: "static",
+    },
+    prerender: {
+      entries: ["/", "/ebd"],
+    },
   },
 };
 
