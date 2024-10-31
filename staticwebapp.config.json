@@ -6,10 +6,18 @@
       "/favicon.ico",
       "/favicon/*",
       "/*.{png,jpg,gif,svg}",
-      "/logo.svg"
+      "/logo.svg",
+      "/_app/*",
+      "/__data.json"
     ]
   },
   "routes": [
+    {
+      "route": "/__data.json",
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    },
     {
       "route": "/",
       "rewrite": "/index.html"
@@ -25,10 +33,16 @@
   ],
   "responseOverrides": {
     "404": {
-      "rewrite": "/index.html"
+      "rewrite": "/index.html",
+      "statusCode": 200
     }
   },
   "mimeTypes": {
-    ".svg": "image/svg+xml"
+    ".svg": "image/svg+xml",
+    ".json": "application/json"
+  },
+  "globalHeaders": {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
   }
 }

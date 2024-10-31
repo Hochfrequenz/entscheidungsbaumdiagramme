@@ -18,9 +18,6 @@ const config = {
     files: {
       assets: "static",
     },
-    prerender: {
-      entries: ["/", "/ebd"],
-    },
   },
 };
 
