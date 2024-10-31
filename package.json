@@ -12,6 +12,7 @@
     "format": "prettier '**/*.{svelte,js,jsx,ts,tsx,html,css,scss,json,yml,md}' --write",
     "format:check": "prettier '**/*.{svelte,js,jsx,ts,tsx,html,css,scss,json,yml,md}' --check",
     "lint": "eslint 'src/**/*.{js,ts,svelte}' --fix",
+    "lint:check": "eslint 'src/**/*.{js,ts,svelte}'",
     "postinstall": "npx playwright install",
     "test": "npx playwright test"
   },
