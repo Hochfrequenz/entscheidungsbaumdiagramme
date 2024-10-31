@@ -32,7 +32,6 @@
     } catch (err) {
       console.error(`error loading svg: ${err}`);
       svgContent = "";
-      error = err instanceof Error ? err.message : "Unknown error";
     } finally {
       isLoading = false;
     }
