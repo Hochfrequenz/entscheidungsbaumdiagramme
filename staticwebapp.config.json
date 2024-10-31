@@ -7,13 +7,12 @@
       "/favicon.ico",
       "/favicon/*",
       "/logo.svg",
-      "/*.{png,jpg,gif,svg}",
-      "/__data.json"
+      "/*.{png,jpg,gif,svg}"
     ]
   },
   "routes": [
     {
-      "route": "/__data.json",
+      "route": "/*.json",
       "headers": {
         "Content-Type": "application/json",
         "Cache-Control": "no-store",
@@ -21,7 +20,7 @@
       }
     },
     {
-      "route": "/ebd/*/__data.json",
+      "route": "/ebd/*/index.json",
       "headers": {
         "Content-Type": "application/json",
         "Cache-Control": "no-store",
