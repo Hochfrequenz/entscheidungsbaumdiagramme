@@ -17,7 +17,7 @@ function tryReadDir(path: string) {
 // fetch submodule data from either /static/ebd (sveltekit "dev server") or /build/ebd (sveltekit "preview")
 export function getEbds(): Record<string, string[]> {
   const staticPath = join(process.cwd(), "static", "ebd");
-  const buildPath = join(process.cwd(), "build", "ebd");
+  const buildPath = join(process.cwd(), "build", "static", "ebd");
   const ebds: Record<string, string[]> = {};
 
   const basePath = tryReadDir(staticPath) ? staticPath : buildPath;

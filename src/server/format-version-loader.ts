@@ -50,7 +50,7 @@ function tryReadDir(path: string) {
 // fetch submodule data from either /static/ebd (sveltekit "dev server") or /build/ebd (sveltekit "preview")
 export function getFormatVersions(): FormatVersion[] {
   const staticPath = join(process.cwd(), "static", "ebd");
-  const buildPath = join(process.cwd(), "build", "ebd");
+  const buildPath = join(process.cwd(), "build", "static", "ebd");
 
   const dirents = tryReadDir(staticPath) || tryReadDir(buildPath);
 
