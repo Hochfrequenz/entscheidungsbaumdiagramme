@@ -2,47 +2,29 @@
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": [
+      "/_app/*",
       "/static/*",
+      "/ebd/*/*.svg",
       "/favicon.ico",
       "/favicon/*",
       "/*.{png,jpg,gif,svg}",
-      "/logo.svg",
-      "/_app/*",
-      "/__data.json"
+      "/logo.svg"
     ]
   },
   "routes": [
     {
-      "route": "/__data.json",
+      "route": "/__data.json*",
       "headers": {
         "Content-Type": "application/json"
       }
     },
     {
-      "route": "/",
-      "rewrite": "/index.html"
-    },
-    {
-      "route": "/ebd",
-      "rewrite": "/index.html"
-    },
-    {
       "route": "/ebd/*",
-      "rewrite": "/index.html"
+      "serve": "/index.html"
     }
   ],
-  "responseOverrides": {
-    "404": {
-      "rewrite": "/index.html",
-      "statusCode": 200
-    }
-  },
   "mimeTypes": {
     ".svg": "image/svg+xml",
     ".json": "application/json"
-  },
-  "globalHeaders": {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
   }
 }
