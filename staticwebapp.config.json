@@ -4,10 +4,8 @@
     "exclude": [
       "/_app/*",
       "/static/*",
-      "/ebd/*/*.svg",
       "/favicon.ico",
       "/favicon/*",
-      "/*.{png,jpg,gif,svg}",
       "/logo.svg"
     ]
   },
