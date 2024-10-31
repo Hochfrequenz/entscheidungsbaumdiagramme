@@ -48,8 +48,6 @@
     const formattedEbd = ebd.replace(/_/g, "");
     if (formatVersion && ebd) {
       goto(`${base}/ebd/${formatVersion}/${formattedEbd}`);
-    } else if (formatVersion) {
-      goto(`${base}/ebd/${formatVersion}`);
     }
   }
 </script>
