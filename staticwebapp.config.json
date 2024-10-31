@@ -6,23 +6,39 @@
       "/static/*",
       "/favicon.ico",
       "/favicon/*",
-      "/logo.svg"
+      "/logo.svg",
+      "/*.{png,jpg,gif,svg}",
+      "/__data.json"
     ]
   },
   "routes": [
     {
-      "route": "/__data.json*",
+      "route": "/__data.json",
       "headers": {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "route": "/ebd/*/__data.json",
+      "headers": {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
       }
     },
     {
       "route": "/ebd/*",
-      "serve": "/index.html"
+      "serve": "/index.html",
+      "statusCode": 200
     }
   ],
   "mimeTypes": {
-    ".svg": "image/svg+xml",
-    ".json": "application/json"
+    ".json": "application/json",
+    ".svg": "image/svg+xml"
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff"
   }
 }
