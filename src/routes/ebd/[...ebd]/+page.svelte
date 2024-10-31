@@ -1,6 +1,5 @@
 <script lang="ts">
   /* eslint-disable svelte/no-at-html-tags */
-
   import { onMount } from "svelte";
 
   import { base } from "$app/paths";
@@ -12,10 +11,12 @@
   let error: string | null = null;
   let mounted = false;
 
-  $: ({ formatVersion, ebd } = $page.params);
+  $: params = $page.params.ebd?.split("/") || [];
+  $: formatVersion = params[0];
+  $: ebd = params[1];
 
   async function loadSvg() {
-    if (!mounted) return;
+    if (!mounted || !formatVersion || !ebd) return;
 
     isLoading = true;
     error = null;
@@ -31,6 +32,7 @@
     } catch (err) {
       console.error(`error loading svg: ${err}`);
       svgContent = "";
+      error = err instanceof Error ? err.message : "Unknown error";
     } finally {
       isLoading = false;
     }

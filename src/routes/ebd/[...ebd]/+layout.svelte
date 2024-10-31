@@ -1,11 +1,13 @@
 <script lang="ts">
-  import "../../../../app.scss";
+  import "../../../app.scss";
 
   import { page } from "$app/stores";
   import { EbdFormHeader } from "$lib";
 
   $: ({ formatVersions, ebds } = $page.data);
-  $: ({ formatVersion, ebd } = $page.params);
+  $: params = $page.params.ebd?.split("/") || [];
+  $: formatVersion = params[0];
+  $: ebd = params[1];
 </script>
 
 <div class="flex flex-col h-full">
