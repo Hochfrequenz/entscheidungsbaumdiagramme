@@ -39,24 +39,20 @@ function formatVersion(version: string): FormatVersion {
   };
 }
 
-// fetch submodule data from their correct location depending on the environment
-export function getFormatVersions(): FormatVersion[] {
-  const assetsPath = [
-    ["static", "ebd"], // vite dev server
-    ["build", "static", "ebd"], // vite preview
-  ];
-
-  let dirents = null;
-
-  for (const pathSegments of assetsPath) {
-    const currentPath = join(process.cwd(), ...pathSegments);
-    try {
-      dirents = readdirSync(currentPath, { withFileTypes: true });
-      break;
-    } catch {
-      continue;
-    }
+function tryReadDir(path: string) {
+  try {
+    return readdirSync(path, { withFileTypes: true });
+  } catch {
+    return null;
   }
+}
+
+// fetch submodule data from either /static/ebd (sveltekit "dev server") or /build/ebd (sveltekit "preview")
+export function getFormatVersions(): FormatVersion[] {
+  const staticPath = join(process.cwd(), "static", "ebd");
+  const buildPath = join(process.cwd(), "build", "ebd");
+
+  const dirents = tryReadDir(staticPath) || tryReadDir(buildPath);
 
   if (!dirents) {
     console.error("submodule data not found.");
@@ -64,7 +60,6 @@ export function getFormatVersions(): FormatVersion[] {
   }
 
   const uniqueFormatVersion = new Set<string>();
-
   return dirents
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => formatVersion(dirent.name))
