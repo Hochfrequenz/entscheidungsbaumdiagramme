@@ -21,8 +21,7 @@
   function handleEbdSelect(event: CustomEvent<string>) {
     selectedEbd = event.detail;
     if (selectedFormatVersion && selectedEbd) {
-      const formattedEbd = selectedEbd.replace(/_/g, "");
-      goto(`${base}/ebd/${selectedFormatVersion}/${formattedEbd}`);
+      goto(`${base}/ebd/${selectedFormatVersion}/${selectedEbd}`);
     }
   }
 </script>

@@ -20,8 +20,7 @@
 
     isLoading = true;
     error = null;
-    const ebdFile = `E_${ebdKey.slice(1)}`;
-    const ebdPath = `${base}/ebd/${formatVersion}/${ebdFile}.svg`;
+    const ebdPath = `${base}/ebd/${formatVersion}/${ebdKey}.svg`;
 
     try {
       const response = await fetch(ebdPath);
