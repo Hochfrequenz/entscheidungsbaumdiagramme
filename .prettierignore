@@ -3,4 +3,4 @@
 .svelte-kit/
 node_modules/
 test-results/
-static/ebd/
+data/ebd/
