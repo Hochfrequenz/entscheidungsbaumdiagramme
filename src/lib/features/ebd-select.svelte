@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import type { Event, HTMLInputElement } from "svelte/elements";
 
   export let ebds: string[] = [];
   export let disabled: boolean = false;
