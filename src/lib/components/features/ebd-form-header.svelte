@@ -2,7 +2,7 @@
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import {
-    EbdSelect,
+    EbdInput,
     ExportButton,
     FormatVersionSelect,
     IconLogo,
@@ -44,7 +44,7 @@
 
   // ebd <select> is required for redirect and URL update
   // [...ebd] exists only as a combination of /ebd/<formatversion>/<ebd>/
-  function handleEbdSelect(event: CustomEvent<string>) {
+  function handleEbdInput(event: CustomEvent<string>) {
     const newEbd = event.detail;
     if (newEbd !== currentEbd) {
       currentEbd = newEbd;
@@ -73,11 +73,11 @@
         />
       </div>
       <div class="-mt-2 pl-5 w-1/3">
-        <EbdSelect
+        <EbdInput
           ebds={currentEbds}
           {selectedEbdCode}
           disabled={!currentFormatVersion}
-          on:select={handleEbdSelect}
+          on:select={handleEbdInput}
         />
       </div>
     </div>
