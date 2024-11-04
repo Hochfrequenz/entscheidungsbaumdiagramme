@@ -7,35 +7,88 @@
 
   const dispatch = createEventDispatcher<{ select: string }>();
 
-  function handleSelect() {
-    dispatch("select", selectedEbd);
+  let inputValue = "";
+  let filteredEbds = ebds;
+  let showOptions = false;
+  let isFocused = false;
+
+  $: {
+    if (selectedEbd && !isFocused) {
+      inputValue = selectedEbd;
+    }
   }
 
-  $: if (!ebds.includes(selectedEbd)) {
-    selectedEbd = "";
+  function handleInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    inputValue = input.value;
+    filteredEbds = ebds.filter((ebd) => ebd.includes(inputValue.toUpperCase()));
+    showOptions = true;
+  }
+
+  function handleSelect(ebd: string) {
+    inputValue = ebd;
+    selectedEbd = ebd;
+    showOptions = false;
+    dispatch("select", ebd);
+  }
+
+  function handleFocus() {
+    isFocused = true;
+    showOptions = true;
+    inputValue = "";
+    filteredEbds = ebds;
+  }
+
+  // closes list of selectable EBDs when removing focus
+  function handleBlur() {
+    isFocused = false;
+    setTimeout(() => {
+      showOptions = false;
+      inputValue = selectedEbd;
+    }, 200);
   }
 </script>
 
 <div class="flex flex-col items-start mt-2 w-full relative">
-  <div class="w-full" class:opacity-50={disabled}>
-    <select
-      id="ebd-select"
-      bind:value={selectedEbd}
-      on:change={handleSelect}
-      {disabled}
-      class="inline-block border-2 border-white rounded-lg bg-secondary py-3 ps-2 pe-4 focus:outline-0 w-full"
-      class:cursor-pointer={!disabled}
-    >
-      <option value="">Bitte auswählen</option>
-      {#each ebds as ebd}
-        <option value={ebd}>{ebd}</option>
-      {/each}
-    </select>
-  </div>
+  <input
+    type="text"
+    id="ebd-input"
+    {disabled}
+    value={inputValue}
+    on:input={handleInput}
+    on:focus={handleFocus}
+    on:blur={handleBlur}
+    placeholder={isFocused ? "" : "Bitte auswählen"}
+    class="inline-block border-2 border-white rounded-lg bg-secondary py-3 ps-2 pe-4 focus:outline-0 w-full"
+    class:placeholder-opacity-50={disabled}
+    class:placeholder-black={!disabled}
+  />
+
   <label
-    for="ebd-select"
+    for="ebd-input"
     class="absolute top-0.5 left-3 -translate-y-1/2 text-xs border-white rounded inline-block text-slate-500 text-[12px] bg-white px-1"
   >
     EBD
   </label>
+
+  {#if showOptions && !disabled}
+    <div
+      class="suggestions-list absolute top-full left-0 w-full bg-white border border-gray-200 rounded-b-lg shadow-lg max-h-60 overflow-y-auto z-50 mt-1"
+    >
+      {#each filteredEbds as ebd}
+        <button
+          on:mousedown={() => handleSelect(ebd)}
+          class="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+        >
+          {ebd}
+        </button>
+      {/each}
+    </div>
+  {/if}
 </div>
+
+<style>
+  input::placeholder {
+    opacity: 1;
+  }
+</style>
