@@ -11,5 +11,6 @@
     "sourceMap": true,
     "strict": true,
     "types": ["node"]
-  }
+  },
+  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]
 }

@@ -26,7 +26,7 @@
     await auth.checkAuth();
     isLoading = false;
 
-    isAuthenticated.subscribe((value) => {
+    isAuthenticated.subscribe((value: boolean) => {
       if (!value && !isLoading && $page.url.pathname !== `${base}/`) {
         goto(`${base}/`);
       }
