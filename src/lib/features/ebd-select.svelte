@@ -7,7 +7,7 @@
 
   const dispatch = createEventDispatcher<{ select: string }>();
 
-  let inputValue = "";
+  let inputValue = selectedEbd;
   let filteredEbds = ebds;
   let showOptions = false;
   let isFocused = false;
