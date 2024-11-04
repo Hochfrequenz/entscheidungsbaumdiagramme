@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import { IconLogin, IconLogout } from "$lib";
+  import { IconLogin, IconLogout } from "$lib/components";
 
-  import auth from "../../auth/authService";
-  import { isAuthenticated, user } from "../../store";
+  import auth from "../../../auth/authService";
+  import { isAuthenticated, user } from "../../../store";
 
   let userEmail: string = "";
 

@@ -1,6 +1,6 @@
 <script>
   import { base } from "$app/paths";
-  import { IconLogo } from "$lib";
+  import { IconLogo } from "$lib/components";
 </script>
 
 <header class="bg-secondary">

@@ -2,7 +2,7 @@
   import "../../../app.scss";
 
   import { page } from "$app/stores";
-  import { EbdFormHeader } from "$lib";
+  import { EbdFormHeader } from "$lib/components";
 
   $: ({ formatVersions, ebds } = $page.data);
   $: params = $page.params.ebd?.split("/") || [];
