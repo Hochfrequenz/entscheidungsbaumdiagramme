@@ -1,12 +1,11 @@
 <script lang="ts">
-  import "../app.scss";
+  import "$src/app.scss";
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import { LoginButton, ToolsBanner } from "$lib/components";
-
-  import auth from "../auth/authService";
-  import { isAuthenticated } from "../store";
+  import auth from "$src/auth/authService";
+  import { isAuthenticated } from "$src/store";
 
   async function checkAuthentication() {
     if ($isAuthenticated) {

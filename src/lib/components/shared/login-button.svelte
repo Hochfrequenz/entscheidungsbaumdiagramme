@@ -2,9 +2,8 @@
   import { onMount } from "svelte";
 
   import { IconLogin, IconLogout } from "$lib/components";
-
-  import auth from "../../../auth/authService";
-  import { isAuthenticated, user } from "../../../store";
+  import auth from "$src/auth/authService";
+  import { isAuthenticated, user } from "$src/store";
 
   let userEmail: string = "";
 

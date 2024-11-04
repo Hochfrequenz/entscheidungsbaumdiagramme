@@ -6,6 +6,10 @@ const config = {
   preprocess: vitePreprocess(),
   kit: {
     adapter: adapter({
+      alias: {
+        $server: "src/server",
+        $src: "src",
+      },
       pages: "build",
       assets: "build",
       fallback: "404.html",

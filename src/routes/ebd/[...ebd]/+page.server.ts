@@ -1,5 +1,6 @@
-import { getFormatVersions } from "../../../server/format-version-loader";
-import { prerenderEntries } from "../../../server/prerender-entries";
+import { getFormatVersions } from "$server/format-version-loader";
+import { prerenderEntries } from "$server/prerender-entries";
+
 import type { PageServerLoad } from "./$types";
 
 export function entries() {

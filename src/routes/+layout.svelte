@@ -1,5 +1,5 @@
 <script lang="ts">
-  import "../app.scss";
+  import "$src/app.scss";
 
   import { onMount } from "svelte";
 
@@ -7,9 +7,8 @@
   import { base } from "$app/paths";
   import { page } from "$app/stores";
   import { Footer } from "$lib/components";
-
-  import auth from "../auth/authService";
-  import { isAuthenticated } from "../store";
+  import auth from "$src/auth/authService";
+  import { isAuthenticated } from "$src/store";
 
   let isLoading = true;
 
