@@ -36,6 +36,10 @@ export default [
         URL: "readonly",
         HTMLDivElement: "readonly",
         CustomEvent: "readonly",
+        // DOM types
+        Event: "readonly",
+        EventTarget: "readonly",
+        HTMLInputElement: "readonly",
         // Node.js globals
         process: "readonly",
       },
