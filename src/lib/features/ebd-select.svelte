@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import type { Event, HTMLInputElement } from "svelte/elements";
 
   export let ebds: string[] = [];
   export let disabled: boolean = false;
@@ -19,8 +18,10 @@
     }
   }
 
-  function handleInput(event: Event) {
-    const input = event.target as HTMLInputElement;
+  function handleInput(
+    event: Event & { currentTarget: EventTarget & HTMLInputElement },
+  ) {
+    const input = event.currentTarget;
     inputValue = input.value;
     filteredEbds = ebds.filter((ebd) => ebd.includes(inputValue.toUpperCase()));
     showOptions = true;
