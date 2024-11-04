@@ -1,37 +1,52 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
 
-  export let ebds: string[] = [];
+  import type { EbdNameExtended } from "$lib/types/metadata";
+
+  export let ebds: EbdNameExtended[] = [];
   export let disabled: boolean = false;
-  export let selectedEbd: string = "";
+  export let selectedEbdCode: string = "";
 
   const dispatch = createEventDispatcher<{ select: string }>();
 
-  let inputValue: string = selectedEbd; // preselected EBD on dynamic routes
-  let filteredEbds: string[] = ebds; // by default (without filter), the list of filtered EBDs is equivalent to a list containing all fetched EBDs
+  let inputValue: string = ""; // preselected EBD on dynamic routes
+  let filteredEbds: EbdNameExtended[] = ebds; // by default (without filter), the list of filtered EBDs is equivalent to a list containing all fetched EBDs
   let showOptions: boolean = false; // used for setting the visibility state of the window containing the selectable EBDs
   let isFocused: boolean = false; // used for setting the focus state of the EBD input to show/hide the window containing the selectable EBDs
+  let selectedEbdNameExtended: EbdNameExtended | undefined;
+
+  function updateSelectedEbdNameExtended() {
+    selectedEbdNameExtended = selectedEbdCode
+      ? ebds.find((ebd) => ebd.ebd_code === selectedEbdCode)
+      : undefined;
+    inputValue = selectedEbdNameExtended?.ebd_name ?? selectedEbdCode;
+  }
+
+  onMount(() => {
+    updateSelectedEbdNameExtended();
+  });
 
   $: {
-    if (selectedEbd && !isFocused) {
-      inputValue = selectedEbd;
+    if (selectedEbdCode && !isFocused) {
+      updateSelectedEbdNameExtended();
     }
   }
 
-  function handleInput(
-    event: Event & { currentTarget: EventTarget & HTMLInputElement },
-  ) {
-    const input = event.currentTarget;
+  function handleInput(event: Event) {
+    const input = event.target as HTMLInputElement;
     inputValue = input.value;
-    filteredEbds = ebds.filter((ebd) => ebd.includes(inputValue.toUpperCase()));
+    filteredEbds = ebds.filter((ebd) =>
+      ebd.ebd_name.toUpperCase().includes(inputValue.toUpperCase()),
+    );
     showOptions = true;
   }
 
-  function handleSelect(ebd: string) {
-    inputValue = ebd;
-    selectedEbd = ebd;
+  function handleSelect(ebd: EbdNameExtended) {
+    selectedEbdNameExtended = ebd;
+    inputValue = ebd.ebd_name;
+    selectedEbdCode = ebd.ebd_code;
     showOptions = false;
-    dispatch("select", ebd);
+    dispatch("select", ebd.ebd_code);
   }
 
   function handleFocus() {
@@ -46,8 +61,15 @@
     isFocused = false;
     setTimeout(() => {
       showOptions = false;
-      inputValue = selectedEbd;
+      const selectedInfo = ebds.find((ebd) => ebd.ebd_code === selectedEbdCode);
+      inputValue = selectedInfo?.ebd_name ?? selectedEbdCode;
     }, 200);
+  }
+
+  $: {
+    if (!isFocused) {
+      filteredEbds = ebds;
+    }
   }
 </script>
 
@@ -82,7 +104,7 @@
           on:mousedown={() => handleSelect(ebd)}
           class="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
         >
-          {ebd}
+          {ebd.ebd_name}
         </button>
       {/each}
     </div>

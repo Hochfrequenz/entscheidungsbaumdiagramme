@@ -7,6 +7,7 @@
     FormatVersionSelect,
     IconLogo,
   } from "$lib/components";
+  import type { EbdNameExtended } from "$lib/types/metadata";
 
   type FormatVersion = {
     code: string;
@@ -14,19 +15,22 @@
   };
 
   export let formatVersions: FormatVersion[] = [];
-  export let ebds: Record<string, string[]> = {};
+  export let ebds: Record<string, EbdNameExtended[]> = {};
   export let currentFormatVersion = "";
   export let currentEbd = "";
 
   $: currentEbds = ebds[currentFormatVersion] || [];
-  $: selectedEbd = selectMatchingEbd(currentEbd, currentEbds);
+  $: selectedEbdCode = selectMatchingEbd(currentEbd, currentEbds);
 
   function selectMatchingEbd(
     currentEbd: string,
-    availableEbds: string[],
+    availableEbds: EbdNameExtended[],
   ): string {
     if (!currentEbd || !availableEbds.length) return "";
-    return availableEbds.find((ebd) => ebd === currentEbd) || "";
+    const matchingEbd = availableEbds.find(
+      (ebd) => ebd.ebd_code === currentEbd,
+    );
+    return matchingEbd ? matchingEbd.ebd_code : "";
   }
 
   // new format version <select> only causes ebd <select> to reset to placeholder
@@ -71,14 +75,14 @@
       <div class="-mt-2 pl-5 w-1/3">
         <EbdSelect
           ebds={currentEbds}
-          {selectedEbd}
+          {selectedEbdCode}
           disabled={!currentFormatVersion}
           on:select={handleEbdSelect}
         />
       </div>
     </div>
     <div class="ml-auto">
-      <ExportButton {currentFormatVersion} currentEbd={selectedEbd} />
+      <ExportButton {currentFormatVersion} currentEbd={selectedEbdCode} />
     </div>
   </nav>
 </header>
