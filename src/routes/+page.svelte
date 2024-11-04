@@ -3,7 +3,7 @@
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { LoginButton, ToolsBanner } from "$lib";
+  import { LoginButton, ToolsBanner } from "$lib/components";
 
   import auth from "../auth/authService";
   import { isAuthenticated } from "../store";

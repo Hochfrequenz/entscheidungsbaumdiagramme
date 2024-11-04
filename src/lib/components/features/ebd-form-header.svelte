@@ -1,7 +1,12 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { EbdSelect, ExportButton, FormatVersionSelect, IconLogo } from "$lib";
+  import {
+    EbdSelect,
+    ExportButton,
+    FormatVersionSelect,
+    IconLogo,
+  } from "$lib/components";
 
   type FormatVersion = {
     code: string;

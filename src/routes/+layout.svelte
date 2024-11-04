@@ -6,7 +6,7 @@
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import { page } from "$app/stores";
-  import { Footer } from "$lib";
+  import { Footer } from "$lib/components";
 
   import auth from "../auth/authService";
   import { isAuthenticated } from "../store";

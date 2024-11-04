@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { EbdSelect, FormatVersionSelect, Header } from "$lib";
+  import { EbdSelect, FormatVersionSelect, Header } from "$lib/components";
 
   import type { PageData } from "./$types";
 
