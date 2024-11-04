@@ -23,10 +23,14 @@ $ npm run test # runs E2E tests (playwright) assuming the dev server is up and r
 To serve the built site locally, run
 
 ```sh
+$ npm run serve
+```
+
+```sh
 $ npm run build && npx http-server ./build
 ```
 
-This starts an HTTP server at http://127.0.0.1:8080, providing a local view roughly similar to how Azure will render the project.
+This starts an HTTP server at http://127.0.0.1:8080, providing a local view roughly equivalent to how Azure will render the project.
 
 ### 🏷️ Semantic commit messages
 
