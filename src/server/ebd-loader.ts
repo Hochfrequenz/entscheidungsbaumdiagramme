@@ -30,15 +30,21 @@ export function getEbds(): Record<string, EbdNameExtended[]> {
         .filter((file) => file.endsWith(".svg"))
         .map((file) => {
           const ebdCode = file.replace(".svg", "");
-          let ebd_name = ebdCode;
+          let ebd_name = ebdCode; // by default, EBD <input> only shows ebd_code "E_XXXX"
 
           try {
             const jsonPath = join(versionPath, `${ebdCode}.json`);
             const jsonContent = readFileSync(jsonPath, "utf-8");
             const parseMetaData = JSON.parse(jsonContent) as MetaData;
-            ebd_name = `${ebdCode}_${parseMetaData.metadata.chapter}`;
+            // only update extended ebd_name if corresponding metadata <value> of ebd_name <key> exists
+            if (
+              parseMetaData.metadata.ebd_name &&
+              parseMetaData.metadata.ebd_name.trim()
+            ) {
+              ebd_name = `${ebdCode}_${parseMetaData.metadata.ebd_name}`;
+            }
           } catch (error) {
-            console.warn(`no metadata avaiable for ${ebdCode}: ${error}`);
+            console.warn(`no metadata available for ${ebdCode}: ${error}`);
           }
 
           return {

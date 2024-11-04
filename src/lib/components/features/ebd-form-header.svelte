@@ -33,16 +33,16 @@
     return matchingEbd ? matchingEbd.ebd_code : "";
   }
 
-  // new format version <select> only causes ebd <select> to reset to placeholder
+  // new format version <select> only causes ebd <input> to reset to placeholder
   function handleFormatVersionSelect(event: CustomEvent<string>) {
     const newFormatVersion = event.detail;
     if (newFormatVersion !== currentFormatVersion) {
       currentFormatVersion = newFormatVersion;
-      currentEbd = ""; // Just reset the EBD selection
+      currentEbd = ""; // reset the EBD selection
     }
   }
 
-  // ebd <select> is required for redirect and URL update
+  // ebd <input> is required for redirect and URL update
   // [...ebd] exists only as a combination of /ebd/<formatversion>/<ebd>/
   function handleEbdInput(event: CustomEvent<string>) {
     const newEbd = event.detail;
