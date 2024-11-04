@@ -8,10 +8,10 @@
 
   const dispatch = createEventDispatcher<{ select: string }>();
 
-  let inputValue = selectedEbd;
-  let filteredEbds = ebds;
-  let showOptions = false;
-  let isFocused = false;
+  let inputValue: string = selectedEbd; // preselected EBD on dynamic routes
+  let filteredEbds: string[] = ebds; // by default (without filter), the list of filtered EBDs is equivalent to the list containing all fetched EBDs
+  let showOptions: boolean = false; // used for setting the visibility state of the window containing the selectable EBDs
+  let isFocused: boolean = false; // used for setting the focus state of the EBD input to show/hide the window containing the selectable EBDs
 
   $: {
     if (selectedEbd && !isFocused) {
