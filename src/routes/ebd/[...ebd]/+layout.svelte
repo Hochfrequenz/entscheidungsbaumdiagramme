@@ -1,5 +1,5 @@
 <script lang="ts">
-  import "../../../app.scss";
+  import "$src/app.scss";
 
   import { page } from "$app/stores";
   import { EbdFormHeader } from "$lib/components";

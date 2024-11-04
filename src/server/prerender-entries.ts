@@ -1,7 +1,7 @@
 import { join } from "path";
 
-import { getEbds } from "./ebd-loader";
-import { getFormatVersions } from "./format-version-loader";
+import { getEbds } from "$server/ebd-loader";
+import { getFormatVersions } from "$server/format-version-loader";
 
 export function prerenderEntries() {
   const staticPath = join(process.cwd(), "static", "ebd");

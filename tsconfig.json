@@ -2,14 +2,21 @@
   "extends": "./.svelte-kit/tsconfig.json",
   "compilerOptions": {
     "allowJs": true,
+    "baseUrl": ".",
     "checkJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "paths": {
+      "$lib/*": ["src/lib/*"],
+      "$src/*": ["src/*"],
+      "$server/*": ["src/server/*"]
+    },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "moduleResolution": "node",
     "types": ["node"]
-  }
+  },
+  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]
 }

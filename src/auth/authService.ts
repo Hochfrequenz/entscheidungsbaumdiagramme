@@ -1,8 +1,8 @@
 import type { LogoutOptions } from "@auth0/auth0-spa-js";
 import { Auth0Client, createAuth0Client, User } from "@auth0/auth0-spa-js";
 
-import { isAuthenticated, user } from "../store";
-import config from "./auth_config";
+import config from "$src/auth/auth_config";
+import { isAuthenticated, user } from "$src/store";
 
 let auth0Client: Auth0Client;
 

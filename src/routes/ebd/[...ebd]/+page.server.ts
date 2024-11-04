@@ -1,10 +1,16 @@
-import { getFormatVersions } from "../../../server/format-version-loader";
-import { prerenderEntries } from "../../../server/prerender-entries";
+import { getFormatVersions } from "$server/format-version-loader";
+import { prerenderEntries } from "$server/prerender-entries";
+
 import type { PageServerLoad } from "./$types";
+
+interface RouteEntry {
+  ebd: string;
+  filePath: string;
+}
 
 export function entries() {
   const routes = prerenderEntries();
-  return routes.map((route) => ({
+  return routes.map((route: RouteEntry) => ({
     ebd: route.ebd,
   }));
 }
@@ -12,7 +18,9 @@ export function entries() {
 export const load: PageServerLoad = async ({ params }) => {
   const [formatVersion, ebdFile] = params.ebd.split("/");
   const availableVersions = getFormatVersions();
-  const version = availableVersions.find((v) => v.code === formatVersion);
+  const version = availableVersions.find(
+    (v: { code: string }) => v.code === formatVersion,
+  );
 
   return {
     formatVersion: version,
