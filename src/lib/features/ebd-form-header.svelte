@@ -20,34 +20,28 @@
     currentEbd: string,
     availableEbds: string[],
   ): string {
-    const formattedCurrentEbd = currentEbd.replace(/[_-]/g, "").toLowerCase();
-    return (
-      availableEbds.find(
-        (ebd) => ebd.replace(/[_-]/g, "").toLowerCase() === formattedCurrentEbd,
-      ) || ""
-    );
+    if (!currentEbd || !availableEbds.length) return "";
+    return availableEbds.find((ebd) => ebd === currentEbd) || "";
   }
 
+  // new format version <select> only causes ebd <select> to reset to placeholder
   function handleFormatVersionSelect(event: CustomEvent<string>) {
     const newFormatVersion = event.detail;
     if (newFormatVersion !== currentFormatVersion) {
       currentFormatVersion = newFormatVersion;
-      currentEbd = "";
+      currentEbd = ""; // Just reset the EBD selection
     }
   }
 
+  // ebd <select> is required for redirect and URL update
+  // [...ebd] exists only as a combination of /ebd/<formatversion>/<ebd>/
   function handleEbdSelect(event: CustomEvent<string>) {
     const newEbd = event.detail;
     if (newEbd !== currentEbd) {
       currentEbd = newEbd;
-      updateUrl(currentFormatVersion, newEbd);
-    }
-  }
-
-  function updateUrl(formatVersion: string, ebd: string) {
-    const formattedEbd = ebd.replace(/_/g, "");
-    if (formatVersion && ebd) {
-      goto(`${base}/ebd/${formatVersion}/${formattedEbd}`);
+      if (currentFormatVersion && newEbd) {
+        goto(`${base}/ebd/${currentFormatVersion}/${newEbd}`);
+      }
     }
   }
 </script>
@@ -73,12 +67,13 @@
         <EbdSelect
           ebds={currentEbds}
           {selectedEbd}
+          disabled={!currentFormatVersion}
           on:select={handleEbdSelect}
         />
       </div>
     </div>
     <div class="ml-auto">
-      <ExportButton {currentFormatVersion} {currentEbd} />
+      <ExportButton {currentFormatVersion} currentEbd={selectedEbd} />
     </div>
   </nav>
 </header>

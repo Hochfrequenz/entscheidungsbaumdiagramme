@@ -19,8 +19,7 @@
     if (!isExportReady || !currentFormatVersion || !currentEbd) return;
 
     isExportReady = false;
-    const ebdFile = `E_${currentEbd.slice(1)}`;
-    const ebdPath = `${base}/ebd/${currentFormatVersion}/${ebdFile}.svg`;
+    const ebdPath = `${base}/ebd/${currentFormatVersion}/${currentEbd}.svg`;
 
     try {
       const response = await fetch(ebdPath);
@@ -33,7 +32,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `EBD_E_${currentEbd.slice(1)}_${currentFormatVersion}.svg`;
+      a.download = `${currentFormatVersion}-${currentEbd}.svg`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

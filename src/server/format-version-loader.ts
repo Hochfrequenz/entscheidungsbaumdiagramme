@@ -39,43 +39,33 @@ function formatVersion(version: string): FormatVersion {
   };
 }
 
-function tryReadDir(path: string) {
-  try {
-    return readdirSync(path, { withFileTypes: true });
-  } catch {
-    return null;
-  }
-}
-
-// fetch submodule data from either /static/ebd (sveltekit "dev server") or /build/ebd (sveltekit "preview")
 export function getFormatVersions(): FormatVersion[] {
   const staticPath = join(process.cwd(), "static", "ebd");
-  const buildPath = join(process.cwd(), "build", "ebd");
 
-  const dirents = tryReadDir(staticPath) || tryReadDir(buildPath);
+  try {
+    const dirents = readdirSync(staticPath, { withFileTypes: true });
+    const uniqueFormatVersion = new Set<string>();
 
-  if (!dirents) {
-    console.error("submodule data not found.");
+    return dirents
+      .filter((dirent) => dirent.isDirectory())
+      .map((dirent) => formatVersion(dirent.name))
+      .filter((version) => {
+        if (
+          Object.keys(skippedFormatVersionToInsteadFormatVersionMap).includes(
+            version.code,
+          )
+        ) {
+          return false;
+        }
+        if (uniqueFormatVersion.has(version.code)) {
+          return false;
+        }
+        uniqueFormatVersion.add(version.code);
+        return true;
+      })
+      .sort((a, b) => b.code.localeCompare(a.code));
+  } catch (error) {
+    console.error("error reading format versions from submodule:", error);
     return [];
   }
-
-  const uniqueFormatVersion = new Set<string>();
-  return dirents
-    .filter((dirent) => dirent.isDirectory())
-    .map((dirent) => formatVersion(dirent.name))
-    .filter((version) => {
-      if (
-        Object.keys(skippedFormatVersionToInsteadFormatVersionMap).includes(
-          version.code,
-        )
-      ) {
-        return false;
-      }
-      if (uniqueFormatVersion.has(version.code)) {
-        return false;
-      }
-      uniqueFormatVersion.add(version.code);
-      return true;
-    })
-    .sort((a, b) => b.code.localeCompare(a.code));
 }
