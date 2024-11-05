@@ -83,21 +83,19 @@
     on:focus={handleFocus}
     on:blur={handleBlur}
     placeholder={isFocused ? "" : "Bitte auswählen"}
-    class="inline-block border-2 border-white rounded-lg bg-secondary py-3 ps-2 pe-4 focus:outline-0 w-full"
-    class:placeholder-opacity-50={disabled}
-    class:placeholder-black={!disabled}
+    class="inline-block border-2 border-white rounded-lg bg-secondary py-3 px-2 pe-4 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25"
   />
 
   <label
     for="ebd-input"
-    class="absolute top-0.5 left-3 -translate-y-1/2 text-xs border-white rounded inline-block text-slate-500 text-[12px] bg-white px-1"
+    class="absolute top-0.5 left-3 -translate-y-1/2 text-xs text-slate-500 bg-white px-1 rounded"
   >
     EBD
   </label>
 
   {#if showOptions && !disabled}
     <div
-      class="suggestions-list absolute top-full left-0 w-full bg-white border border-gray-200 rounded-b-lg shadow-lg max-h-60 overflow-y-auto z-50 mt-1"
+      class="absolute top-full left-0 w-full bg-white border border-gray-200 rounded-b-lg shadow-lg max-h-60 overflow-y-auto z-50 mt-1"
     >
       {#each filteredEbds as ebd}
         <button
@@ -110,9 +108,3 @@
     </div>
   {/if}
 </div>
-
-<style>
-  input::placeholder {
-    opacity: 1;
-  }
-</style>
