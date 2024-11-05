@@ -2,10 +2,12 @@
 export { default as Footer } from "$lib/components/shared/footer.svelte";
 export { default as Header } from "$lib/components/shared/header.svelte";
 export { default as IconBack } from "$lib/components/shared/icon-back.svelte";
+export { default as IconHeart } from "$lib/components/shared/icon-heart.svelte";
 export { default as IconLogin } from "$lib/components/shared/icon-login.svelte";
 export { default as IconLogo } from "$lib/components/shared/icon-logo.svelte";
 export { default as IconLogout } from "$lib/components/shared/icon-logout.svelte";
-export { default as HomeButton } from "$lib/components/shared/landingpage-button.svelte";
+export { default as IconPlant } from "$lib/components/shared/icon-plant.svelte";
+export { default as LandingpageButton } from "$lib/components/shared/landingpage-button.svelte";
 export { default as LoginButton } from "$lib/components/shared/login-button.svelte";
 export { default as ToolsBanner } from "$lib/components/shared/tools-banner.svelte";
 
