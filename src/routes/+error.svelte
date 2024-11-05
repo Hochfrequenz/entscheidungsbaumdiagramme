@@ -8,7 +8,7 @@
     class="flex flex-grow flex-col overflow-hidden items-center justify-center"
   >
     <div class="flex flex-row">
-      <span class="text-xl pr-1">
+      <span class="text-3xl pb-8 pr-2">
         Der gesuchte Entscheidungsbaum muss erst noch gepflanzt werden
       </span>
       <IconPlant />
