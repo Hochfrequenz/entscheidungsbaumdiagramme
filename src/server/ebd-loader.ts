@@ -38,10 +38,10 @@ export function getEbds(): Record<string, EbdNameExtended[]> {
             const parseMetaData = JSON.parse(jsonContent) as MetaData;
             // only update extended ebd_name if corresponding metadata <value> of ebd_name <key> exists
             if (
-              parseMetaData.metadata.ebd_name &&
-              parseMetaData.metadata.ebd_name.trim()
+              parseMetaData.metadata.chapter &&
+              parseMetaData.metadata.chapter.trim()
             ) {
-              ebd_name = `${ebdCode}_${parseMetaData.metadata.ebd_name}`;
+              ebd_name = `${ebdCode}_${parseMetaData.metadata.chapter}`;
             }
           } catch (error) {
             console.warn(`no metadata available for ${ebdCode}: ${error}`);

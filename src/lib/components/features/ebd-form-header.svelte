@@ -33,12 +33,18 @@
     return matchingEbd ? matchingEbd.ebd_code : "";
   }
 
+  let formatVersionChanged = false;
+
   // new format version <select> only causes ebd <input> to reset to placeholder
   function handleFormatVersionSelect(event: CustomEvent<string>) {
     const newFormatVersion = event.detail;
     if (newFormatVersion !== currentFormatVersion) {
       currentFormatVersion = newFormatVersion;
-      currentEbd = ""; // reset the EBD selection
+      currentEbd = ""; // reset EBD selection
+      formatVersionChanged = true;
+      setTimeout(() => {
+        formatVersionChanged = false;
+      }, 0);
     }
   }
 
@@ -76,6 +82,7 @@
         <EbdInput
           ebds={currentEbds}
           {selectedEbdCode}
+          {formatVersionChanged}
           disabled={!currentFormatVersion}
           on:select={handleEbdInput}
         />

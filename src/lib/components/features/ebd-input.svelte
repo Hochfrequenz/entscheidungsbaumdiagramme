@@ -6,6 +6,7 @@
   export let ebds: EbdNameExtended[] = [];
   export let disabled: boolean = false;
   export let selectedEbdCode: string = "";
+  export let formatVersionChanged = false;
 
   const dispatch = createEventDispatcher<{ select: string }>();
 
@@ -14,6 +15,15 @@
   let showOptions: boolean = false; // used for setting the visibility state of the window containing the selectable EBDs
   let isFocused: boolean = false; // used for setting the focus state of the EBD input to show/hide the window containing the selectable EBDs
   let selectedEbdNameExtended: EbdNameExtended | undefined;
+
+  $: {
+    if (formatVersionChanged) {
+      selectedEbdCode = "";
+      selectedEbdNameExtended = undefined;
+      inputValue = "";
+      filteredEbds = ebds;
+    }
+  }
 
   function updateSelectedEbdNameExtended() {
     selectedEbdNameExtended = selectedEbdCode
