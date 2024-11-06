@@ -24,14 +24,14 @@
         href="https://github.com/Hochfrequenz/ebdamame/"
         target="_blank"
         rel="noopener noreferrer"
-        class="hover:underline text-secondary mx-1">ebdamame</a
+        class="hover:underline text-secondary font-medium mx-1">ebdamame</a
       >
       und
       <a
         href="https://github.com/Hochfrequenz/rebdhuhn/"
         target="_blank"
         rel="noopener noreferrer"
-        class="hover:underline text-secondary mx-1">rebdhuhn</a
+        class="hover:underline text-secondary font-medium mx-1">rebdhuhn</a
       >
       bei.
     </span>
@@ -43,7 +43,8 @@
         href="https://github.com/Hochfrequenz/"
         target="_blank"
         rel="noopener noreferrer"
-        class="hover:underline text-secondary mx-1">Open-Source-Projekten</a
+        class="hover:underline text-secondary font-medium mx-1"
+        >Open-Source-Projekten</a
       >
       von Hochfrequenz.
     </span>
