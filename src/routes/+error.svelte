@@ -3,37 +3,51 @@
   import LandingpageButton from "$lib/components/shared/landingpage-button.svelte";
 </script>
 
-<div class="flex flex-col h-full">
+<div class="flex flex-col h-full justify-center">
   <div
     class="flex flex-grow flex-col overflow-hidden items-center justify-center"
   >
-    <div class="flex flex-row">
-      <span class="text-3xl pb-8 pr-2">
+    <div class="flex flex-wrap flex-row text-center justify-center">
+      <span class="text-4xl pb-8 pr-2">
         Der gesuchte Entscheidungsbaum muss erst noch gepflanzt werden
       </span>
       <IconPlant />
     </div>
 
-    <span class="flex text-xl">
-      Unterstütze uns dafür gerne im Backend von&nbsp;
+    <span
+      class="flex flex-wrap text-2xl justify-center text-center pb-10 max-w-prose"
+    >
+      Falls du ein EBD nicht finden konntest oder fehlerhafte Prüfschritte
+      entdeckt hast, arbeite gerne mit uns zusammen und trag zur Verbesserung
+      unserer Backends
       <a
         href="https://github.com/Hochfrequenz/ebdamame/"
-        class="hover:underline text-secondary">ebdamame</a
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:underline text-secondary mx-1">ebdamame</a
       >
-      &nbsp;und&nbsp;
+      und
       <a
         href="https://github.com/Hochfrequenz/rebdhuhn/"
-        class="hover:underline text-secondary">rebdhuhn</a
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:underline text-secondary mx-1">rebdhuhn</a
       >
+      bei.
     </span>
-    <span class="flex text-xl pb-10">
-      &nbsp;oder bei weiteren Open-Source-Projekten von&nbsp;
+    <span
+      class="flex flex-wrap text-2xl justify-center text-center pb-10 max-w-prose"
+    >
+      Unterstütze uns auch gerne bei weiteren
       <a
         href="https://github.com/Hochfrequenz/"
-        class="hover:underline text-secondary">Hochfrequenz</a
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:underline text-secondary mx-1">Open-Source-Projekten</a
       >
-      .
+      von Hochfrequenz.
     </span>
+
     <LandingpageButton />
   </div>
 </div>
