@@ -13,6 +13,6 @@ export { default as ToolsBanner } from "$lib/components/shared/tools-banner.svel
 
 // features
 export { default as EbdFormHeader } from "$lib/components/features/ebd-form-header.svelte";
-export { default as EbdSelect } from "$lib/components/features/ebd-select.svelte";
+export { default as EbdInput } from "$lib/components/features/ebd-input.svelte";
 export { default as ExportButton } from "$lib/components/features/export-button.svelte";
 export { default as FormatVersionSelect } from "$lib/components/features/format-version-select.svelte";

@@ -2,11 +2,12 @@
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import {
-    EbdSelect,
+    EbdInput,
     ExportButton,
     FormatVersionSelect,
     IconLogo,
   } from "$lib/components";
+  import type { EbdNameExtended } from "$lib/types/metadata";
 
   type FormatVersion = {
     code: string;
@@ -14,33 +15,42 @@
   };
 
   export let formatVersions: FormatVersion[] = [];
-  export let ebds: Record<string, string[]> = {};
+  export let ebds: Record<string, EbdNameExtended[]> = {};
   export let currentFormatVersion = "";
   export let currentEbd = "";
 
   $: currentEbds = ebds[currentFormatVersion] || [];
-  $: selectedEbd = selectMatchingEbd(currentEbd, currentEbds);
+  $: selectedEbdCode = selectMatchingEbd(currentEbd, currentEbds);
 
   function selectMatchingEbd(
     currentEbd: string,
-    availableEbds: string[],
+    availableEbds: EbdNameExtended[],
   ): string {
     if (!currentEbd || !availableEbds.length) return "";
-    return availableEbds.find((ebd) => ebd === currentEbd) || "";
+    const matchingEbd = availableEbds.find(
+      (ebd) => ebd.ebd_code === currentEbd,
+    );
+    return matchingEbd ? matchingEbd.ebd_code : "";
   }
 
-  // new format version <select> only causes ebd <select> to reset to placeholder
+  let formatVersionChanged = false;
+
+  // new format version <select> only causes ebd <input> to reset to placeholder
   function handleFormatVersionSelect(event: CustomEvent<string>) {
     const newFormatVersion = event.detail;
     if (newFormatVersion !== currentFormatVersion) {
       currentFormatVersion = newFormatVersion;
-      currentEbd = ""; // Just reset the EBD selection
+      currentEbd = ""; // reset EBD selection
+      formatVersionChanged = true;
+      setTimeout(() => {
+        formatVersionChanged = false;
+      }, 0);
     }
   }
 
-  // ebd <select> is required for redirect and URL update
+  // ebd <input> is required for redirect and URL update
   // [...ebd] exists only as a combination of /ebd/<formatversion>/<ebd>/
-  function handleEbdSelect(event: CustomEvent<string>) {
+  function handleEbdInput(event: CustomEvent<string>) {
     const newEbd = event.detail;
     if (newEbd !== currentEbd) {
       currentEbd = newEbd;
@@ -69,16 +79,17 @@
         />
       </div>
       <div class="-mt-2 pl-5 w-1/3">
-        <EbdSelect
+        <EbdInput
           ebds={currentEbds}
-          {selectedEbd}
+          {selectedEbdCode}
+          {formatVersionChanged}
           disabled={!currentFormatVersion}
-          on:select={handleEbdSelect}
+          on:select={handleEbdInput}
         />
       </div>
     </div>
     <div class="ml-auto">
-      <ExportButton {currentFormatVersion} currentEbd={selectedEbd} />
+      <ExportButton {currentFormatVersion} currentEbd={selectedEbdCode} />
     </div>
   </nav>
 </header>
