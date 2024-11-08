@@ -1,7 +1,8 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { EbdSelect, FormatVersionSelect, Header } from "$lib/components";
+  import { EbdInput, FormatVersionSelect, Header } from "$lib/components";
+  import type { EbdNameExtended } from "$lib/types/metadata";
 
   import type { PageData } from "./$types";
 
@@ -9,7 +10,7 @@
 
   let selectedFormatVersion = "";
   let selectedEbd = "";
-  let ebdList: string[] = [];
+  let ebdList: EbdNameExtended[] = [];
 
   function handleFormatVersionSelect(event: CustomEvent<string>) {
     selectedFormatVersion = event.detail;
@@ -18,7 +19,7 @@
       : [];
   }
 
-  function handleEbdSelect(event: CustomEvent<string>) {
+  function handleEbdInput(event: CustomEvent<string>) {
     selectedEbd = event.detail;
     if (selectedFormatVersion && selectedEbd) {
       goto(`${base}/ebd/${selectedFormatVersion}/${selectedEbd}`);
@@ -45,10 +46,10 @@
       />
     </div>
     <div class="mt-4">
-      <EbdSelect
+      <EbdInput
         ebds={ebdList}
         disabled={!selectedFormatVersion}
-        on:select={handleEbdSelect}
+        on:select={handleEbdInput}
       />
     </div>
   </div>

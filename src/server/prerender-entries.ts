@@ -1,13 +1,13 @@
 import { join } from "path";
 
-import { getEbds } from "$server/ebd-loader";
+import { getEbdFiles } from "$server/ebd-loader";
 import { getFormatVersions } from "$server/format-version-loader";
 
 export function prerenderEntries() {
   const staticPath = join(process.cwd(), "static", "ebd");
 
   const formatVersions = getFormatVersions();
-  const ebds = getEbds();
+  const ebds = getEbdFiles();
 
   const entries = [];
   const formatVersionCounts: Record<string, number> = {};
