@@ -88,7 +88,7 @@
           on:select={handleEbdInput}
         />
       </div>
-      <EbdNavigation />
+      <EbdNavigation {currentEbds} {currentFormatVersion} {selectedEbdCode} />
     </div>
     <div class="ml-auto">
       <ExportButton {currentFormatVersion} currentEbd={selectedEbdCode} />

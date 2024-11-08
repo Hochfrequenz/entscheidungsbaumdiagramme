@@ -1,8 +1,59 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
+  import { base } from "$app/paths";
+  import type { EbdNameExtended } from "$lib/types/metadata";
+
   import IconArrow from "../shared/icon-arrow.svelte";
+
+  export let currentEbds: EbdNameExtended[] = [];
+  export let currentFormatVersion: string = "";
+  export let selectedEbdCode: string = "";
+
+  $: currentIndex = currentEbds.findIndex(
+    (ebd) => ebd.ebd_code === selectedEbdCode,
+  );
+
+  $: isFirstEbd = currentIndex === 0;
+  $: isLastEbd = currentIndex === currentEbds.length - 1;
+
+  function handleNavigation(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const navId = target.closest("svg")?.id;
+
+    if (
+      !navId ||
+      !currentFormatVersion ||
+      !selectedEbdCode ||
+      !currentEbds.length
+    ) {
+      return;
+    }
+
+    if (currentIndex === -1) return;
+
+    // required to set boundaries to disable navigation once the first/last EBD is reached
+    if (navId === "previousEbd" && isFirstEbd) return;
+    if (navId === "nextEbd" && isLastEbd) return;
+
+    let newIndex: number;
+    if (navId === "nextEbd") {
+      newIndex = currentIndex + 1;
+    } else if (navId === "previousEbd") {
+      newIndex = currentIndex - 1;
+    } else {
+      return;
+    }
+
+    const newEbd = currentEbds[newIndex].ebd_code;
+    goto(`${base}/ebd/${currentFormatVersion}/${newEbd}`);
+  }
 </script>
 
-<div class="flex flex-col gap-1">
-  <IconArrow id="nextEbd" />
-  <IconArrow orientation="rotate-180" id="previousEbd" />
-</div>
+<button class="flex flex-col gap-1" on:click={handleNavigation}>
+  <div class:opacity-35={isLastEbd}>
+    <IconArrow id="nextEbd" />
+  </div>
+  <div class:opacity-35={isFirstEbd}>
+    <IconArrow orientation="rotate-180" id="previousEbd" />
+  </div>
+</button>
