@@ -1,3 +1,5 @@
+import { error } from "@sveltejs/kit";
+
 import { getFormatVersions } from "$server/format-version-loader";
 import { prerenderEntries } from "$server/prerender-entries";
 
@@ -16,11 +18,22 @@ export function entries() {
 }
 
 export const load: PageServerLoad = async ({ params }) => {
-  const [formatVersion, ebdFile] = params.ebd.split("/");
+  const path = params.ebd.endsWith("/") ? params.ebd.slice(0, -1) : params.ebd;
+  const segments = path.split("/");
+  const [formatVersion, ebdFile] = segments;
+
+  if (!formatVersion || !ebdFile) {
+    throw error(404);
+  }
+
   const availableVersions = getFormatVersions();
   const version = availableVersions.find(
     (v: { code: string }) => v.code === formatVersion,
   );
+
+  if (!version) {
+    throw error(404);
+  }
 
   return {
     formatVersion: version,
