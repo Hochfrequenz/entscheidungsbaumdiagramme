@@ -62,15 +62,16 @@ export function getEbdsWithMetadata(): Record<string, EbdNameExtended[]> {
     const versionPath = join(process.cwd(), "static", "ebd", formatVersion);
 
     result[formatVersion] = ebdCodes.map((ebdCode) => {
-      let ebd_name = ebdCode;
+      let ebd_name = ebdCode; // by default, display ebd_code if ebd_name is n/a
 
       try {
         const jsonPath = join(versionPath, `${ebdCode}.json`);
         const parseMetaData = JSON.parse(
           readFileSync(jsonPath, "utf-8"),
         ) as MetaData;
-        if (parseMetaData.metadata.chapter?.trim()) {
-          ebd_name = `${ebdCode}_${parseMetaData.metadata.chapter}`;
+        // if ebd_name != n/a, show ebd_name instead of ebd_code
+        if (parseMetaData.metadata.ebd_name?.trim()) {
+          ebd_name = `${parseMetaData.metadata.ebd_name}`;
         }
       } catch (error) {
         console.warn(`no metadata available for ${ebdCode}: ${error}`);
