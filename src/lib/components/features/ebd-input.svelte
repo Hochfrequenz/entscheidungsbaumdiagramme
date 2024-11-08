@@ -93,7 +93,7 @@
     on:focus={handleFocus}
     on:blur={handleBlur}
     placeholder={isFocused ? "" : "Bitte auswählen"}
-    class="inline-block border-2 border-white rounded-lg bg-secondary py-3 px-2 pe-4 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25"
+    class="inline-block border-2 border-white rounded-lg bg-secondary py-3 px-2 ps-2 pe-4 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25"
   />
 
   <label

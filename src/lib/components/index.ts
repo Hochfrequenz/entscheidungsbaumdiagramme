@@ -1,6 +1,7 @@
 // shared components
 export { default as Footer } from "$lib/components/shared/footer.svelte";
 export { default as Header } from "$lib/components/shared/header.svelte";
+export { default as IconArrow } from "$lib/components/shared/icon-arrow.svelte";
 export { default as IconBack } from "$lib/components/shared/icon-back.svelte";
 export { default as IconHeart } from "$lib/components/shared/icon-heart.svelte";
 export { default as IconLogin } from "$lib/components/shared/icon-login.svelte";
