@@ -38,7 +38,7 @@
   </div>
 
   <div class="w-2/5 flex flex-col">
-    <div class="mb-4 pb-8">
+    <div class="mb-4">
       <FormatVersionSelect
         formatVersions={data.formatVersions}
         selectedVersion={selectedFormatVersion}

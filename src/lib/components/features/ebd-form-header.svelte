@@ -72,7 +72,7 @@
         <IconLogo />
       </a>
       <span class="text-xl text-white">EBD.HOCHFREQUENZ.DE</span>
-      <div class="-mt-12 pl-10 w-1/5">
+      <div class="-mt-2 pl-10 w-1/5">
         <FormatVersionSelect
           {formatVersions}
           selectedVersion={currentFormatVersion}
