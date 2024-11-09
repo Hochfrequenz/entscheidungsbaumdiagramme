@@ -3,7 +3,7 @@
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { IconSquareArrow, LoginButton, ToolsBanner } from "$lib/components";
+  import { AuthButton, IconSquareArrow, ToolsBanner } from "$lib/components";
   import auth from "$src/auth/authService";
   import { isAuthenticated } from "$src/store";
 
@@ -18,7 +18,7 @@
 
 <div class="relative">
   <div class="absolute top-4 right-4 z-10">
-    <LoginButton />
+    <AuthButton />
   </div>
 </div>
 
