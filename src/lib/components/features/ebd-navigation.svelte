@@ -18,10 +18,10 @@
 
   function handleNavigation(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    const navId = target.closest("svg")?.id;
+    const ebdId = target.closest("svg")?.id;
 
     if (
-      !navId ||
+      !ebdId ||
       !currentFormatVersion ||
       !selectedEbdCode ||
       !currentEbds.length
@@ -31,14 +31,14 @@
 
     if (currentIndex === -1) return;
 
-    // required to set boundaries to disable navigation once the first/last EBD is reached
-    if (navId === "previousEbd" && isFirstEbd) return;
-    if (navId === "nextEbd" && isLastEbd) return;
+    // set boundaries to disable navigation once the first/last EBD is reached
+    if (ebdId === "previousEbd" && isFirstEbd) return;
+    if (ebdId === "nextEbd" && isLastEbd) return;
 
     let newIndex: number;
-    if (navId === "nextEbd") {
+    if (ebdId === "nextEbd") {
       newIndex = currentIndex + 1;
-    } else if (navId === "previousEbd") {
+    } else if (ebdId === "previousEbd") {
       newIndex = currentIndex - 1;
     } else {
       return;
@@ -49,11 +49,19 @@
   }
 </script>
 
-<button class="flex flex-col gap-1" on:click={handleNavigation}>
-  <div class:opacity-35={isLastEbd}>
+<div class="flex flex-col gap-1">
+  <button
+    on:click={handleNavigation}
+    class="cursor-pointer"
+    class:opacity-35={isLastEbd}
+  >
     <IconArrow id="nextEbd" />
-  </div>
-  <div class:opacity-35={isFirstEbd}>
+  </button>
+  <button
+    on:click={handleNavigation}
+    class="cursor-pointer"
+    class:opacity-35={isFirstEbd}
+  >
     <IconArrow orientation="rotate-180" id="previousEbd" />
-  </div>
-</button>
+  </button>
+</div>
