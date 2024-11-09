@@ -18,10 +18,10 @@
 
   function handleNavigation(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    const ebdId = target.closest("svg")?.id;
+    const ebdListIndex = target.closest("svg")?.id;
 
     if (
-      !ebdId ||
+      !ebdListIndex ||
       !currentFormatVersion ||
       !selectedEbdCode ||
       !currentEbds.length
@@ -32,13 +32,13 @@
     if (currentIndex === -1) return;
 
     // set boundaries to disable navigation once the first/last EBD is reached
-    if (ebdId === "previousEbd" && isFirstEbd) return;
-    if (ebdId === "nextEbd" && isLastEbd) return;
+    if (ebdListIndex === "previousEbd" && isFirstEbd) return;
+    if (ebdListIndex === "nextEbd" && isLastEbd) return;
 
     let newIndex: number;
-    if (ebdId === "nextEbd") {
+    if (ebdListIndex === "nextEbd") {
       newIndex = currentIndex + 1;
-    } else if (ebdId === "previousEbd") {
+    } else if (ebdListIndex === "previousEbd") {
       newIndex = currentIndex - 1;
     } else {
       return;
