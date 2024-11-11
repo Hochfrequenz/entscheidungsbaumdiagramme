@@ -3,6 +3,7 @@
   import { base } from "$app/paths";
   import {
     EbdInput,
+    EbdNavigation,
     ExportButton,
     FormatVersionSelect,
     IconLogo,
@@ -71,14 +72,14 @@
         <IconLogo />
       </a>
       <span class="text-xl text-white">EBD.HOCHFREQUENZ.DE</span>
-      <div class="-mt-12 pl-10 w-1/5">
+      <div class="-mt-2 pl-10 w-1/5">
         <FormatVersionSelect
           {formatVersions}
           selectedVersion={currentFormatVersion}
           on:select={handleFormatVersionSelect}
         />
       </div>
-      <div class="-mt-2 pl-5 w-1/3">
+      <div class="-mt-2 pl-5 w-1/3 mr-1">
         <EbdInput
           ebds={currentEbds}
           {selectedEbdCode}
@@ -87,6 +88,7 @@
           on:select={handleEbdInput}
         />
       </div>
+      <EbdNavigation {currentEbds} {currentFormatVersion} {selectedEbdCode} />
     </div>
     <div class="ml-auto">
       <ExportButton {currentFormatVersion} currentEbd={selectedEbdCode} />

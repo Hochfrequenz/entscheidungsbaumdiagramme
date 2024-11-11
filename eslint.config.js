@@ -39,7 +39,9 @@ export default [
         // DOM types
         Event: "readonly",
         EventTarget: "readonly",
+        HTMLElement: "readonly",
         HTMLInputElement: "readonly",
+        MouseEvent: "readonly",
         // Node.js globals
         process: "readonly",
       },
@@ -52,7 +54,7 @@ export default [
       "import/first": "error",
       "import/newline-after-import": "error",
       "import/no-duplicates": "error",
-      "svelte/no-at-html-tags": "warn", // Changed from 'error' to 'warn'
+      "svelte/no-at-html-tags": "warn",
       "no-undef": "error",
     },
   },
