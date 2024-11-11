@@ -41,16 +41,16 @@
   {#if $isAuthenticated}
     <button
       on:click={logout}
-      class="flex items-center gap-2 rounded-full bg-tint text-[16px] font-bold py-3 px-5 text-secondary"
+      class="flex items-center gap-2 rounded-full bg-tint text-[16px] py-3 px-5 text-secondary"
     >
-      Ausloggen <IconLogout />
+      Abmelden <IconLogout />
     </button>
   {:else}
     <button
       on:click={login}
-      class="flex items-center gap-2 rounded-full bg-tint text-[16px] font-bold py-3 px-5 text-secondary"
+      class="flex items-center gap-2 rounded-full bg-tint text-[16px] py-3 px-5 text-secondary"
     >
-      Einloggen <IconLogin />
+      Anmelden <IconLogin />
     </button>
   {/if}
 </div>
