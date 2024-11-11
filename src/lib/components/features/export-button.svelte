@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
 
   import { base } from "$app/paths";
+  import { IconDownload } from "$lib/components";
 
   export let currentFormatVersion: string = "";
   export let currentEbd: string = "";
@@ -49,7 +50,7 @@
 
 <button
   on:click={handleExport}
-  class="rounded-full bg-tint text-[16px] font-bold py-3 px-5 text-secondary"
+  class="flex flex-row items-center gap-2 rounded-full bg-tint text-[16px] py-3 px-5 text-secondary"
 >
-  Export SVG
+  <IconDownload /> Export SVG
 </button>
