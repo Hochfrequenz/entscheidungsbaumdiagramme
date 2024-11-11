@@ -31,6 +31,7 @@ jobs:
           app_location: "/" # App source code path
           api_location: "build/server" # Api source code path - optional
           output_location: "build" # Built app content directory - optional
+          skip_deploy_on_missing_secrets: true # dependabot related
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
