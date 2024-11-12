@@ -4,7 +4,7 @@ import { join } from "path";
 import type { EbdNameExtended, MetaData } from "$lib/types/metadata";
 
 let ebdFiles: Record<string, string[]> | null = null;
-let ebdsWithMetadata: Record<string, EbdNameExtended[]> | null = null;
+let ebdFullName: Record<string, EbdNameExtended[]> | null = null;
 
 // mapping of FVs where the BDEW skipped EBD related updates
 const skippedFormatVersionToInsteadFormatVersionMap: Record<string, string> = {
@@ -52,8 +52,8 @@ export function getEbdFiles(): Record<string, string[]> {
 }
 
 // export function for UI, including EBDs and associated metadata
-export function getEbdsWithMetadata(): Record<string, EbdNameExtended[]> {
-  if (ebdsWithMetadata) return ebdsWithMetadata;
+export function getEbdNames(): Record<string, EbdNameExtended[]> {
+  if (ebdFullName) return ebdFullName;
 
   const ebds = getEbds();
   const result: Record<string, EbdNameExtended[]> = {};
@@ -81,7 +81,7 @@ export function getEbdsWithMetadata(): Record<string, EbdNameExtended[]> {
     });
   }
 
-  ebdsWithMetadata = result;
+  ebdFullName = result;
   return result;
 }
 
