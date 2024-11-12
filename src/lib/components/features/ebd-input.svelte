@@ -24,6 +24,17 @@
     }
   }
 
+  $: {
+    if (ebds) {
+      filteredEbds = ebds;
+      if (!ebds.find((ebd) => ebd.ebd_code === selectedEbdCode)) {
+        selectedEbdCode = "";
+        selectedEbdNameExtended = undefined;
+        inputValue = "";
+      }
+    }
+  }
+
   function updateSelectedEbdNameExtended() {
     selectedEbdNameExtended = selectedEbdCode
       ? ebds.find((ebd) => ebd.ebd_code === selectedEbdCode)

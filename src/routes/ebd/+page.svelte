@@ -18,6 +18,10 @@
   let selectedRole = "";
   let ebdList: EbdNameExtended[] = [];
 
+  $: if (selectedFormatVersion && selectedRole !== undefined) {
+    ebdList = filterEbdsByRole(selectedFormatVersion, selectedRole);
+  }
+
   function handleFormatVersionSelect(version: string) {
     selectedFormatVersion = version;
     selectedRole = "";
@@ -35,6 +39,28 @@
 
   function handleRoleSelect(role: string) {
     selectedRole = role;
+    ebdList = selectedFormatVersion
+      ? filterEbdsByRole(selectedFormatVersion, role)
+      : [];
+  }
+
+  function filterEbdsByRole(
+    formatVersion: string,
+    role: string,
+  ): EbdNameExtended[] {
+    if (!role) return data.ebds[formatVersion] || [];
+
+    const filteredEbds: EbdNameExtended[] = [];
+    const formatVersionMetadata = data.metadata[formatVersion] || {};
+
+    data.ebds[formatVersion]?.forEach((ebd) => {
+      const ebdMetadata = formatVersionMetadata[ebd.ebd_code];
+      if (ebdMetadata?.metadata.role === role) {
+        filteredEbds.push(ebd);
+      }
+    });
+
+    return filteredEbds;
   }
 </script>
 
