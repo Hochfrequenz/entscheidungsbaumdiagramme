@@ -1,7 +1,12 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { EbdInput, FormatVersionSelect, Header } from "$lib/components";
+  import {
+    EbdInput,
+    FilterRoleSelect,
+    FormatVersionSelect,
+    Header,
+  } from "$lib/components";
   import type { EbdNameExtended } from "$lib/types/metadata";
 
   import type { PageData } from "./$types";
@@ -44,6 +49,9 @@
         selectedVersion={selectedFormatVersion}
         onSelect={handleFormatVersionSelect}
       />
+    </div>
+    <div class="my-4">
+      <FilterRoleSelect disabled={!selectedFormatVersion} />
     </div>
     <div class="mt-4">
       <EbdInput
