@@ -37,10 +37,9 @@
   let formatVersionChanged = false;
 
   // new format version <select> only causes ebd <input> to reset to placeholder
-  function handleFormatVersionSelect(event: CustomEvent<string>) {
-    const newFormatVersion = event.detail;
-    if (newFormatVersion !== currentFormatVersion) {
-      currentFormatVersion = newFormatVersion;
+  function handleFormatVersionSelect(version: string) {
+    if (version !== currentFormatVersion) {
+      currentFormatVersion = version;
       currentEbd = ""; // reset EBD selection
       formatVersionChanged = true;
       setTimeout(() => {
@@ -51,12 +50,11 @@
 
   // ebd <input> is required for redirect and URL update
   // [...ebd] exists only as a combination of /ebd/<formatversion>/<ebd>/
-  function handleEbdInput(event: CustomEvent<string>) {
-    const newEbd = event.detail;
-    if (newEbd !== currentEbd) {
-      currentEbd = newEbd;
-      if (currentFormatVersion && newEbd) {
-        goto(`${base}/ebd/${currentFormatVersion}/${newEbd}`);
+  function handleEbdInput(ebdCode: string) {
+    if (ebdCode !== currentEbd) {
+      currentEbd = ebdCode;
+      if (currentFormatVersion && ebdCode) {
+        goto(`${base}/ebd/${currentFormatVersion}/${ebdCode}`);
       }
     }
   }
@@ -76,7 +74,7 @@
         <FormatVersionSelect
           {formatVersions}
           selectedVersion={currentFormatVersion}
-          on:select={handleFormatVersionSelect}
+          onSelect={(version) => handleFormatVersionSelect(version)}
         />
       </div>
       <div class="-mt-2 pl-5 w-1/3 mr-1">
@@ -85,7 +83,7 @@
           {selectedEbdCode}
           {formatVersionChanged}
           disabled={!currentFormatVersion}
-          on:select={handleEbdInput}
+          onSelect={(ebdCode: string) => handleEbdInput(ebdCode)}
         />
       </div>
       <EbdNavigation {currentEbds} {currentFormatVersion} {selectedEbdCode} />

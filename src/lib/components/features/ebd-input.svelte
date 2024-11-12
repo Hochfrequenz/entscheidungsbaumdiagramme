@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, onMount } from "svelte";
+  import { onMount } from "svelte";
 
   import type { EbdNameExtended } from "$lib/types/metadata";
 
@@ -7,8 +7,7 @@
   export let disabled: boolean = false;
   export let selectedEbdCode: string = "";
   export let formatVersionChanged = false;
-
-  const dispatch = createEventDispatcher<{ select: string }>();
+  export let onSelect: (ebdCode: string) => void;
 
   let inputValue: string = ""; // preselected EBD on dynamic routes
   let filteredEbds: EbdNameExtended[] = ebds; // by default (without filter), the list of filtered EBDs is equivalent to a list containing all fetched EBDs
@@ -56,7 +55,7 @@
     inputValue = ebd.ebd_name;
     selectedEbdCode = ebd.ebd_code;
     showOptions = false;
-    dispatch("select", ebd.ebd_code);
+    onSelect(ebd.ebd_code);
   }
 
   function handleFocus() {
