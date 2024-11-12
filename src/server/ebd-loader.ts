@@ -84,3 +84,39 @@ export function getEbdsWithMetadata(): Record<string, EbdNameExtended[]> {
   ebdsWithMetadata = result;
   return result;
 }
+
+// fetches available roles from EBD metadata for a given format version
+function getRolesForFormatVersion(formatVersion: string): string[] {
+  const staticPath = join(process.cwd(), "static", "ebd");
+  const versionPath = join(staticPath, formatVersion);
+  const roles = new Set<string>();
+
+  try {
+    const files = readdirSync(versionPath);
+    const jsonFiles = files.filter((file) => file.endsWith(".json"));
+
+    for (const jsonFile of jsonFiles) {
+      const jsonPath = join(versionPath, jsonFile);
+      const metadata = JSON.parse(readFileSync(jsonPath, "utf-8")) as MetaData;
+      if (metadata.metadata.role?.trim()) {
+        roles.add(metadata.metadata.role);
+      }
+    }
+
+    return Array.from(roles).sort();
+  } catch (error) {
+    console.error(`no roles avaialble for ${formatVersion}:`, error);
+    return [];
+  }
+}
+
+export function getRoles(): Record<string, string[]> {
+  const ebds = getEbds();
+  const roles: Record<string, string[]> = {};
+
+  for (const formatVersion of Object.keys(ebds)) {
+    roles[formatVersion] = getRolesForFormatVersion(formatVersion);
+  }
+
+  return roles;
+}
