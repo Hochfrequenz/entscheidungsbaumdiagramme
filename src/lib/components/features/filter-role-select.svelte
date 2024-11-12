@@ -2,43 +2,107 @@
   export let disabled: boolean = false;
   export let formatVersion: string = "";
   export let roles: Record<string, string[]> = {};
-  export let onSelect: (role: string) => void;
+  export let onSelect: (selectedRoles: string[]) => void;
 
-  let selectedRole = "";
+  let selectedRoles: Set<string> = new Set();
+  let selectElement: HTMLSelectElement;
 
   $: availableRoles = formatVersion ? roles[formatVersion] || [] : [];
 
-  // reset role filter select upon changing format version
   $: if (formatVersion) {
-    selectedRole = "";
+    selectedRoles = new Set();
+    onSelect([]);
   }
 
   function handleSelect(event: Event) {
     const select = event.target as HTMLSelectElement;
-    selectedRole = select.value;
-    onSelect(select.value);
+    const role = select.value;
+    if (role && !selectedRoles.has(role)) {
+      selectedRoles.add(role);
+      selectedRoles = selectedRoles;
+      onSelect([...selectedRoles]);
+    }
+    select.value = "";
+  }
+
+  function removeRole(role: string) {
+    selectedRoles.delete(role);
+    selectedRoles = selectedRoles;
+    onSelect([...selectedRoles]);
+  }
+
+  function removePlaceholderChip() {
+    selectedRoles = new Set();
+    onSelect([]);
   }
 </script>
 
 <div class="flex flex-col items-start mt-2 w-full relative">
-  <select
-    id="role-select"
-    bind:value={selectedRole}
-    {disabled}
-    on:change={handleSelect}
-    class="inline-block border-2 border-white rounded-lg bg-secondary py-3 px-2 ps-3 pe-4 focus:outline-0 w-full cursor-pointer text-base leading-relaxed appearance-none text-black disabled:text-black/25"
-  >
-    <option value="" class={disabled ? "text-black/25" : "text-black"}>
-      (Optional)
-    </option>
-    {#each availableRoles as role}
-      <option value={role}>{role}</option>
-    {/each}
-  </select>
-  <label
-    for="role-select"
-    class="absolute top-0.5 left-3 -translate-y-1/2 text-xs text-slate-500 bg-white px-1 rounded"
-  >
-    Filter: Rolle
-  </label>
+  <div class="w-full">
+    <label
+      for="role-select"
+      class="absolute top-0.5 left-3 -translate-y-1/2 text-xs text-slate-500 bg-white px-1 rounded z-10"
+    >
+      Filter: prüfende Rollen
+    </label>
+
+    <div
+      class="border-2 border-white rounded-lg bg-secondary p-3 flex flex-wrap items-center gap-2"
+    >
+      {#if selectedRoles.size === 0}
+        <button
+          type="button"
+          class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-black disabled:opacity-25"
+          on:click={removePlaceholderChip}
+          {disabled}
+        >
+          alle
+          <svg
+            class="w-4 h-4 ml-1"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      {:else}
+        {#each [...selectedRoles] as role}
+          <button
+            type="button"
+            class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-black"
+            on:click={() => removeRole(role)}
+            {disabled}
+          >
+            {role}
+            <svg
+              class="w-4 h-4 ml-1"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        {/each}
+      {/if}
+
+      <select
+        id="role-select"
+        bind:this={selectElement}
+        on:change={handleSelect}
+        {disabled}
+        class="flex-1 min-w-[120px] bg-transparent text-black disabled:text-black/25 cursor-pointer disabled:cursor-not-allowed appearance-none focus:outline-none"
+      >
+        <option value="" class="bg-secondary"></option>
+        {#each availableRoles as role}
+          {#if !selectedRoles.has(role)}
+            <option value={role} class="bg-secondary">{role}</option>
+          {/if}
+        {/each}
+      </select>
+    </div>
+  </div>
 </div>
