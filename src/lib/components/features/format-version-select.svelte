@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
-
   type FormatVersion = {
     code: string;
     detailedFormatVersion: string;
@@ -8,11 +6,10 @@
 
   export let formatVersions: FormatVersion[] = [];
   export let selectedVersion: string = "";
-
-  const dispatch = createEventDispatcher();
+  export let onSelect: (version: string) => void;
 
   function handleSelect() {
-    dispatch("select", selectedVersion);
+    onSelect(selectedVersion);
   }
 </script>
 

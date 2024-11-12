@@ -12,15 +12,15 @@
   let selectedEbd = "";
   let ebdList: EbdNameExtended[] = [];
 
-  function handleFormatVersionSelect(event: CustomEvent<string>) {
-    selectedFormatVersion = event.detail;
+  function handleFormatVersionSelect(version: string) {
+    selectedFormatVersion = version;
     ebdList = selectedFormatVersion
       ? data.ebds[selectedFormatVersion] || []
       : [];
   }
 
-  function handleEbdInput(event: CustomEvent<string>) {
-    selectedEbd = event.detail;
+  function handleEbdInput(ebdCode: string) {
+    selectedEbd = ebdCode;
     if (selectedFormatVersion && selectedEbd) {
       goto(`${base}/ebd/${selectedFormatVersion}/${selectedEbd}`);
     }
@@ -42,14 +42,16 @@
       <FormatVersionSelect
         formatVersions={data.formatVersions}
         selectedVersion={selectedFormatVersion}
-        on:select={handleFormatVersionSelect}
+        onSelect={handleFormatVersionSelect}
       />
     </div>
     <div class="mt-4">
       <EbdInput
         ebds={ebdList}
         disabled={!selectedFormatVersion}
-        on:select={handleEbdInput}
+        selectedEbdCode={selectedEbd}
+        formatVersionChanged={false}
+        onSelect={handleEbdInput}
       />
     </div>
   </div>
