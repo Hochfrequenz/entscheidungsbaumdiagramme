@@ -1,6 +1,5 @@
-import { getEbdsWithMetadata } from "$server/ebd-loader";
+import { getEbdsWithMetadata, getRoles } from "$server/ebd-loader";
 import { getFormatVersions } from "$server/format-version-loader";
-import { getRoles } from "$server/ebd-loader";
 
 import type { PageServerLoad } from "./$types";
 

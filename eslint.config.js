@@ -41,6 +41,7 @@ export default [
         EventTarget: "readonly",
         HTMLElement: "readonly",
         HTMLInputElement: "readonly",
+        HTMLSelectElement: "readonly",
         MouseEvent: "readonly",
         // Node.js globals
         process: "readonly",

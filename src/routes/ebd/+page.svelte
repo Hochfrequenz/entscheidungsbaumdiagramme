@@ -15,10 +15,12 @@
 
   let selectedFormatVersion = "";
   let selectedEbd = "";
+  let selectedRole = "";
   let ebdList: EbdNameExtended[] = [];
 
   function handleFormatVersionSelect(version: string) {
     selectedFormatVersion = version;
+    selectedRole = "";
     ebdList = selectedFormatVersion
       ? data.ebds[selectedFormatVersion] || []
       : [];
@@ -29,6 +31,10 @@
     if (selectedFormatVersion && selectedEbd) {
       goto(`${base}/ebd/${selectedFormatVersion}/${selectedEbd}`);
     }
+  }
+
+  function handleRoleSelect(role: string) {
+    selectedRole = role;
   }
 </script>
 
@@ -51,7 +57,12 @@
       />
     </div>
     <div class="my-4">
-      <FilterRoleSelect disabled={!selectedFormatVersion} />
+      <FilterRoleSelect
+        disabled={!selectedFormatVersion}
+        formatVersion={selectedFormatVersion}
+        roles={data.roles}
+        onSelect={handleRoleSelect}
+      />
     </div>
     <div class="mt-4">
       <EbdInput
