@@ -6,9 +6,11 @@
 
   let selectedRoles: Set<string> = new Set();
   let selectElement: HTMLSelectElement;
+  let isSelectFocused = false;
 
   $: availableRoles = formatVersion ? roles[formatVersion] || [] : [];
 
+  // reset role filter select upon changing format version
   $: if (formatVersion) {
     selectedRoles = new Set();
     onSelect([]);
@@ -18,22 +20,31 @@
     const select = event.target as HTMLSelectElement;
     const role = select.value;
     if (role && !selectedRoles.has(role)) {
-      selectedRoles.add(role);
-      selectedRoles = selectedRoles;
+      selectedRoles = new Set([...selectedRoles, role]);
       onSelect([...selectedRoles]);
     }
     select.value = "";
   }
 
   function removeRole(role: string) {
-    selectedRoles.delete(role);
-    selectedRoles = selectedRoles;
+    selectedRoles = new Set([...selectedRoles].filter((r) => r !== role));
     onSelect([...selectedRoles]);
   }
 
+  // visual indicator that all roles are selected and no EBDs are filtered (by role)
   function removePlaceholderChip() {
     selectedRoles = new Set();
     onSelect([]);
+  }
+
+  function handleFocus() {
+    isSelectFocused = true;
+  }
+
+  function handleBlur() {
+    setTimeout(() => {
+      isSelectFocused = false;
+    }, 200);
   }
 </script>
 
@@ -49,7 +60,7 @@
     <div
       class="border-2 border-white rounded-lg bg-secondary p-3 flex flex-wrap items-center gap-2"
     >
-      {#if selectedRoles.size === 0}
+      {#if selectedRoles.size === 0 && !isSelectFocused}
         <button
           type="button"
           class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-black disabled:opacity-25"
@@ -93,10 +104,12 @@
         id="role-select"
         bind:this={selectElement}
         on:change={handleSelect}
+        on:focus={handleFocus}
+        on:blur={handleBlur}
         {disabled}
         class="flex-1 min-w-[120px] bg-transparent text-black disabled:text-black/25 cursor-pointer disabled:cursor-not-allowed appearance-none focus:outline-none"
       >
-        <option value="" class="bg-secondary"></option>
+        <option value="" class="hidden"> </option>
         {#each availableRoles as role}
           {#if !selectedRoles.has(role)}
             <option value={role} class="bg-secondary">{role}</option>
