@@ -1,5 +1,6 @@
 import adapter from "@sveltejs/adapter-static";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+import { minifyHtml } from "vite-plugin-html";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -19,6 +20,17 @@ const config = {
       strict: true,
     }),
   },
+  vite: {
+  plugins: [
+    minifyHtml({
+      collapseWhitespace: true,
+      removeComments: true,
+      removeRedundantAttributes: true,
+      minifyCSS: true,
+      minifyJS: true,
+    }),
+  ],
+  }
 };
 
 export default config;
