@@ -15,7 +15,7 @@ const config = {
       files: {
         assets: "static",
       },
-      precompress: false,
+      precompress: true,
       strict: true,
     }),
   },
