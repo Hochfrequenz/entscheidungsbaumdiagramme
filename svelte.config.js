@@ -21,16 +21,16 @@ const config = {
     }),
   },
   vite: {
-  plugins: [
-    minifyHtml({
-      collapseWhitespace: true,
-      removeComments: true,
-      removeRedundantAttributes: true,
-      minifyCSS: true,
-      minifyJS: true,
-    }),
-  ],
-  }
+    plugins: [
+      minifyHtml({
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        minifyCSS: true,
+        minifyJS: true,
+      }),
+    ],
+  },
 };
 
 export default config;
