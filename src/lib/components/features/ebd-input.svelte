@@ -24,6 +24,17 @@
     }
   }
 
+  $: {
+    if (ebds) {
+      filteredEbds = ebds;
+      if (!ebds.find((ebd) => ebd.ebd_code === selectedEbdCode)) {
+        selectedEbdCode = "";
+        selectedEbdNameExtended = undefined;
+        inputValue = "";
+      }
+    }
+  }
+
   function updateSelectedEbdNameExtended() {
     selectedEbdNameExtended = selectedEbdCode
       ? ebds.find((ebd) => ebd.ebd_code === selectedEbdCode)
@@ -92,7 +103,7 @@
     on:focus={handleFocus}
     on:blur={handleBlur}
     placeholder={isFocused ? "" : "Bitte auswählen"}
-    class="inline-block border-2 border-white rounded-lg bg-secondary py-3 px-2 ps-3 pe-4 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25 text-base leading-relaxed appearance-none"
+    class="inline-block border-2 border-white rounded-lg bg-secondary py-3 px-2 ps-3 pe-4 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25 text-base leading-relaxed appearance-none cursor-pointer"
   />
 
   <label

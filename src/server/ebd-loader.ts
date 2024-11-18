@@ -4,7 +4,8 @@ import { join } from "path";
 import type { EbdNameExtended, MetaData } from "$lib/types/metadata";
 
 let ebdFiles: Record<string, string[]> | null = null;
-let ebdsWithMetadata: Record<string, EbdNameExtended[]> | null = null;
+let ebdFullName: Record<string, EbdNameExtended[]> | null = null;
+let ebdMetadata: Record<string, Record<string, MetaData>> | null = null;
 
 // mapping of FVs where the BDEW skipped EBD related updates
 const skippedFormatVersionToInsteadFormatVersionMap: Record<string, string> = {
@@ -52,8 +53,8 @@ export function getEbdFiles(): Record<string, string[]> {
 }
 
 // export function for UI, including EBDs and associated metadata
-export function getEbdsWithMetadata(): Record<string, EbdNameExtended[]> {
-  if (ebdsWithMetadata) return ebdsWithMetadata;
+export function getEbdNames(): Record<string, EbdNameExtended[]> {
+  if (ebdFullName) return ebdFullName;
 
   const ebds = getEbds();
   const result: Record<string, EbdNameExtended[]> = {};
@@ -81,6 +82,77 @@ export function getEbdsWithMetadata(): Record<string, EbdNameExtended[]> {
     });
   }
 
-  ebdsWithMetadata = result;
+  ebdFullName = result;
   return result;
+}
+
+export function getEbdMetadata(): Record<string, Record<string, MetaData>> {
+  if (ebdMetadata) return ebdMetadata;
+
+  const ebds = getEbds();
+  const metadata: Record<string, Record<string, MetaData>> = {};
+
+  for (const formatVersion of Object.keys(ebds)) {
+    const versionPath = join(process.cwd(), "static", "ebd", formatVersion);
+    metadata[formatVersion] = {};
+
+    try {
+      const files = readdirSync(versionPath);
+      const jsonFiles = files.filter((file) => file.endsWith(".json"));
+
+      for (const jsonFile of jsonFiles) {
+        const ebdCode = jsonFile.replace(".json", "");
+        const jsonPath = join(versionPath, jsonFile);
+        try {
+          const parseMetaData = JSON.parse(
+            readFileSync(jsonPath, "utf-8"),
+          ) as MetaData;
+          metadata[formatVersion][ebdCode] = parseMetaData;
+        } catch (error) {
+          console.warn(`no metadata available for ${ebdCode}: ${error}`);
+        }
+      }
+    } catch (error) {
+      console.error(`error reading metadata for ${formatVersion}:`, error);
+    }
+  }
+
+  ebdMetadata = metadata;
+  return metadata;
+}
+
+// fetches available roles from EBD metadata for a given format version
+function getRolesForFormatVersion(formatVersion: string): string[] {
+  const staticPath = join(process.cwd(), "static", "ebd");
+  const versionPath = join(staticPath, formatVersion);
+  const roles = new Set<string>();
+
+  try {
+    const files = readdirSync(versionPath);
+    const jsonFiles = files.filter((file) => file.endsWith(".json"));
+
+    for (const jsonFile of jsonFiles) {
+      const jsonPath = join(versionPath, jsonFile);
+      const metadata = JSON.parse(readFileSync(jsonPath, "utf-8")) as MetaData;
+      if (metadata.metadata.role?.trim()) {
+        roles.add(metadata.metadata.role);
+      }
+    }
+
+    return Array.from(roles).sort();
+  } catch (error) {
+    console.error(`no roles avaialble for ${formatVersion}:`, error);
+    return [];
+  }
+}
+
+export function getRoles(): Record<string, string[]> {
+  const ebds = getEbds();
+  const roles: Record<string, string[]> = {};
+
+  for (const formatVersion of Object.keys(ebds)) {
+    roles[formatVersion] = getRolesForFormatVersion(formatVersion);
+  }
+
+  return roles;
 }
