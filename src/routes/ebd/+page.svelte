@@ -87,7 +87,7 @@
     </div>
     <div class="my-4">
       <FilterRoleSelect
-        disabled={!selectedFormatVersion}
+        isDisabled={!selectedFormatVersion}
         formatVersion={selectedFormatVersion}
         roles={data.roles}
         onSelect={handleRoleSelect}

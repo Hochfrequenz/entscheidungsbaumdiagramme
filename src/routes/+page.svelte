@@ -3,7 +3,11 @@
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { AuthButton, IconSquareArrow, ToolsBanner } from "$lib/components";
+  import {
+    AuthButton,
+    IconSquareArrow,
+    LandingpageBanner,
+  } from "$lib/components";
   import auth from "$src/auth/authService";
   import { isAuthenticated } from "$src/store";
 
@@ -41,5 +45,5 @@
   </div>
 </section>
 <section class="pb-8">
-  <ToolsBanner />
+  <LandingpageBanner />
 </section>

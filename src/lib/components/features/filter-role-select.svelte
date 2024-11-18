@@ -1,7 +1,7 @@
 <script lang="ts">
-  export let disabled: boolean = false;
-  export let formatVersion: string = "";
-  export let roles: Record<string, string[]> = {};
+  export let isDisabled: boolean = false; // controls whether the role filter is disabled (depending on state of <FormatVersionSelect />)
+  export let formatVersion: string = ""; // currently selected format version that determines available roles
+  export let roles: Record<string, string[]> = {}; // maps format versions to their available roles for EBD filtering
   export let onSelect: (selectedRoles: string[]) => void;
 
   let selectedRoles: Set<string> = new Set();
@@ -65,7 +65,7 @@
           type="button"
           class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-black disabled:opacity-25"
           on:click={removePlaceholderChip}
-          {disabled}
+          disabled={isDisabled}
         >
           alle
           <svg
@@ -84,7 +84,7 @@
             type="button"
             class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-black"
             on:click={() => removeRole(role)}
-            {disabled}
+            disabled={isDisabled}
           >
             {role}
             <svg
@@ -106,7 +106,7 @@
         on:change={handleSelect}
         on:focus={handleFocus}
         on:blur={handleBlur}
-        {disabled}
+        disabled={isDisabled}
         class="flex-1 min-w-[120px] bg-transparent text-black disabled:text-black/25 cursor-pointer disabled:cursor-not-allowed appearance-none focus:outline-none"
       >
         <option value="" class="hidden"> </option>
