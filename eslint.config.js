@@ -56,6 +56,14 @@ export default [
       "import/no-duplicates": "error",
       "svelte/no-at-html-tags": "warn",
       "no-undef": "error",
+      "@typescript-eslint/no-unused-expressions": [
+        "error",
+        {
+          allowShortCircuit: true,
+          allowTernary: true,
+          allowTaggedTemplates: true,
+        },
+      ],
     },
   },
   {
