@@ -26,7 +26,7 @@
   </div>
 </div>
 
-<section class="bg-secondary flex-grow flex items-center justify-center">
+<section class="bg-primary flex-grow flex items-center justify-center">
   <div class="rounded-lg bg-tint p-12 shadow-md">
     <h1 class="text-2xl pb-5">Entscheidungsbaumdiagramme</h1>
     <h2
@@ -37,7 +37,7 @@
     <div class="mt-10 flex justify-center">
       <button
         on:click={checkAuthentication}
-        class="flex flex-row items-center gap-2 rounded-full bg-secondary text-white px-5 py-2 shadow-md no-underline transition-transform duration-300 ease-in-out hover:scale-110"
+        class="flex flex-row items-center gap-2 rounded-full bg-primary text-white px-5 py-2 shadow-md no-underline transition-transform duration-300 ease-in-out hover:scale-110"
       >
         <IconSquareArrow /> Jetzt öffnen
       </button>

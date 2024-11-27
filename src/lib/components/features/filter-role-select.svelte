@@ -58,7 +58,7 @@
     </label>
 
     <div
-      class="border-2 border-white rounded-lg bg-secondary p-3 flex flex-wrap items-center gap-2"
+      class="border-2 border-white rounded-lg bg-primary p-3 flex flex-wrap items-center gap-2"
     >
       {#if selectedRoles.size === 0 && !isSelectFocused}
         <button
@@ -112,7 +112,7 @@
         <option value="" class="hidden"> </option>
         {#each availableRoles as role}
           {#if !selectedRoles.has(role)}
-            <option value={role} class="bg-secondary">{role}</option>
+            <option value={role} class="bg-primary">{role}</option>
           {/if}
         {/each}
       </select>

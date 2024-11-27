@@ -60,7 +60,7 @@
   }
 </script>
 
-<header class="bg-secondary">
+<header class="bg-primary">
   <nav
     class="mx-auto my-1 flex items-center justify-between px-6 py-4"
     aria-label="Global"
