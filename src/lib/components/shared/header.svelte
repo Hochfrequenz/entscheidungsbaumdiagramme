@@ -3,7 +3,7 @@
   import { IconLogo } from "$lib/components";
 </script>
 
-<header class="bg-secondary">
+<header class="bg-primary">
   <nav class="mx-auto flex items-center px-6 py-4" aria-label="Global">
     <a href="{base}/" title="landingpage" class="flex-none items-center">
       <IconLogo />
