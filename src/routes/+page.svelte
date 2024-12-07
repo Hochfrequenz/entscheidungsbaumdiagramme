@@ -29,11 +29,9 @@
 <section class="bg-primary flex-grow flex items-center justify-center">
   <div class="rounded-lg bg-tint p-12 shadow-md">
     <h1 class="text-2xl pb-5">Entscheidungsbaumdiagramme</h1>
-    <h2
+    <p
       class="flex justify-center text-sm border-b border-secondary pb-3 mb-5 uppercase"
-    >
-      - aber es sind actually Diagramme.
-    </h2>
+    ></p>
     <div class="mt-10 flex justify-center">
       <button
         on:click={checkAuthentication}
@@ -44,6 +42,6 @@
     </div>
   </div>
 </section>
-<section class="pb-8">
+<section class="pb-8 bg-primary">
   <LandingpageBanner />
 </section>
