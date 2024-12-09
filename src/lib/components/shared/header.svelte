@@ -40,6 +40,15 @@
             onSelect={onFormatVersionSelect}
           />
         </div>
+        <!-- Role select moved here -->
+        <div class="-mt-2 pl-5 w-1/5">
+          <FilterRoleSelect
+            isDisabled={!selectedFormatVersion}
+            formatVersion={selectedFormatVersion}
+            {roles}
+            onSelect={onRoleSelect}
+          />
+        </div>
         <div class="-mt-2 pl-5 w-1/3 mr-1">
           <EbdInput
             ebds={ebdList}
@@ -49,29 +58,17 @@
             onSelect={onEbdSelect}
           />
         </div>
-        {#if selectedFormatVersion && selectedEbd}
-          <EbdNavigation
-            currentEbds={ebdList}
-            selectedEbdCode={selectedEbd}
-            currentFormatVersion={selectedFormatVersion}
-            onSelect={onEbdSelect}
-          />
-        {/if}
+        <EbdNavigation
+          currentEbds={ebdList}
+          selectedEbdCode={selectedEbd}
+          currentFormatVersion={selectedFormatVersion}
+          onSelect={onEbdSelect}
+          isDisabled={!selectedFormatVersion || !selectedEbd}
+        />
       </div>
       <div class="ml-auto">
         <slot name="actions" />
       </div>
     </nav>
-
-    <div class="px-6 py-2">
-      <div class="w-1/5">
-        <FilterRoleSelect
-          isDisabled={!selectedFormatVersion}
-          formatVersion={selectedFormatVersion}
-          {roles}
-          onSelect={onRoleSelect}
-        />
-      </div>
-    </div>
   </div>
 </header>
