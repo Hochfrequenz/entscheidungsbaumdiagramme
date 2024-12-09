@@ -1,15 +1,7 @@
 <script lang="ts">
   import { base } from "$app/paths";
-  import {
-    EbdInput,
-    EbdNavigation,
-    ExportButton,
-    FilterRoleSelect,
-    FormatVersionSelect,
-    Header,
-  } from "$lib/components";
+  import { ExportButton, Header } from "$lib/components";
   import type { EbdNameExtended } from "$lib/types/metadata";
-
   import type { PageData } from "./$types";
 
   export let data: PageData;
@@ -19,7 +11,6 @@
   let selectedRoles: string[] = [];
   let ebdList: EbdNameExtended[] = [];
 
-  // SVG Display state
   let svgContainer: HTMLDivElement;
   let svgContent = "";
   let isLoading = false;
@@ -113,80 +104,47 @@
 </script>
 
 <div class="flex flex-col h-full">
-  <div class="bg-primary">
-    <nav
-      class="mx-auto my-1 flex items-center justify-between px-6 py-4"
-      aria-label="Global"
-    >
-      <div class="flex items-center w-4/5">
-        <span class="text-xl text-white">EBD.HOCHFREQUENZ.DE</span>
-        <div class="-mt-2 pl-10 w-1/5">
-          <FormatVersionSelect
-            formatVersions={data.formatVersions}
-            selectedVersion={selectedFormatVersion}
-            onSelect={handleFormatVersionSelect}
-          />
-        </div>
-        <div class="-mt-2 pl-5 w-1/3 mr-1">
-          <EbdInput
-            ebds={ebdList}
-            disabled={!selectedFormatVersion}
-            selectedEbdCode={selectedEbd}
-            formatVersionChanged={false}
-            onSelect={handleEbdInput}
-          />
-        </div>
-        {#if selectedFormatVersion && selectedEbd}
-          <EbdNavigation
-            currentEbds={ebdList}
-            currentFormatVersion={selectedFormatVersion}
-            selectedEbdCode={selectedEbd}
-          />
-        {/if}
-      </div>
-      <div class="ml-auto">
-        {#if selectedFormatVersion && selectedEbd}
-          <ExportButton
-            currentFormatVersion={selectedFormatVersion}
-            currentEbd={selectedEbd}
-          />
-        {/if}
-      </div>
-    </nav>
-  </div>
-
-  <div class="flex flex-1 p-4">
-    <div class="w-1/5">
-      <FilterRoleSelect
-        isDisabled={!selectedFormatVersion}
-        formatVersion={selectedFormatVersion}
-        roles={data.roles}
-        onSelect={handleRoleSelect}
-      />
-    </div>
-
-    <div class="flex-1">
-      {#if isLoading}
-        <div class="flex items-center justify-center h-full">
-          <p>Loading SVG...</p>
-        </div>
-      {:else if error}
-        <div class="flex items-center justify-center h-full">
-          <p>{error}</p>
-        </div>
-      {:else if svgContent}
-        <div
-          class="max-w-[95vw] mx-auto h-full flex items-center justify-center"
-          bind:this={svgContainer}
-        >
-          {@html svgContent}
-        </div>
-      {:else}
-        <div class="flex items-center justify-center h-full text-gray-500">
-          Select a format version and EBD to view the diagram
-        </div>
+  <Header
+    formatVersions={data.formatVersions}
+    {selectedFormatVersion}
+    onFormatVersionSelect={handleFormatVersionSelect}
+    {ebdList}
+    selectedEbd={selectedEbd}
+    onEbdSelect={handleEbdInput}
+    roles={data.roles}
+    onRoleSelect={handleRoleSelect}
+  >
+    <svelte:fragment slot="actions">
+      {#if selectedFormatVersion && selectedEbd}
+        <ExportButton
+          currentFormatVersion={selectedFormatVersion}
+          currentEbd={selectedEbd}
+        />
       {/if}
-    </div>
+    </svelte:fragment>
+  </Header>
+
+  <div class="flex-1 p-4">
+    {#if isLoading}
+      <div class="flex items-center justify-center h-full">
+        <p>Loading SVG...</p>
+      </div>
+    {:else if error}
+      <div class="flex items-center justify-center h-full">
+        <p>{error}</p>
+      </div>
+    {:else if svgContent}
+      <div
+        class="max-w-[95vw] mx-auto h-full flex items-center justify-center"
+        bind:this={svgContainer}
+      >
+        {@html svgContent}
+      </div>
+    {:else}
+      <div class="flex items-center justify-center h-full text-gray-500">
+        Select a format version and EBD to view the diagram
+      </div>
+    {/if}
   </div>
 </div>
 
