@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import {
     EbdInput,
+    EbdNavigation,
+    ExportButton,
     FilterRoleSelect,
     FormatVersionSelect,
     Header,
@@ -18,13 +19,55 @@
   let selectedRoles: string[] = [];
   let ebdList: EbdNameExtended[] = [];
 
+  // SVG Display state
+  let svgContainer: HTMLDivElement;
+  let svgContent = "";
+  let isLoading = false;
+  let error: string | null = null;
+
   $: if (selectedFormatVersion && selectedRoles !== undefined) {
     ebdList = filterEbdsByRole(selectedFormatVersion, selectedRoles);
+  }
+
+  async function loadSvg() {
+    if (!selectedFormatVersion || !selectedEbd) {
+      svgContent = "";
+      return;
+    }
+
+    isLoading = true;
+    error = null;
+    const ebdPath = `${base}/ebd/${selectedFormatVersion}/${selectedEbd}.svg`;
+
+    try {
+      const response = await fetch(ebdPath);
+      if (!response.ok) {
+        throw new Error(`http error: ${response.status}`);
+      }
+      svgContent = await response.text();
+    } catch (err) {
+      console.error(`error loading svg: ${err}`);
+      error = String(err);
+      svgContent = "";
+    } finally {
+      isLoading = false;
+    }
+  }
+
+  function updateSvgSize() {
+    const svg = svgContainer?.querySelector("svg");
+    if (svg) {
+      svg.setAttribute("width", "100%");
+      svg.setAttribute("height", "100%");
+      svg.style.display = "block";
+    }
   }
 
   function handleFormatVersionSelect(version: string) {
     selectedFormatVersion = version;
     selectedRoles = [];
+    selectedEbd = "";
+    svgContent = "";
     ebdList = selectedFormatVersion
       ? data.ebds[selectedFormatVersion] || []
       : [];
@@ -32,9 +75,7 @@
 
   function handleEbdInput(ebdCode: string) {
     selectedEbd = ebdCode;
-    if (selectedFormatVersion && selectedEbd) {
-      goto(`${base}/ebd/${selectedFormatVersion}/${selectedEbd}`);
-    }
+    loadSvg();
   }
 
   function handleRoleSelect(roles: string[]) {
@@ -65,27 +106,57 @@
 
     return filteredEbds;
   }
+
+  $: if (svgContent) {
+    setTimeout(updateSvgSize, 0);
+  }
 </script>
 
-<Header />
-<div
-  class="container mx-auto flex flex-1 max-w-6xl justify-between items-center"
->
-  <div class="w-3/5">
-    <h2 class="border-b border-secondary inline-block pb-[12px] uppercase">
-      Entscheidungsbaumdiagramme - aber es sind actually Diagramme.
-    </h2>
+<div class="flex flex-col h-full">
+  <div class="bg-primary">
+    <nav
+      class="mx-auto my-1 flex items-center justify-between px-6 py-4"
+      aria-label="Global"
+    >
+      <div class="flex items-center w-4/5">
+        <span class="text-xl text-white">EBD.HOCHFREQUENZ.DE</span>
+        <div class="-mt-2 pl-10 w-1/5">
+          <FormatVersionSelect
+            formatVersions={data.formatVersions}
+            selectedVersion={selectedFormatVersion}
+            onSelect={handleFormatVersionSelect}
+          />
+        </div>
+        <div class="-mt-2 pl-5 w-1/3 mr-1">
+          <EbdInput
+            ebds={ebdList}
+            disabled={!selectedFormatVersion}
+            selectedEbdCode={selectedEbd}
+            formatVersionChanged={false}
+            onSelect={handleEbdInput}
+          />
+        </div>
+        {#if selectedFormatVersion && selectedEbd}
+          <EbdNavigation
+            currentEbds={ebdList}
+            currentFormatVersion={selectedFormatVersion}
+            selectedEbdCode={selectedEbd}
+          />
+        {/if}
+      </div>
+      <div class="ml-auto">
+        {#if selectedFormatVersion && selectedEbd}
+          <ExportButton
+            currentFormatVersion={selectedFormatVersion}
+            currentEbd={selectedEbd}
+          />
+        {/if}
+      </div>
+    </nav>
   </div>
 
-  <div class="w-2/5 flex flex-col">
-    <div class="mb-4">
-      <FormatVersionSelect
-        formatVersions={data.formatVersions}
-        selectedVersion={selectedFormatVersion}
-        onSelect={handleFormatVersionSelect}
-      />
-    </div>
-    <div class="my-4">
+  <div class="flex flex-1 p-4">
+    <div class="w-1/5">
       <FilterRoleSelect
         isDisabled={!selectedFormatVersion}
         formatVersion={selectedFormatVersion}
@@ -93,14 +164,37 @@
         onSelect={handleRoleSelect}
       />
     </div>
-    <div class="mt-4">
-      <EbdInput
-        ebds={ebdList}
-        disabled={!selectedFormatVersion}
-        selectedEbdCode={selectedEbd}
-        formatVersionChanged={false}
-        onSelect={handleEbdInput}
-      />
+
+    <div class="flex-1">
+      {#if isLoading}
+        <div class="flex items-center justify-center h-full">
+          <p>Loading SVG...</p>
+        </div>
+      {:else if error}
+        <div class="flex items-center justify-center h-full">
+          <p>{error}</p>
+        </div>
+      {:else if svgContent}
+        <div
+          class="max-w-[95vw] mx-auto h-full flex items-center justify-center"
+          bind:this={svgContainer}
+        >
+          {@html svgContent}
+        </div>
+      {:else}
+        <div class="flex items-center justify-center h-full text-gray-500">
+          Select a format version and EBD to view the diagram
+        </div>
+      {/if}
     </div>
   </div>
 </div>
+
+<style>
+  div :global(svg) {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+</style>
