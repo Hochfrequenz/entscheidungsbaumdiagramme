@@ -2,6 +2,7 @@
   import { base } from "$app/paths";
   import { ExportButton, Header } from "$lib/components";
   import type { EbdNameExtended } from "$lib/types/metadata";
+
   import type { PageData } from "./$types";
 
   export let data: PageData;
@@ -109,7 +110,7 @@
     {selectedFormatVersion}
     onFormatVersionSelect={handleFormatVersionSelect}
     {ebdList}
-    selectedEbd={selectedEbd}
+    {selectedEbd}
     onEbdSelect={handleEbdInput}
     roles={data.roles}
     onRoleSelect={handleRoleSelect}

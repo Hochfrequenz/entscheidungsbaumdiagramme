@@ -21,7 +21,6 @@
   export let roles: Record<string, string[]> = {};
   export let onRoleSelect: (roles: string[]) => void;
 
-  let showRoleSelect = true;
 </script>
 
 <header class="bg-primary">
