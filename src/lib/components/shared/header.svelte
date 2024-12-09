@@ -20,7 +20,6 @@
   export let onEbdSelect: (ebdCode: string) => void;
   export let roles: Record<string, string[]> = {};
   export let onRoleSelect: (roles: string[]) => void;
-
 </script>
 
 <header class="bg-primary">
@@ -55,6 +54,7 @@
             currentEbds={ebdList}
             selectedEbdCode={selectedEbd}
             currentFormatVersion={selectedFormatVersion}
+            onSelect={onEbdSelect}
           />
         {/if}
       </div>

@@ -6,6 +6,7 @@
 
   export let currentFormatVersion: string = "";
   export let currentEbd: string = "";
+  export let isDisabled: boolean = false;
 
   let isExportReady = true;
   let cooldownTimer: ReturnType<typeof setTimeout>;
@@ -17,7 +18,8 @@
   });
 
   async function handleExport() {
-    if (!isExportReady || !currentFormatVersion || !currentEbd) return;
+    if (isDisabled || !isExportReady || !currentFormatVersion || !currentEbd)
+      return;
 
     isExportReady = false;
     const ebdPath = `${base}/ebd/${currentFormatVersion}/${currentEbd}.svg`;
@@ -44,13 +46,15 @@
 
     cooldownTimer = setTimeout(() => {
       isExportReady = true;
-    }, 5000); // 5 seconds cooldown to prevent spamming the download button
+    }, 5000);
   }
 </script>
 
 <button
   on:click={handleExport}
-  class="flex flex-row items-center gap-2 rounded-full bg-tint text-[16px] py-3 px-5 text-secondary"
+  class="flex flex-row items-center gap-2 rounded-full bg-tint text-[16px] py-3 px-5 text-secondary transition-opacity duration-200"
+  class:opacity-30={isDisabled}
+  disabled={isDisabled}
 >
   <IconDownload /> Export SVG
 </button>

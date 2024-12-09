@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
-  import { base } from "$app/paths";
   import type { EbdNameExtended } from "$lib/types/metadata";
 
   import IconArrow from "../shared/icon-arrow.svelte";
@@ -8,6 +6,7 @@
   export let currentEbds: EbdNameExtended[] = [];
   export let currentFormatVersion: string = "";
   export let selectedEbdCode: string = "";
+  export let onSelect: (ebdCode: string) => void;
 
   $: currentIndex = currentEbds.findIndex(
     (ebd) => ebd.ebd_code === selectedEbdCode,
@@ -31,7 +30,6 @@
 
     if (currentIndex === -1) return;
 
-    // set boundaries to disable navigation once the first/last EBD is reached
     if (ebdListIndex === "previousEbd" && isFirstEbd) return;
     if (ebdListIndex === "nextEbd" && isLastEbd) return;
 
@@ -44,8 +42,8 @@
       return;
     }
 
-    const newEbd = currentEbds[newIndex].ebd_code;
-    goto(`${base}/ebd/${currentFormatVersion}/${newEbd}`);
+    const newEbd = currentEbds[newIndex];
+    onSelect(newEbd.ebd_code);
   }
 </script>
 

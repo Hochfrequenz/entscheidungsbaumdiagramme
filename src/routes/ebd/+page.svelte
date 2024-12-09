@@ -116,12 +116,11 @@
     onRoleSelect={handleRoleSelect}
   >
     <svelte:fragment slot="actions">
-      {#if selectedFormatVersion && selectedEbd}
-        <ExportButton
-          currentFormatVersion={selectedFormatVersion}
-          currentEbd={selectedEbd}
-        />
-      {/if}
+      <ExportButton
+        currentFormatVersion={selectedFormatVersion}
+        currentEbd={selectedEbd}
+        isDisabled={!selectedFormatVersion || !selectedEbd || !svgContent}
+      />
     </svelte:fragment>
   </Header>
 
