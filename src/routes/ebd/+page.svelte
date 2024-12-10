@@ -10,10 +10,13 @@
 
   export let data: PageData;
 
-  let selectedFormatVersion = data.initialState.formatVersion;
-  let selectedEbd = data.initialState.ebd;
-  let selectedRoles = data.initialState.roles || [];
-  let ebdList = filterEbdsByRole(selectedFormatVersion, selectedRoles);
+  let selectedFormatVersion: string = data.initialState.formatVersion;
+  let selectedEbd: string = data.initialState.ebd;
+  let selectedRoles: string[] = data.initialState.roles || [];
+  let ebdList: EbdNameExtended[] = filterEbdsByRole(
+    selectedFormatVersion,
+    selectedRoles,
+  );
 
   let svgContainer: HTMLDivElement;
   let svgContent = "";
@@ -26,9 +29,21 @@
 
   onMount(async () => {
     const urlParams = new URLSearchParams(window.location.search);
+    const formatVersion = urlParams.get("fv");
+    const ebd = urlParams.get("ebd");
     const rolesParam = urlParams.get("roles");
+
+    if (formatVersion) {
+      selectedFormatVersion = formatVersion;
+    }
+    if (ebd) {
+      selectedEbd = ebd;
+    }
     if (rolesParam) {
       selectedRoles = rolesParam.split(",");
+    }
+
+    if (selectedFormatVersion) {
       ebdList = filterEbdsByRole(selectedFormatVersion, selectedRoles);
     }
 
