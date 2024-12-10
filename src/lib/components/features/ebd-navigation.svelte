@@ -33,6 +33,7 @@
 
     if (currentIndex === -1) return;
 
+    // set boundaries to disable navigation once the first/last EBD is reached
     if (ebdListIndex === "previousEbd" && isFirstEbd) return;
     if (ebdListIndex === "nextEbd" && isLastEbd) return;
 

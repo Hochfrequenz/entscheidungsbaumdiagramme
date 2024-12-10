@@ -46,7 +46,7 @@
 
     cooldownTimer = setTimeout(() => {
       isExportReady = true;
-    }, 5000);
+    }, 5000); // 5 seconds cooldown to prevent spamming the download button
   }
 </script>
 

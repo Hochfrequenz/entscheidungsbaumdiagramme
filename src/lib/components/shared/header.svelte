@@ -41,7 +41,6 @@
             onSelect={onFormatVersionSelect}
           />
         </div>
-        <!-- Role select moved here -->
         <div class="-mt-2 pl-5 w-1/5">
           <FilterRoleSelect
             isDisabled={!selectedFormatVersion}
