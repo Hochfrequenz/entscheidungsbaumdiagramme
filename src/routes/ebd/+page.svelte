@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
+  import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import { ExportButton, Header } from "$lib/components";
   import type { EbdNameExtended } from "$lib/types/metadata";
@@ -7,18 +10,45 @@
 
   export let data: PageData;
 
-  let selectedFormatVersion = "";
-  let selectedEbd = "";
-  let selectedRoles: string[] = [];
-  let ebdList: EbdNameExtended[] = [];
+  let selectedFormatVersion = data.initialState.formatVersion;
+  let selectedEbd = data.initialState.ebd;
+  let selectedRoles = data.initialState.roles || [];
+  let ebdList = filterEbdsByRole(selectedFormatVersion, selectedRoles);
 
   let svgContainer: HTMLDivElement;
   let svgContent = "";
   let isLoading = false;
   let error: string | null = null;
 
-  $: if (selectedFormatVersion && selectedRoles !== undefined) {
+  $: if (selectedFormatVersion) {
     ebdList = filterEbdsByRole(selectedFormatVersion, selectedRoles);
+  }
+
+  onMount(async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const rolesParam = urlParams.get("roles");
+    if (rolesParam) {
+      selectedRoles = rolesParam.split(",");
+      ebdList = filterEbdsByRole(selectedFormatVersion, selectedRoles);
+    }
+
+    if (selectedFormatVersion && selectedEbd) {
+      await loadSvg();
+    }
+  });
+
+  function updateURL() {
+    const params = new URLSearchParams();
+    if (selectedFormatVersion) params.set("fv", selectedFormatVersion);
+    if (selectedEbd) params.set("ebd", selectedEbd);
+    if (selectedRoles.length > 0) params.set("roles", selectedRoles.join(","));
+
+    const url = `${base}/ebd/?${params.toString()}`;
+    goto(url, { replaceState: true, keepFocus: true });
+  }
+
+  $: {
+    console.log("selectedRoles changed:", selectedRoles);
   }
 
   async function loadSvg() {
@@ -60,14 +90,14 @@
     selectedRoles = [];
     selectedEbd = "";
     svgContent = "";
-    ebdList = selectedFormatVersion
-      ? data.ebds[selectedFormatVersion] || []
-      : [];
+    ebdList = version ? filterEbdsByRole(version, []) : [];
+    updateURL();
   }
 
   function handleEbdInput(ebdCode: string) {
     selectedEbd = ebdCode;
     loadSvg();
+    updateURL();
   }
 
   function handleRoleSelect(roles: string[]) {
@@ -75,6 +105,7 @@
     ebdList = selectedFormatVersion
       ? filterEbdsByRole(selectedFormatVersion, roles)
       : [];
+    updateURL();
   }
 
   function filterEbdsByRole(
@@ -113,6 +144,7 @@
     {selectedEbd}
     onEbdSelect={handleEbdInput}
     roles={data.roles}
+    {selectedRoles}
     onRoleSelect={handleRoleSelect}
   >
     <svelte:fragment slot="actions">

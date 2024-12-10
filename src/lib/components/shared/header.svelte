@@ -19,6 +19,7 @@
   export let selectedEbd: string = "";
   export let onEbdSelect: (ebdCode: string) => void;
   export let roles: Record<string, string[]> = {};
+  export let selectedRoles: string[] = [];
   export let onRoleSelect: (roles: string[]) => void;
 </script>
 
@@ -47,6 +48,7 @@
             formatVersion={selectedFormatVersion}
             {roles}
             onSelect={onRoleSelect}
+            initialRoles={selectedRoles}
           />
         </div>
         <div class="-mt-2 pl-5 w-1/3 mr-1">
