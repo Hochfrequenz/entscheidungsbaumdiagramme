@@ -3,6 +3,7 @@
   import {
     EbdInput,
     EbdNavigation,
+    FilterChapterSelect,
     FilterRoleSelect,
     FormatVersionSelect,
     IconLogo,
@@ -21,6 +22,9 @@
   export let roles: Record<string, string[]> = {};
   export let selectedRoles: string[] = [];
   export let onRoleSelect: (roles: string[]) => void;
+  export let chapters: Record<string, string[]> = {};
+  export let selectedChapters: string[] = [];
+  export let onChapterSelect: (chapters: string[]) => void;
 </script>
 
 <header class="bg-primary">
@@ -48,6 +52,15 @@
             {roles}
             onSelect={onRoleSelect}
             initialRoles={selectedRoles}
+          />
+        </div>
+        <div class="-mt-2 pl-5 w-1/5">
+          <FilterChapterSelect
+            isDisabled={!selectedFormatVersion}
+            formatVersion={selectedFormatVersion}
+            chapter={chapters}
+            onSelect={onChapterSelect}
+            initialChapters={selectedChapters}
           />
         </div>
         <div class="-mt-2 pl-5 w-1/3 mr-1">
