@@ -27,18 +27,32 @@
     ebdList = filterEbdsByRole(selectedFormatVersion, selectedRoles);
   }
 
-  onMount(async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const formatVersion = urlParams.get("fv");
-    const ebd = urlParams.get("ebd");
-    const rolesParam = urlParams.get("roles");
+  function updateURL() {
+    const params = new URLSearchParams();
 
-    if (formatVersion) {
-      selectedFormatVersion = formatVersion;
+    if (selectedFormatVersion) {
+      params.set("formatversion", selectedFormatVersion);
     }
-    if (ebd) {
-      selectedEbd = ebd;
+    if (selectedRoles.length > 0) {
+      params.set("rolle", selectedRoles.join(","));
     }
+    if (selectedEbd) {
+      params.set("ebd", selectedEbd);
+    }
+
+    const url = `${base}/ebd/?${params.toString()}`;
+    goto(url, { replaceState: true, keepFocus: true });
+  }
+
+  onMount(async () => {
+    const searchParams = new URLSearchParams(window.location.search);
+
+    const formatVersion = searchParams.get("formatversion");
+    const ebd = searchParams.get("ebd");
+    const rolesParam = searchParams.get("rolle");
+
+    if (formatVersion) selectedFormatVersion = formatVersion;
+    if (ebd) selectedEbd = ebd;
     if (rolesParam) {
       selectedRoles = rolesParam.split(",");
     }
@@ -51,20 +65,6 @@
       await loadSvg();
     }
   });
-
-  function updateURL() {
-    const params = new URLSearchParams();
-    if (selectedFormatVersion) params.set("fv", selectedFormatVersion);
-    if (selectedEbd) params.set("ebd", selectedEbd);
-    if (selectedRoles.length > 0) params.set("roles", selectedRoles.join(","));
-
-    const url = `${base}/ebd/?${params.toString()}`;
-    goto(url, { replaceState: true, keepFocus: true });
-  }
-
-  $: {
-    console.log("selectedRoles changed:", selectedRoles);
-  }
 
   async function loadSvg() {
     if (!selectedFormatVersion || !selectedEbd) {
