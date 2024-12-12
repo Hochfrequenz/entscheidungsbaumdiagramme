@@ -18,5 +18,6 @@ export { default as LandingpageButton } from "$lib/components/shared/landingpage
 export { default as EbdInput } from "$lib/components/features/ebd-input.svelte";
 export { default as EbdNavigation } from "$lib/components/features/ebd-navigation.svelte";
 export { default as ExportButton } from "$lib/components/features/export-button.svelte";
+export { default as FilterChapterSelect } from "$lib/components/features/filter-chapter-select.svelte";
 export { default as FilterRoleSelect } from "$lib/components/features/filter-role-select.svelte";
 export { default as FormatVersionSelect } from "$lib/components/features/format-version-select.svelte";

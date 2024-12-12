@@ -156,3 +156,38 @@ export function getRoles(): Record<string, string[]> {
 
   return roles;
 }
+
+function getChaptersForFormatVersion(formatVersion: string): string[] {
+  const staticPath = join(process.cwd(), "static", "ebd");
+  const versionPath = join(staticPath, formatVersion);
+  const chapters = new Set<string>();
+
+  try {
+    const files = readdirSync(versionPath);
+    const jsonFiles = files.filter((file) => file.endsWith(".json"));
+
+    for (const jsonFile of jsonFiles) {
+      const jsonPath = join(versionPath, jsonFile);
+      const metadata = JSON.parse(readFileSync(jsonPath, "utf-8")) as MetaData;
+      if (metadata.metadata.chapter?.trim()) {
+        chapters.add(metadata.metadata.chapter);
+      }
+    }
+
+    return Array.from(chapters).sort();
+  } catch (error) {
+    console.error(`no chapters available for ${formatVersion}:`, error);
+    return [];
+  }
+}
+
+export function getChapters(): Record<string, string[]> {
+  const ebds = getEbds();
+  const chapters: Record<string, string[]> = {};
+
+  for (const formatVersion of Object.keys(ebds)) {
+    chapters[formatVersion] = getChaptersForFormatVersion(formatVersion);
+  }
+
+  return chapters;
+}
