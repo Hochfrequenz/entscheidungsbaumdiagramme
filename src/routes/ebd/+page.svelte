@@ -13,9 +13,11 @@
   let selectedFormatVersion: string = data.initialState.formatVersion;
   let selectedEbd: string = data.initialState.ebd;
   let selectedRoles: string[] = data.initialState.roles || [];
-  let ebdList: EbdNameExtended[] = filterEbdsByRole(
+  let selectedChapters: string[] = data.initialState.chapters || [];
+  let ebdList: EbdNameExtended[] = filterEbds(
     selectedFormatVersion,
     selectedRoles,
+    selectedChapters,
   );
 
   let svgContainer: HTMLDivElement;
@@ -24,7 +26,11 @@
   let error: string | null = null;
 
   $: if (selectedFormatVersion) {
-    ebdList = filterEbdsByRole(selectedFormatVersion, selectedRoles);
+    ebdList = filterEbds(
+      selectedFormatVersion,
+      selectedRoles,
+      selectedChapters,
+    );
   }
 
   function updateURL() {
@@ -35,6 +41,9 @@
     }
     if (selectedRoles.length > 0) {
       params.set("rolle", selectedRoles.join(","));
+    }
+    if (selectedChapters.length > 0) {
+      params.set("chapter", selectedChapters.join(","));
     }
     if (selectedEbd) {
       params.set("ebd", selectedEbd);
@@ -50,15 +59,23 @@
     const formatVersion = searchParams.get("formatversion");
     const ebd = searchParams.get("ebd");
     const rolesParam = searchParams.get("rolle");
+    const chaptersParam = searchParams.get("chapter");
 
     if (formatVersion) selectedFormatVersion = formatVersion;
     if (ebd) selectedEbd = ebd;
     if (rolesParam) {
       selectedRoles = rolesParam.split(",");
     }
+    if (chaptersParam) {
+      selectedChapters = chaptersParam.split(",");
+    }
 
     if (selectedFormatVersion) {
-      ebdList = filterEbdsByRole(selectedFormatVersion, selectedRoles);
+      ebdList = filterEbds(
+        selectedFormatVersion,
+        selectedRoles,
+        selectedChapters,
+      );
     }
 
     if (selectedFormatVersion && selectedEbd) {
@@ -103,9 +120,10 @@
   function handleFormatVersionSelect(version: string) {
     selectedFormatVersion = version;
     selectedRoles = [];
+    selectedChapters = [];
     selectedEbd = "";
     svgContent = "";
-    ebdList = version ? filterEbdsByRole(version, []) : [];
+    ebdList = version ? filterEbds(version, [], []) : [];
     updateURL();
   }
 
@@ -118,26 +136,42 @@
   function handleRoleSelect(roles: string[]) {
     selectedRoles = roles;
     ebdList = selectedFormatVersion
-      ? filterEbdsByRole(selectedFormatVersion, roles)
+      ? filterEbds(selectedFormatVersion, roles, selectedChapters)
       : [];
     updateURL();
   }
 
-  function filterEbdsByRole(
+  function handleChapterSelect(chapters: string[]) {
+    selectedChapters = chapters;
+    ebdList = selectedFormatVersion
+      ? filterEbds(selectedFormatVersion, selectedRoles, chapters)
+      : [];
+    updateURL();
+  }
+
+  function filterEbds(
     formatVersion: string,
     roles: string[],
+    chapters: string[],
   ): EbdNameExtended[] {
-    if (!roles.length) return data.ebds[formatVersion] || [];
+    if (!roles.length && !chapters.length)
+      return data.ebds[formatVersion] || [];
 
     const filteredEbds: EbdNameExtended[] = [];
     const formatVersionMetadata = data.metadata[formatVersion] || {};
 
     data.ebds[formatVersion]?.forEach((ebd) => {
       const ebdMetadata = formatVersionMetadata[ebd.ebd_code];
-      if (
-        ebdMetadata?.metadata.role &&
-        roles.includes(ebdMetadata.metadata.role)
-      ) {
+      const matchesRole =
+        !roles.length ||
+        (ebdMetadata?.metadata.role &&
+          roles.includes(ebdMetadata.metadata.role));
+      const matchesChapter =
+        !chapters.length ||
+        (ebdMetadata?.metadata.chapter &&
+          chapters.includes(ebdMetadata.metadata.chapter));
+
+      if (matchesRole && matchesChapter) {
         filteredEbds.push(ebd);
       }
     });
@@ -161,6 +195,9 @@
     roles={data.roles}
     {selectedRoles}
     onRoleSelect={handleRoleSelect}
+    chapters={data.chapters}
+    {selectedChapters}
+    onChapterSelect={handleChapterSelect}
   >
     <svelte:fragment slot="actions">
       <ExportButton
