@@ -3,7 +3,7 @@
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { ExportButton, Header } from "$lib/components";
+  import { ExportButton, Header, SvgContainer } from "$lib/components";
   import type { EbdNameExtended } from "$lib/types/metadata";
 
   import type { PageData } from "./$types";
@@ -20,7 +20,6 @@
     selectedChapters,
   );
 
-  let svgContainer: HTMLDivElement;
   let svgContent = "";
   let isLoading = false;
   let error: string | null = null;
@@ -108,15 +107,6 @@
     }
   }
 
-  function updateSvgSize() {
-    const svg = svgContainer?.querySelector("svg");
-    if (svg) {
-      svg.setAttribute("width", "100%");
-      svg.setAttribute("height", "100%");
-      svg.style.display = "block";
-    }
-  }
-
   function handleFormatVersionSelect(version: string) {
     selectedFormatVersion = version;
     selectedRoles = [];
@@ -178,13 +168,9 @@
 
     return filteredEbds;
   }
-
-  $: if (svgContent) {
-    setTimeout(updateSvgSize, 0);
-  }
 </script>
 
-<div class="flex flex-col h-full">
+<div class="flex flex-col h-full overflow-hidden">
   <Header
     formatVersions={data.formatVersions}
     {selectedFormatVersion}
@@ -208,31 +194,7 @@
     </svelte:fragment>
   </Header>
 
-  <div class="flex-1 p-4">
-    {#if isLoading}
-      <div class="flex items-center justify-center h-full">
-        <p>Loading SVG...</p>
-      </div>
-    {:else if error}
-      <div class="flex items-center justify-center h-full">
-        <p>{error}</p>
-      </div>
-    {:else if svgContent}
-      <div
-        class="max-w-[95vw] mx-auto h-full flex items-center justify-center"
-        bind:this={svgContainer}
-      >
-        {@html svgContent}
-      </div>
-    {/if}
+  <div class="flex-1 overflow-hidden">
+    <SvgContainer {svgContent} {isLoading} {error} />
   </div>
 </div>
-
-<style>
-  div :global(svg) {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-  }
-</style>
