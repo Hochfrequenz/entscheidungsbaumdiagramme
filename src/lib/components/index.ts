@@ -21,3 +21,4 @@ export { default as ExportButton } from "$lib/components/features/export-button.
 export { default as FilterChapterSelect } from "$lib/components/features/filter-chapter-select.svelte";
 export { default as FilterRoleSelect } from "$lib/components/features/filter-role-select.svelte";
 export { default as FormatVersionSelect } from "$lib/components/features/format-version-select.svelte";
+export { default as SvgContainer } from "$lib/components/features/svg-container.svelte";
