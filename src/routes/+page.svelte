@@ -40,7 +40,7 @@
       hingegen echte Diagramme - lesbar und nutzungsfreundlich.
     </p>
     <p class="text-base text-justify pt-[20px]">
-      Die auf edi@energy veröffentlichten Word-Dateien werden von uns
+      Die auf bdew-mako.de veröffentlichten Word-Dateien werden von uns
       vollautomatisch ausgelesen. Aus den so gewonnenen Rohdaten erstellt unsere
       Software anschließend ebenso automatisiert Diagramme, welche inhaltlich zu
       100% den offiziellen BDEW-Dokumenten entsprechen. Diese Diagramme sollen
