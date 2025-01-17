@@ -141,11 +141,11 @@
 
   function handleSectionSelect(ebdCode: string) {
     selectedEbd = ebdCode;
-    selectedRoles = []; // Reset roles filter
-    selectedChapters = []; // Reset chapters filter
+    selectedRoles = []; // reset filter
+    selectedChapters = []; // reset filter
     ebdList = selectedFormatVersion
       ? filterEbds(selectedFormatVersion, [], [])
-      : []; // Reset filtered list
+      : [];
     loadSvg();
     updateURL();
   }
