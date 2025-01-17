@@ -31,7 +31,7 @@
     <h2
       class="border-b border-secondary inline-block pb-[10px] text-2xl uppercase text-center w-full"
     >
-      Entscheidungsbaumdiagramme - ???
+      Entscheidungsbaumdiagramme - als Diagramme
     </h2>
     <p class="text-base text-justify pt-[20px]">
       Wer mit den vom BDEW veröffentlichten Entscheidungsbaumdiagrammen (EBDs)
