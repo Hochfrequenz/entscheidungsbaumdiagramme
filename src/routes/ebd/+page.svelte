@@ -139,6 +139,17 @@
     updateURL();
   }
 
+  function handleSectionSelect(ebdCode: string) {
+    selectedEbd = ebdCode;
+    selectedRoles = []; // Reset roles filter
+    selectedChapters = []; // Reset chapters filter
+    ebdList = selectedFormatVersion
+      ? filterEbds(selectedFormatVersion, [], [])
+      : []; // Reset filtered list
+    loadSvg();
+    updateURL();
+  }
+
   function filterEbds(
     formatVersion: string,
     roles: string[],
@@ -184,6 +195,8 @@
     chapters={data.chapters}
     {selectedChapters}
     onChapterSelect={handleChapterSelect}
+    metadata={data.metadata}
+    onSectionSelect={handleSectionSelect}
   >
     <svelte:fragment slot="actions">
       <ExportButton

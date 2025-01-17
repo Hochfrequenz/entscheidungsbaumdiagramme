@@ -1,14 +1,13 @@
 <script lang="ts">
-  import { base } from "$app/paths";
   import {
     EbdInput,
     EbdNavigation,
     FilterChapterSelect,
     FilterRoleSelect,
     FormatVersionSelect,
-    IconLogo,
+    SectionSearch,
   } from "$lib/components";
-  import type { EbdNameExtended } from "$lib/types/metadata";
+  import type { EbdNameExtended, MetaData } from "$lib/types/metadata";
 
   export let formatVersions: Array<{
     code: string;
@@ -25,6 +24,8 @@
   export let chapters: Record<string, string[]> = {};
   export let selectedChapters: string[] = [];
   export let onChapterSelect: (chapters: string[]) => void;
+  export let metadata: Record<string, Record<string, MetaData>> = {};
+  export let onSectionSelect: (ebdCode: string) => void;
 </script>
 
 <header class="bg-primary">
@@ -34,11 +35,7 @@
       aria-label="Global"
     >
       <div class="flex items-center w-4/5">
-        <a href="{base}/" title="landingpage" class="flex-none items-center">
-          <IconLogo />
-        </a>
-        <span class="text-xl text-white">EBD.HOCHFREQUENZ.DE</span>
-        <div class="-mt-2 pl-10 w-1/5">
+        <div class="-mt-2 w-1/5">
           <FormatVersionSelect
             {formatVersions}
             selectedVersion={selectedFormatVersion}
@@ -78,6 +75,15 @@
           currentFormatVersion={selectedFormatVersion}
           onSelect={onEbdSelect}
           isDisabled={!selectedFormatVersion || !selectedEbd}
+        />
+      </div>
+      <div class="-mt-2 w-1/4 mr-2">
+        <SectionSearch
+          {metadata}
+          formatVersion={selectedFormatVersion}
+          disabled={!selectedFormatVersion}
+          onSelect={onSectionSelect}
+          selectedEbdCode={selectedEbd}
         />
       </div>
       <div class="ml-auto">
