@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
-  import { cubicOut } from "svelte/easing";
-  import { fly } from "svelte/transition";
+  // import { cubicOut } from "svelte/easing";
+  // import { fly } from "svelte/transition";
 
   let visible = false;
 
@@ -12,6 +12,7 @@
 
 <div class="flex justify-evenly w-full p-5 pt-10">
   {#if visible}
+    <!--
     <div
       class="flex flex-col items-center rounded-lg bg-hf-ahbtabellen p-8 shadow-md w-1/5 aspect-square"
       in:fly={{ x: -500, duration: 1000, delay: 250, easing: cubicOut }}
@@ -80,5 +81,6 @@
         voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
       </p>
     </div>
+  -->
   {/if}
 </div>
