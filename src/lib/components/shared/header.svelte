@@ -4,8 +4,8 @@
     EbdNavigation,
     FilterChapterSelect,
     FilterRoleSelect,
+    FilterSectionInput,
     FormatVersionSelect,
-    SectionSearch,
   } from "$lib/components";
   import type { EbdNameExtended, MetaData } from "$lib/types/metadata";
 
@@ -78,12 +78,11 @@
         />
       </div>
       <div class="-mt-2 w-1/4 mr-2">
-        <SectionSearch
+        <FilterSectionInput
           {metadata}
           formatVersion={selectedFormatVersion}
           disabled={!selectedFormatVersion}
           onSelect={onSectionSelect}
-          selectedEbdCode={selectedEbd}
         />
       </div>
       <div class="ml-auto">

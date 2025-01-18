@@ -7,8 +7,8 @@
   export let onSelect: (ebdCode: string) => void;
 
   type SectionEntry = {
-    ebdCode: string;
-    sectionText: string;
+    ebdCodes: string[];
+    sectionHeading: string;
   };
 
   let inputValue: string = "";
@@ -16,22 +16,34 @@
   let filteredSections: SectionEntry[] = [];
   let showOptions: boolean = false;
   let isFocused: boolean = false;
-  export let selectedEbdCode: string = "";
 
   // remove "<section_number> AD: " pattern
-  function extractSectionText(section: string): string {
+  function extractSectionHeading(section: string): string {
     const match = section.match(/AD:\s*(.*)/);
     return match ? match[1] : section;
   }
 
   $: if (formatVersion) {
     const formatVersionMetadata = metadata[formatVersion] || {};
-    sections = Object.entries(formatVersionMetadata)
-      .filter((entry) => entry[1].metadata.section)
-      .map(([ebdCode, data]) => ({
-        ebdCode,
-        sectionText: extractSectionText(data.metadata.section),
-      }));
+    const sectionMap = new Map<string, string[]>();
+
+    Object.entries(formatVersionMetadata).forEach(([ebdCode, data]) => {
+      if (data.metadata.section) {
+        const sectionHeading = extractSectionHeading(data.metadata.section);
+        if (!sectionMap.has(sectionHeading)) {
+          sectionMap.set(sectionHeading, []);
+        }
+        sectionMap.get(sectionHeading)!.push(ebdCode);
+      }
+    });
+
+    sections = Array.from(sectionMap.entries())
+      .map(([sectionHeading, ebdCodes]) => ({
+        sectionHeading,
+        ebdCodes,
+      }))
+      .sort((a, b) => a.sectionHeading.localeCompare(b.sectionHeading));
+
     filteredSections = sections;
     inputValue = "";
   } else {
@@ -40,28 +52,19 @@
     inputValue = "";
   }
 
-  $: if (selectedEbdCode) {
-    const currentSection = sections.find((s) => s.ebdCode === selectedEbdCode);
-    if (currentSection) {
-      inputValue = currentSection.sectionText;
-    } else {
-      inputValue = "";
-    }
-  }
-
   function handleInput(event: Event) {
     const input = event.target as HTMLInputElement;
     inputValue = input.value;
     filteredSections = sections.filter((section) =>
-      section.sectionText.toLowerCase().includes(inputValue.toLowerCase()),
+      section.sectionHeading.toLowerCase().includes(inputValue.toLowerCase()),
     );
     showOptions = true;
   }
 
   function handleSelect(section: SectionEntry) {
-    inputValue = section.sectionText;
+    inputValue = section.sectionHeading;
     showOptions = false;
-    onSelect(section.ebdCode);
+    onSelect(section.ebdCodes[0]);
   }
 
   function handleFocus() {
@@ -75,9 +78,6 @@
     isFocused = false;
     setTimeout(() => {
       showOptions = false;
-      if (!selectedEbdCode) {
-        inputValue = "";
-      }
     }, 200);
   }
 </script>
@@ -99,7 +99,7 @@
     for="section-search"
     class="absolute top-0.5 left-3 -translate-y-1/2 text-xs text-slate-500 bg-white px-1 rounded"
   >
-    Kapitel-Auswahl
+    Filter: Prozess
   </label>
 
   {#if showOptions && !disabled}
@@ -111,7 +111,7 @@
           on:mousedown={() => handleSelect(section)}
           class="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
         >
-          {section.sectionText}
+          {section.sectionHeading}
         </button>
       {/each}
     </div>

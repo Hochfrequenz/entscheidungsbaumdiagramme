@@ -119,6 +119,8 @@
 
   function handleEbdInput(ebdCode: string) {
     selectedEbd = ebdCode;
+    selectedRoles = [];
+    selectedChapters = [];
     loadSvg();
     updateURL();
   }
@@ -140,13 +142,17 @@
   }
 
   function handleSectionSelect(ebdCode: string) {
-    selectedEbd = ebdCode;
-    selectedRoles = []; // reset filter
-    selectedChapters = []; // reset filter
-    ebdList = selectedFormatVersion
-      ? filterEbds(selectedFormatVersion, [], [])
-      : [];
-    loadSvg();
+    const formatVersionMetadata = data.metadata[selectedFormatVersion] || {};
+    const section = formatVersionMetadata[ebdCode]?.metadata.section;
+    if (section) {
+      const sectionHeading = section.match(/AD:\s*(.*)/)![1];
+      ebdList = filterEbds(
+        selectedFormatVersion,
+        selectedRoles,
+        selectedChapters,
+        sectionHeading,
+      );
+    }
     updateURL();
   }
 
@@ -154,30 +160,32 @@
     formatVersion: string,
     roles: string[],
     chapters: string[],
+    section?: string,
   ): EbdNameExtended[] {
-    if (!roles.length && !chapters.length)
-      return data.ebds[formatVersion] || [];
-
-    const filteredEbds: EbdNameExtended[] = [];
     const formatVersionMetadata = data.metadata[formatVersion] || {};
+    const allEbds = data.ebds[formatVersion] || [];
 
-    data.ebds[formatVersion]?.forEach((ebd) => {
+    if (!roles.length && !chapters.length && !section) return allEbds;
+
+    return allEbds.filter((ebd) => {
       const ebdMetadata = formatVersionMetadata[ebd.ebd_code];
+      if (!ebdMetadata) return false;
+
       const matchesRole =
         !roles.length ||
-        (ebdMetadata?.metadata.role &&
+        (ebdMetadata.metadata.role &&
           roles.includes(ebdMetadata.metadata.role));
       const matchesChapter =
         !chapters.length ||
-        (ebdMetadata?.metadata.chapter &&
+        (ebdMetadata.metadata.chapter &&
           chapters.includes(ebdMetadata.metadata.chapter));
+      const matchesSection =
+        !section ||
+        (ebdMetadata.metadata.section &&
+          ebdMetadata.metadata.section.includes(section));
 
-      if (matchesRole && matchesChapter) {
-        filteredEbds.push(ebd);
-      }
+      return matchesRole && matchesChapter && matchesSection;
     });
-
-    return filteredEbds;
   }
 </script>
 
