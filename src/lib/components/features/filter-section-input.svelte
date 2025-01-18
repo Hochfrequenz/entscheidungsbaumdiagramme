@@ -92,7 +92,7 @@
     on:focus={handleFocus}
     on:blur={handleBlur}
     placeholder={isFocused ? "" : 'z.B. "Lieferbeginn"'}
-    class="inline-block border-2 border-white rounded-lg bg-primary py-3 px-2 ps-3 pe-4 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25 text-base leading-relaxed appearance-none cursor-pointer"
+    class="inline-block border-2 border-white rounded-lg bg-primary py-3 px-2 ps-3 pe-4 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25 text-base leading-relaxed cursor-pointer"
   />
 
   <label
