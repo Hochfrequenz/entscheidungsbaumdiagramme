@@ -119,8 +119,6 @@
 
   function handleEbdInput(ebdCode: string) {
     selectedEbd = ebdCode;
-    selectedRoles = [];
-    selectedChapters = [];
     loadSvg();
     updateURL();
   }
@@ -182,10 +180,16 @@
       const matchesSection =
         !section ||
         (ebdMetadata.metadata.section &&
-          ebdMetadata.metadata.section.includes(section));
+          extractSectionHeading(ebdMetadata.metadata.section) === section);
 
       return matchesRole && matchesChapter && matchesSection;
     });
+  }
+
+  // remove "<section_number> AD: " pattern
+  function extractSectionHeading(section: string): string {
+    const match = section.match(/AD:\s*(.*)/);
+    return match ? match[1] : section;
   }
 </script>
 

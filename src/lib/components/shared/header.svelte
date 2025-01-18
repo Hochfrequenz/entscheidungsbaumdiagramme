@@ -34,15 +34,38 @@
       class="flex items-center justify-between px-6 py-4 border-b border-white/10"
       aria-label="Global"
     >
-      <div class="flex items-center w-4/5">
-        <div class="-mt-2 w-1/5">
+      <div class="flex items-center gap-4 w-[45%]">
+        <div class="w-2/5">
           <FormatVersionSelect
             {formatVersions}
             selectedVersion={selectedFormatVersion}
             onSelect={onFormatVersionSelect}
           />
         </div>
-        <div class="-mt-2 pl-5 w-1/5">
+        <div class="flex items-center gap-1 w-2/5">
+          <div class="flex-1">
+            <EbdInput
+              ebds={ebdList}
+              disabled={!selectedFormatVersion}
+              selectedEbdCode={selectedEbd}
+              formatVersionChanged={false}
+              onSelect={onEbdSelect}
+            />
+          </div>
+          <div class="mt-2">
+            <EbdNavigation
+              currentEbds={ebdList}
+              selectedEbdCode={selectedEbd}
+              currentFormatVersion={selectedFormatVersion}
+              onSelect={onEbdSelect}
+              isDisabled={!selectedFormatVersion || !selectedEbd}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4 w-[55%]">
+        <div class="w-1/3">
           <FilterRoleSelect
             isDisabled={!selectedFormatVersion}
             formatVersion={selectedFormatVersion}
@@ -51,7 +74,7 @@
             initialRoles={selectedRoles}
           />
         </div>
-        <div class="-mt-2 pl-5 w-1/5">
+        <div class="w-1/3">
           <FilterChapterSelect
             isDisabled={!selectedFormatVersion}
             formatVersion={selectedFormatVersion}
@@ -60,33 +83,17 @@
             initialChapters={selectedChapters}
           />
         </div>
-        <div class="-mt-2 pl-5 w-1/3 mr-1">
-          <EbdInput
-            ebds={ebdList}
+        <div class="w-1/3">
+          <FilterSectionInput
+            {metadata}
+            formatVersion={selectedFormatVersion}
             disabled={!selectedFormatVersion}
-            selectedEbdCode={selectedEbd}
-            formatVersionChanged={false}
-            onSelect={onEbdSelect}
+            onSelect={onSectionSelect}
           />
         </div>
-        <EbdNavigation
-          currentEbds={ebdList}
-          selectedEbdCode={selectedEbd}
-          currentFormatVersion={selectedFormatVersion}
-          onSelect={onEbdSelect}
-          isDisabled={!selectedFormatVersion || !selectedEbd}
-        />
-      </div>
-      <div class="-mt-2 w-1/4 mr-2">
-        <FilterSectionInput
-          {metadata}
-          formatVersion={selectedFormatVersion}
-          disabled={!selectedFormatVersion}
-          onSelect={onSectionSelect}
-        />
-      </div>
-      <div class="ml-auto">
-        <slot name="actions" />
+        <div class="ml-4">
+          <slot name="actions" />
+        </div>
       </div>
     </nav>
   </div>

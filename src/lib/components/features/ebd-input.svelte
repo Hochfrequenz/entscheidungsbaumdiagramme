@@ -85,12 +85,6 @@
       inputValue = selectedInfo?.ebd_name ?? selectedEbdCode;
     }, 200);
   }
-
-  $: {
-    if (!isFocused) {
-      filteredEbds = ebds;
-    }
-  }
 </script>
 
 <div class="flex flex-col items-start mt-2 w-full relative">
