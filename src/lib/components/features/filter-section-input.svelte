@@ -8,8 +8,8 @@
   export let onSelect: (ebdCode: string) => void;
 
   type SectionEntry = {
-    ebdCodes: string[];
-    sectionHeading: string;
+    ebdCodes: string[]; // e.g. ["E_001", "E_003"]
+    sectionHeading: string; // e.g. "GPKE"
   };
 
   let inputValue: string = "";
