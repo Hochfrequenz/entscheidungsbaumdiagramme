@@ -5,6 +5,7 @@
   import { base } from "$app/paths";
   import { ExportButton, Header, SvgContainer } from "$lib/components";
   import type { EbdNameExtended } from "$lib/types/metadata";
+  import { extractSectionHeading } from "$lib/types/metadata";
 
   import type { PageData } from "./$types";
 
@@ -143,13 +144,15 @@
     const formatVersionMetadata = data.metadata[selectedFormatVersion] || {};
     const section = formatVersionMetadata[ebdCode]?.metadata.section;
     if (section) {
-      const sectionHeading = section.match(/AD:\s*(.*)/)![1];
-      ebdList = filterEbds(
-        selectedFormatVersion,
-        selectedRoles,
-        selectedChapters,
-        sectionHeading,
-      );
+      const sectionHeading = extractSectionHeading(section);
+      if (sectionHeading) {
+        ebdList = filterEbds(
+          selectedFormatVersion,
+          selectedRoles,
+          selectedChapters,
+          sectionHeading,
+        );
+      }
     }
     updateURL();
   }
@@ -184,12 +187,6 @@
 
       return matchesRole && matchesChapter && matchesSection;
     });
-  }
-
-  // remove "<section_number> AD: " pattern
-  function extractSectionHeading(section: string): string {
-    const match = section.match(/AD:\s*(.*)/);
-    return match ? match[1] : section;
   }
 </script>
 

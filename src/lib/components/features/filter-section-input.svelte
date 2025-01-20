@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { MetaData } from "$lib/types/metadata";
+  import { extractSectionHeading } from "$lib/types/metadata";
 
   export let metadata: Record<string, Record<string, MetaData>> = {};
   export let formatVersion: string = "";
@@ -16,12 +17,6 @@
   let filteredSections: SectionEntry[] = [];
   let showOptions: boolean = false;
   let isFocused: boolean = false;
-
-  // remove "<section_number> AD: " pattern
-  function extractSectionHeading(section: string): string {
-    const match = section.match(/AD:\s*(.*)/);
-    return match ? match[1] : section;
-  }
 
   $: if (formatVersion) {
     const formatVersionMetadata = metadata[formatVersion] || {};
