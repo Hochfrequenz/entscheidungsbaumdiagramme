@@ -13,3 +13,15 @@ export interface EbdNameExtended {
   ebd_code: string;
   ebd_name: string;
 }
+
+// remove section number prefix and "AD:" pattern from meta data
+export function extractSectionHeading(section: string): string {
+  if (!section?.trim()) {
+    return "";
+  }
+
+  const pattern = /^(?:\d+(?:\.\d+)*\s*:?\s*)?(?:AD:\s*)?/;
+  const cleaned = section.replace(pattern, "");
+
+  return cleaned.replace(/^:\s*AD:\s*/, "").trim();
+}
