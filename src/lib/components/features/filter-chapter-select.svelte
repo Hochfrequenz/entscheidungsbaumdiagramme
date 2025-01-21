@@ -79,7 +79,7 @@
     </label>
 
     <div
-      class="border-2 border-white rounded-lg bg-primary p-3 flex flex-wrap items-center gap-2"
+      class="border-2 border-white rounded-lg bg-secondary p-3 flex flex-wrap items-center gap-2"
     >
       {#if selectedChapters.size === 0 && !isSelectFocused}
         <button

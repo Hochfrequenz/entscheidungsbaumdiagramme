@@ -2,7 +2,7 @@
   import { base } from "$app/paths";
   import { IconHeart, IconLogo } from "$lib/components";
 
-  export let background = "bg-primary";
+  export let background = "bg-secondary";
 
   let currentYear = new Date().getFullYear();
 </script>
@@ -11,7 +11,7 @@
   <a href="{base}/" title="landingpage" class="flex-none items-center">
     <IconLogo size={24} />
   </a>
-  <div class="flex items-center text-sm text-white space-x-1">
+  <div class="flex items-center text-sm text-black space-x-1">
     <p class="flex items-center flex-wrap">
       © {currentYear} - made with
       <IconHeart />
