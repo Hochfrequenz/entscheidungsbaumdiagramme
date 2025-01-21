@@ -4,12 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#8DE040",
-        secondary: "#6EB52C",
-        tint: "#FBFFFE",
-        "hf-ahbtabellen": "#EBBEC1",
-        "hf-bedingungsbaum": "#E4C67F",
-        "hf-fristenkalender": "#ABDCD3",
+        primary: "#8ba2d7",
+        secondary: "#c2cee9",
       },
     },
   },

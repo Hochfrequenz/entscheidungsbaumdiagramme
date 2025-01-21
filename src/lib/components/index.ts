@@ -11,7 +11,6 @@ export { default as IconLogo } from "$lib/components/shared/icon-logo.svelte";
 export { default as IconLogout } from "$lib/components/shared/icon-logout.svelte";
 export { default as IconPlant } from "$lib/components/shared/icon-plant.svelte";
 export { default as IconSquareArrow } from "$lib/components/shared/icon-square-arrow.svelte";
-export { default as LandingpageBanner } from "$lib/components/shared/landingpage-banner.svelte";
 export { default as LandingpageButton } from "$lib/components/shared/landingpage-button.svelte";
 
 // features
