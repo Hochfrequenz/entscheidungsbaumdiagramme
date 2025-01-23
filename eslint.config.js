@@ -37,6 +37,7 @@ export default [
         URLSearchParams: "readonly",
         HTMLDivElement: "readonly",
         CustomEvent: "readonly",
+        ResizeObserver: "readonly",
         // DOM types
         Event: "readonly",
         EventTarget: "readonly",
