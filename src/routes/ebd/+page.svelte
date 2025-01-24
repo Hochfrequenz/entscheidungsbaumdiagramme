@@ -216,7 +216,7 @@
     </svelte:fragment>
   </Header>
 
-  <div class="flex-1 overflow-hidden bg-tertiary">
+  <div class="flex-1 overflow-hidden bg-secondary">
     <SvgContainer {svgContent} {isLoading} {error} />
   </div>
 </div>
