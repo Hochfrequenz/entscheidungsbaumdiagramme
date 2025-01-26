@@ -3,7 +3,12 @@
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { ExportButton, Header, SvgContainer } from "$lib/components";
+  import {
+    ErrorMsg,
+    ExportButton,
+    Header,
+    SvgContainer,
+  } from "$lib/components";
   import type { EbdNameExtended } from "$lib/types/metadata";
   import { extractSectionHeading } from "$lib/types/metadata";
 
@@ -96,12 +101,12 @@
     try {
       const response = await fetch(ebdPath);
       if (!response.ok) {
-        throw new Error(`http error: ${response.status}`);
+        error = "EBD konnte nicht gefunden.";
+        return;
       }
       svgContent = await response.text();
-    } catch (err) {
-      console.error(`error loading svg: ${err}`);
-      error = String(err);
+    } catch {
+      error = "EBD konnte nicht gefunden.";
       svgContent = "";
     } finally {
       isLoading = false;
@@ -217,6 +222,10 @@
   </Header>
 
   <div class="flex-1 overflow-hidden bg-secondary">
-    <SvgContainer {svgContent} {isLoading} {error} />
+    {#if error}
+      <ErrorMsg />
+    {:else}
+      <SvgContainer {svgContent} {isLoading} {error} />
+    {/if}
   </div>
 </div>
