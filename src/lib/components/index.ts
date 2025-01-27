@@ -1,5 +1,6 @@
 // shared components
 export { default as AuthButton } from "$lib/components/shared/auth-button.svelte";
+export { default as ErrorMsg } from "$lib/components/shared/error-msg.svelte";
 export { default as Footer } from "$lib/components/shared/footer.svelte";
 export { default as Header } from "$lib/components/shared/header.svelte";
 export { default as IconArrow } from "$lib/components/shared/icon-arrow.svelte";
@@ -11,7 +12,6 @@ export { default as IconLogo } from "$lib/components/shared/icon-logo.svelte";
 export { default as IconLogout } from "$lib/components/shared/icon-logout.svelte";
 export { default as IconPlant } from "$lib/components/shared/icon-plant.svelte";
 export { default as IconSquareArrow } from "$lib/components/shared/icon-square-arrow.svelte";
-export { default as LandingpageButton } from "$lib/components/shared/landingpage-button.svelte";
 
 // features
 export { default as EbdInput } from "$lib/components/features/ebd-input.svelte";
