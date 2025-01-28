@@ -39,8 +39,8 @@
           rel="noopener noreferrer"
           class="hover:underline text-primary font-medium mx-1">rebdhuhn</a
         >
-        bei.<br>Schreib uns einfach direkt über Github oder unser Kontaktformular und
-        wir helfen gerne beim Einstieg.
+        bei.<br />Schreib uns einfach direkt über Github oder unser
+        Kontaktformular und wir helfen gerne beim Einstieg.
       </span>
       <span class="block text-xl pb-10">
         Unterstütze uns auch gerne bei weiteren
