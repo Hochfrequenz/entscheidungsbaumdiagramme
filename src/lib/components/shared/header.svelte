@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from "$app/paths";
   import {
     EbdInput,
     EbdNavigation,
@@ -6,6 +7,7 @@
     FilterRoleSelect,
     FilterSectionInput,
     FormatVersionSelect,
+    IconLogo,
   } from "$lib/components";
   import type { EbdNameExtended, MetaData } from "$lib/types/metadata";
 
@@ -31,11 +33,18 @@
 <header class="bg-primary">
   <div class="mx-auto">
     <nav
-      class="flex items-center justify-between px-6 py-4 border-b border-white/10"
+      class="flex items-center justify-between px-6 py-2 border-b border-white/10"
       aria-label="Global"
     >
+      <div class="flex-none pl-3">
+        <a href="{base}/" title="landingpage">
+          <IconLogo size={30} />
+        </a>
+      </div>
+
       <div class="flex items-center gap-4 w-[45%]">
-        <div class="w-2/5">
+        <span class="text-xl text-black/70"> Entscheidungsbaumdiagramme </span>
+        <div class="w-2/5 flex items-center">
           <FormatVersionSelect
             {formatVersions}
             selectedVersion={selectedFormatVersion}
@@ -43,7 +52,7 @@
           />
         </div>
         <div class="flex items-center gap-1 w-2/5">
-          <div class="flex-1">
+          <div class="flex-1 flex items-center">
             <EbdInput
               ebds={ebdList}
               disabled={!selectedFormatVersion}
@@ -52,7 +61,7 @@
               onSelect={onEbdSelect}
             />
           </div>
-          <div class="mt-2">
+          <div class="flex items-center">
             <EbdNavigation
               currentEbds={ebdList}
               selectedEbdCode={selectedEbd}
@@ -65,7 +74,7 @@
       </div>
 
       <div class="flex items-center gap-4 w-[55%]">
-        <div class="w-1/3">
+        <div class="w-1/3 flex items-center">
           <FilterRoleSelect
             isDisabled={!selectedFormatVersion}
             formatVersion={selectedFormatVersion}
@@ -74,7 +83,7 @@
             initialRoles={selectedRoles}
           />
         </div>
-        <div class="w-1/3">
+        <div class="w-1/3 flex items-center">
           <FilterChapterSelect
             isDisabled={!selectedFormatVersion}
             formatVersion={selectedFormatVersion}
@@ -83,7 +92,7 @@
             initialChapters={selectedChapters}
           />
         </div>
-        <div class="w-1/3">
+        <div class="w-1/3 flex items-center">
           <FilterSectionInput
             {metadata}
             formatVersion={selectedFormatVersion}
@@ -91,7 +100,7 @@
             onSelect={onSectionSelect}
           />
         </div>
-        <div class="ml-4">
+        <div class="ml-4 flex items-center">
           <slot name="actions" />
         </div>
       </div>
