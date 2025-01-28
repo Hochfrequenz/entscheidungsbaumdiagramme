@@ -7,8 +7,9 @@
     FilterRoleSelect,
     FilterSectionInput,
     FormatVersionSelect,
-   IconLogo } from "$lib/components";
-    import type { EbdNameExtended, MetaData } from "$lib/types/metadata";
+    IconLogo,
+  } from "$lib/components";
+  import type { EbdNameExtended, MetaData } from "$lib/types/metadata";
 
   export let formatVersions: Array<{
     code: string;
