@@ -20,9 +20,9 @@
         Es kann leider vorkommen, dass EBDs nicht auf dieser Website verfügbar
         sind. Mögliche Ursachen könnten z.B. Probleme beim Auslesen der
         Word-Tabellen aus den BDEW-Dokumenten sein, oder Prüflogiken, die
-        Schleifen enthalten<span
+        <span
           title="Und damit keine Bäume oder DAGs, sondern zyklische Graphen sind"
-          >*</span
+          >Schleifen enthalten</span
         >. Falls du ein EBD nicht finden konntest oder fehlerhafte Prüfschritte
         entdeckt hast, arbeite gerne mit uns zusammen und trag zur Verbesserung
         unserer Backends
