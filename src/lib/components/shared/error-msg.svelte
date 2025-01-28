@@ -17,9 +17,13 @@
       </div>
 
       <span class="block text-xl pb-10">
-        Es kann leider vorkommen, dass EBDs nicht auf dieser Website verfügbar sind.
-        Mögliche Ursachen könnten z.B. Probleme beim Auslesen der Word-Tabellen aus den BDEW-Dokumenten sein, oder Prüflogiken, die Schleifen enthalten<span title="Und damit keine Bäume oder DAGs, sondern zyklische Graphen sind">*</span>.
-        Falls du ein EBD nicht finden konntest oder fehlerhafte Prüfschritte
+        Es kann leider vorkommen, dass EBDs nicht auf dieser Website verfügbar
+        sind. Mögliche Ursachen könnten z.B. Probleme beim Auslesen der
+        Word-Tabellen aus den BDEW-Dokumenten sein, oder Prüflogiken, die
+        Schleifen enthalten<span
+          title="Und damit keine Bäume oder DAGs, sondern zyklische Graphen sind"
+          >*</span
+        >. Falls du ein EBD nicht finden konntest oder fehlerhafte Prüfschritte
         entdeckt hast, arbeite gerne mit uns zusammen und trag zur Verbesserung
         unserer Backends
         <a
@@ -35,8 +39,8 @@
           rel="noopener noreferrer"
           class="hover:underline text-primary font-medium mx-1">rebdhuhn</a
         >
-        bei.
-        Schreib uns gerne direkt über Github oder unser Kontaktformular und wir helfen gerne beim Einstieg.
+        bei. Schreib uns gerne direkt über Github oder unser Kontaktformular und
+        wir helfen gerne beim Einstieg.
       </span>
       <span class="block text-xl pb-10">
         Unterstütze uns auch gerne bei weiteren
