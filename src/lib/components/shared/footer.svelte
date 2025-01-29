@@ -7,7 +7,7 @@
   let currentYear = new Date().getFullYear();
 
   type VersionInfo = {
-    version_tag: string,
+    build_branch_or_tag: string,
     commit_hash: string,
     build_date: string,
   };
@@ -100,9 +100,9 @@
       {#if versionInfo}
         -
         <span
-          class="hover:underline font-bold mx-1"
+          class="hover:font-bold mx-1"
           title="commit {versionInfo.commit_hash} built on {versionInfo.build_date}"
-        >{versionInfo.version_tag}
+        >{versionInfo.build_branch_or_tag}
         </span>
       {/if}
 
