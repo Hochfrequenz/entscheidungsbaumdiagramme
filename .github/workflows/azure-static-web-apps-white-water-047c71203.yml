@@ -28,6 +28,7 @@ jobs:
           sed -i "s|\"build_date\": \"{{BUILD_DATE}}\"|\"build_date\": \"$BUILD_DATE\"|" static/version.json
           sed -i "s|\"commit_has\": \"{{COMMIT_HASH}}}}\"|\"commit_hash\": \"$COMMIT_HASH\"|" static/version.json
           sed -i "s|\"build_branch_or_tag\": \"{{BUILD_BRANCH_OR_TAG}}\"|\"build_branch_or_tag\": \"BUILD_BRANCH_OR_TAG\"|" static/version.json
+          cat version.json
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
