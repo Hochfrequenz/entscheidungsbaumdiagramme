@@ -99,11 +99,12 @@
       © {currentYear}
       {#if versionInfo}
         -
-        <span
+        <a
+          href="/static/version.json"
           class="mx-1"
           title="commit {versionInfo.commit_hash} built on {versionInfo.build_date}"
           >{versionInfo.build_branch_or_tag}
-        </span>
+        </a>
       {/if}
 
       - made with
