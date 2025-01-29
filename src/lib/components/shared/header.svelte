@@ -36,22 +36,22 @@
       class="flex items-center justify-between px-6 py-2 border-b border-white/10"
       aria-label="Global"
     >
-      <div class="flex-none pl-3">
+      <div class="flex-none">
         <a href="{base}/" title="landingpage">
-          <IconLogo size={30} />
+          <IconLogo size={23} />
         </a>
       </div>
 
       <div class="flex items-center gap-4 w-[45%]">
         <span class="text-xl text-black/70"> Entscheidungsbaumdiagramme </span>
-        <div class="w-2/5 flex items-center">
+        <div class="w-2/5 flex items-center pl-1 pb-1">
           <FormatVersionSelect
             {formatVersions}
             selectedVersion={selectedFormatVersion}
             onSelect={onFormatVersionSelect}
           />
         </div>
-        <div class="flex items-center gap-1 w-2/5">
+        <div class="flex items-center gap-1 w-2/5 pb-1">
           <div class="flex-1 flex items-center">
             <EbdInput
               ebds={ebdList}
@@ -61,7 +61,7 @@
               onSelect={onEbdSelect}
             />
           </div>
-          <div class="flex items-center">
+          <div class="flex items-center pt-2">
             <EbdNavigation
               currentEbds={ebdList}
               selectedEbdCode={selectedEbd}
