@@ -1,8 +1,23 @@
-<script>
+<script lang="ts">
+  import { onMount } from "svelte";
+
   import { base } from "$app/paths";
   import { IconHeart, IconLogo } from "$lib/components";
-
+  
   let currentYear = new Date().getFullYear();
+
+  type VersionInfo = {
+    version_tag: string,
+    commit_hash: string,
+    build_date: string,
+  };
+  let versionTag: string | null = null;
+
+  onMount(async () => {
+    const response = await fetch(`${base}/version.json`);
+    const data: VersionInfo = await response.json();
+    versionTag = data.version_tag;
+  });
 </script>
 
 <footer class="flex items-center bg-tint px-3 py-3">
@@ -81,7 +96,18 @@
   </a>
   <div class="flex items-center text-sm text-black space-x-1">
     <p class="flex items-center flex-wrap">
-      © {currentYear} - made with
+      © {currentYear}
+      {#if versionTag}
+        -
+        <a
+          href="{base}/version/"
+          class="hover:underline font-bold mx-1"
+          title="Version details"
+        >{versionTag}
+        </a>
+      {/if}
+
+      - made with
       <IconHeart />
       by
       <a class="font-bold ml-1 mr-2" href="https://hochfrequenz.de"
