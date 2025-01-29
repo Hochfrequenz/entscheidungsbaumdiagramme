@@ -100,7 +100,7 @@
       {#if versionInfo}
         -
         <span
-          class="hover:font-bold mx-1"
+          class="mx-1"
           title="commit {versionInfo.commit_hash} built on {versionInfo.build_date}"
           >{versionInfo.build_branch_or_tag}
         </span>
