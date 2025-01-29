@@ -3,7 +3,7 @@
 
   import { base } from "$app/paths";
   import { IconHeart, IconLogo } from "$lib/components";
-  
+
   let currentYear = new Date().getFullYear();
 
   type VersionInfo = {
@@ -11,12 +11,12 @@
     commit_hash: string,
     build_date: string,
   };
-  let versionTag: string | null = null;
+  let versionInfo: VersionInfo | null = null;
 
   onMount(async () => {
     const response = await fetch(`${base}/version.json`);
     const data: VersionInfo = await response.json();
-    versionTag = data.version_tag;
+    versionInfo = data;
   });
 </script>
 
@@ -97,14 +97,13 @@
   <div class="flex items-center text-sm text-black space-x-1">
     <p class="flex items-center flex-wrap">
       © {currentYear}
-      {#if versionTag}
+      {#if versionInfo}
         -
-        <a
-          href="{base}/version/"
+        <span
           class="hover:underline font-bold mx-1"
-          title="Version details"
-        >{versionTag}
-        </a>
+          title="commit {versionInfo.commit_hash} built on {versionInfo.build_date}"
+        >{versionInfo.version_tag}
+        </span>
       {/if}
 
       - made with
