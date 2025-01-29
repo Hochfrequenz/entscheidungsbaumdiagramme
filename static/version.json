@@ -1,0 +1,6 @@
+{
+  "build_date": "{{BUILD_DATE}}",
+  "commit_hash": "{{COMMIT_HASH}}",
+  "build_branch_or_tag": "{{BUILD_BRANCH_OR_TAG}}",
+  "placeholder_values": "are replaced by the release Github Action"
+}

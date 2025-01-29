@@ -19,6 +19,15 @@ jobs:
         with:
           submodules: "recursive"
           lfs: false
+      - name: Set build and release information
+        id: build_release_info
+        run: |
+          BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          COMMIT_HASH=${{ github.event.pull_request.head.sha || github.sha }}
+          BUILD_BRANCH_OR_TAG=${{ github.head_ref || github.ref_name }}
+          sed -i "s|\"build_date\": \"{{BUILD_DATE}}\"|\"build_date\": \"$BUILD_DATE\"|" static/version.json
+          sed -i "s|\"commit_has\": \"{{COMMIT_HASH}}}}\"|\"commit_hash\": \"$COMMIT_HASH\"|" static/version.json
+          sed -i "s|\"build_branch_or_tag\": \"{{BUILD_BRANCH_OR_TAG}}\"|\"build_branch_or_tag\": \"BUILD_BRANCH_OR_TAG\"|" static/version.json
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
