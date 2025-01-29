@@ -27,6 +27,19 @@
     }
   }
 
+  // map chapter aliases for "MeMi" and "Modell 2" due to their names being way too long and messing with the <select>
+  const chapterMapping: Record<string, string> = {
+    "Prozesse zur Ermittlung und Abrechnung von Mehr-/Mindermengen Strom und Gas":
+      "MeMi",
+    "Zum Modell 2 zur ladevorgangscharfen bilanziellen Energiemengenzuordnungsmöglichkeit":
+      "Modell 2",
+  };
+
+  // get chapter alias if one exists, otherwise get original chapter name
+  function getChapterName(chapterName: string): string {
+    return chapterMapping[chapterName] || chapterName;
+  }
+
   onMount(() => {
     if (initialChapters.length > 0) {
       selectedChapters = new Set(initialChapters);
@@ -107,7 +120,7 @@
             on:click={() => removeChapter(chapter)}
             disabled={isDisabled}
           >
-            {chapter}
+            {getChapterName(chapter)}
             <svg
               class="w-4 h-4 ml-1"
               viewBox="0 0 24 24"
@@ -133,7 +146,9 @@
         <option value="" class="hidden"> </option>
         {#each availableChapters as chapter}
           {#if !selectedChapters.has(chapter)}
-            <option value={chapter} class="bg-primary">{chapter}</option>
+            <option value={chapter} class="bg-primary" title={chapter}
+              >{getChapterName(chapter)}</option
+            >
           {/if}
         {/each}
       </select>
