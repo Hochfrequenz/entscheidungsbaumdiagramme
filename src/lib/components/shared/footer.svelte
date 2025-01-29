@@ -101,7 +101,7 @@
         -
         <a
           href="/static/version.json"
-          class="mx-1"
+          class="mx-1, cursor: pointer"
           title="commit {versionInfo.commit_hash} built on {versionInfo.build_date}"
           >{versionInfo.build_branch_or_tag}
         </a>
