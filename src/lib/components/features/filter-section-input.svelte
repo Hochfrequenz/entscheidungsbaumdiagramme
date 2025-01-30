@@ -81,7 +81,7 @@
     inputValue = "";
     showOptions = false;
     filteredSections = sections;
-    onSelect(""); // This will trigger handleSectionSelect with an empty string
+    onSelect("");
   }
 </script>
 
