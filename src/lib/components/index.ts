@@ -2,6 +2,7 @@
 export { default as AuthButton } from "$lib/components/shared/auth-button.svelte";
 export { default as ErrorMsg } from "$lib/components/shared/error-msg.svelte";
 export { default as Footer } from "$lib/components/shared/footer.svelte";
+export { default as FooterTools } from "$lib/components/shared/footer-tools.svelte";
 export { default as Header } from "$lib/components/shared/header.svelte";
 export { default as IconArrow } from "$lib/components/shared/icon-arrow.svelte";
 export { default as IconBack } from "$lib/components/shared/icon-back.svelte";
