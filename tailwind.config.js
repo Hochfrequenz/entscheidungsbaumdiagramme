@@ -6,7 +6,7 @@ export default {
       colors: {
         primary: "#8ba2d7",
         secondary: "#c2cee9",
-        tint: "#e7e6e5" /* off-white */,
+        off_white: "#e7e6e5",
         ahb_primary: "#EBBEC1",
         ahb_secondary: "#F4E0E1",
         bedingungsbaum_primary: "#E5BD5C",
