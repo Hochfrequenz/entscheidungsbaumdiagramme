@@ -98,7 +98,7 @@
     <p class="flex items-center flex-wrap">
       © {currentYear}
       {#if versionInfo}
-        -
+        <span class="mx-1"> - </span>
         <a
           href="/version.json"
           class="mx-1, cursor: pointer"
@@ -106,13 +106,10 @@
           >{versionInfo.build_branch_or_tag}
         </a>
       {/if}
-
-      - made with
+      <span class="mx-1"> - made with </span>
       <IconHeart />
-      by
-      <a class="font-bold ml-1 mr-2" href="https://hochfrequenz.de"
-        >Hochfrequenz</a
-      >
+      <span class="mx-1"> by </span>
+      <a class="font-bold mr-2" href="https://hochfrequenz.de">Hochfrequenz</a>
       |
       <span class="ml-2">powered by</span>
       <a class="font-bold mx-1" href="https://github.com/hochfrequenz/ebdamame"
