@@ -87,7 +87,7 @@
   }
 </script>
 
-<!-- py-[9.25px] is required since the browser renders <input> and <select> slightly differently -->
+<!-- py-[9.5px] is required to match py-3 of <select> since the browser renders <input> and <select> slightly differently -->
 <div class="flex flex-col items-start mt-2 w-full relative">
   <input
     type="text"
@@ -98,7 +98,7 @@
     on:focus={handleFocus}
     on:blur={handleBlur}
     placeholder={isFocused ? "" : "Bitte auswählen"}
-    class="inline-block border-2 border-white rounded-lg bg-secondary py-[9.25px] px-2 ps-3 pe-4 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25 text-base leading-relaxed cursor-pointer"
+    class="inline-block border-2 border-white rounded-lg bg-secondary py-[9.5px] px-2 ps-3 pe-4 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25 text-base leading-relaxed cursor-pointer"
   />
 
   <label
