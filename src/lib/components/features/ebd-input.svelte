@@ -110,7 +110,7 @@
 
   {#if showOptions && !disabled}
     <div
-      class="absolute top-full left-0 w-full bg-white border border-gray-200 rounded-b-lg shadow-lg max-h-60 overflow-y-auto z-50 mt-1"
+      class="absolute top-full left-0 w-full bg-white border border-gray-200 rounded-b-lg shadow-lg max-h-60 overflow-y-auto z-40 mt-1"
     >
       {#each filteredEbds as ebd}
         <button

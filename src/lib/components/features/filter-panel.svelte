@@ -36,7 +36,7 @@
   </button>
 
   {#if isOpen}
-    <div class="absolute left-0 mt-2 px-4 py-6">
+    <div class="absolute left-0 mt-1 px-4 py-6 z-30">
       <div class="flex gap-4 max-w-[800px] mx-auto">
         <div class="min-w-[300px] flex-1">
           <FilterRoleSelect
@@ -56,7 +56,7 @@
             initialChapters={selectedChapters}
           />
         </div>
-        <div class="min-w-[250px] flex-1">
+        <div class="min-w-[300px] flex-1">
           <FilterSectionInput
             {metadata}
             {formatVersion}

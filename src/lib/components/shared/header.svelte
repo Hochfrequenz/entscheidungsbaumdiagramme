@@ -46,7 +46,7 @@
         <span class="text-xl text-black/70 whitespace-nowrap">
           Entscheidungsbaumdiagramme
         </span>
-        <div class="min-w-[150px] flex items-center pl-1 pb-1">
+        <div class="min-w-[245px] flex items-center pl-1 pb-1">
           <FormatVersionSelect
             {formatVersions}
             selectedVersion={selectedFormatVersion}
@@ -54,7 +54,7 @@
           />
         </div>
         <div class="flex items-center gap-1 pb-1">
-          <div class="min-w-[150px] flex items-center">
+          <div class="min-w-[300px] flex items-center">
             <EbdInput
               ebds={ebdList}
               disabled={!hasForatVersionSelected}

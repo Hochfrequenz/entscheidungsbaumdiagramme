@@ -116,7 +116,7 @@
         {#each [...selectedChapters] as chapter}
           <button
             type="button"
-            class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-black"
+            class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-white"
             on:click={() => removeChapter(chapter)}
             disabled={isDisabled}
           >
