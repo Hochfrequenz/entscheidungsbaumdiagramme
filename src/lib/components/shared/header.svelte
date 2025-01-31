@@ -53,8 +53,8 @@
             onSelect={onFormatVersionSelect}
           />
         </div>
-        <div class="flex items-center gap-1 pb-1">
-          <div class="min-w-[300px] flex items-center">
+        <div class="flex items-center gap-1 pl-[2px] pb-1">
+          <div class="min-w-[298px] flex items-center">
             <EbdInput
               ebds={ebdList}
               disabled={!hasForatVersionSelected}
