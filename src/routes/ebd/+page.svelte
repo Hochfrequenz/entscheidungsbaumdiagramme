@@ -146,17 +146,26 @@
   }
 
   function handleSectionSelect(ebdCode: string) {
-    const formatVersionMetadata = data.metadata[selectedFormatVersion] || {};
-    const section = formatVersionMetadata[ebdCode]?.metadata.section;
-    if (section) {
-      const sectionHeading = extractSectionHeading(section);
-      if (sectionHeading) {
-        ebdList = filterEbds(
-          selectedFormatVersion,
-          selectedRoles,
-          selectedChapters,
-          sectionHeading,
-        );
+    if (!ebdCode) {
+      // reset list of selectable EBD options of ebd-input as soon as filter is cleared
+      ebdList = filterEbds(
+        selectedFormatVersion,
+        selectedRoles,
+        selectedChapters,
+      );
+    } else {
+      const formatVersionMetadata = data.metadata[selectedFormatVersion] || {};
+      const section = formatVersionMetadata[ebdCode]?.metadata.section;
+      if (section) {
+        const sectionHeading = extractSectionHeading(section);
+        if (sectionHeading) {
+          ebdList = filterEbds(
+            selectedFormatVersion,
+            selectedRoles,
+            selectedChapters,
+            sectionHeading,
+          );
+        }
       }
     }
     updateURL();

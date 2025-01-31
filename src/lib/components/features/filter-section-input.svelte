@@ -75,20 +75,48 @@
       showOptions = false;
     }, 200);
   }
+
+  function clearInput(event: MouseEvent) {
+    event.preventDefault();
+    inputValue = "";
+    showOptions = false;
+    filteredSections = sections;
+    onSelect("");
+  }
 </script>
 
 <div class="flex flex-col items-start mt-2 w-full relative">
-  <input
-    type="text"
-    id="section-search"
-    {disabled}
-    bind:value={inputValue}
-    on:input={handleInput}
-    on:focus={handleFocus}
-    on:blur={handleBlur}
-    placeholder={isFocused ? "" : 'z.B. "Lieferbeginn"'}
-    class="inline-block border-2 border-white rounded-lg bg-secondary py-3 px-2 ps-3 pe-4 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25 text-base leading-relaxed cursor-pointer"
-  />
+  <div class="relative w-full">
+    <input
+      type="text"
+      id="section-search"
+      {disabled}
+      bind:value={inputValue}
+      on:input={handleInput}
+      on:focus={handleFocus}
+      on:blur={handleBlur}
+      placeholder={isFocused ? "" : 'z.B. "Lieferbeginn"'}
+      class="inline-block border-2 border-white rounded-lg bg-secondary py-[9.25px] px-2 ps-3 pe-10 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25 text-base leading-relaxed cursor-pointer"
+    />
+    {#if inputValue && !disabled}
+      <button
+        type="button"
+        class="absolute right-3 top-1/2 -translate-y-1/2"
+        on:mousedown|preventDefault={clearInput}
+        aria-label="Prozessfilter zurücksetzen"
+      >
+        <svg
+          class="w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    {/if}
+  </div>
 
   <label
     for="section-search"
