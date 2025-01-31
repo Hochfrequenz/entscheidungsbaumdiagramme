@@ -97,7 +97,7 @@
       on:focus={handleFocus}
       on:blur={handleBlur}
       placeholder={isFocused ? "" : 'z.B. "Lieferbeginn"'}
-      class="inline-block border-2 border-white rounded-lg bg-primary py-[15px] px-2 ps-3 pe-10 focus:outline-none w-full placeholder-white disabled:placeholder-opacity-25 text-base leading-relaxed cursor-pointer"
+      class="inline-block border-2 border-white rounded-lg bg-primary py-[15px] px-2 ps-3 pe-10 focus:outline-none w-full placeholder-white disabled:placeholder-opacity-25 text-base leading-relaxed cursor-pointer text-white"
     />
     {#if inputValue && !disabled}
       <button
