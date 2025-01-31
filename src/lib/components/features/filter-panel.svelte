@@ -27,7 +27,12 @@
 </script>
 
 <div class="inline-block">
-  <button on:click={togglePanel} class="hover:scale-110 mt-1.5 px-4">
+  <button
+    on:click={togglePanel}
+    class="hover:scale-110 mt-1.5 px-4 cursor-pointer disabled:cursor-not-allowed"
+    class:opacity-30={isDisabled}
+    disabled={isDisabled}
+  >
     {#if isOpen}
       <IconFilterOpen />
     {:else}
