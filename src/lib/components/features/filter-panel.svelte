@@ -27,7 +27,7 @@
 </script>
 
 <div class="inline-block">
-  <button on:click={togglePanel} class="hover:scale-110">
+  <button on:click={togglePanel} class="hover:scale-110 mt-1.5 px-4">
     {#if isOpen}
       <IconFilterOpen />
     {:else}
