@@ -10,4 +10,9 @@ export default defineConfig({
       $src: path.resolve("./src"),
     },
   },
+  server: {
+    fs: {
+      allow: ["./static"],
+    },
+  },
 });
