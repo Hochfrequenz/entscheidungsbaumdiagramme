@@ -92,12 +92,12 @@
     </label>
 
     <div
-      class="border-2 border-white rounded-lg bg-secondary p-3 flex flex-wrap items-center gap-2"
+      class="border-2 border-white rounded-lg bg-primary p-3 flex items-center gap-2 overflow-x-auto whitespace-nowrap"
     >
       {#if selectedChapters.size === 0 && !isSelectFocused}
         <button
           type="button"
-          class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-black disabled:opacity-25"
+          class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-white disabled:opacity-25"
           on:click={removePlaceholderChip}
           disabled={isDisabled}
         >
@@ -116,7 +116,7 @@
         {#each [...selectedChapters] as chapter}
           <button
             type="button"
-            class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-black"
+            class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-white"
             on:click={() => removeChapter(chapter)}
             disabled={isDisabled}
           >

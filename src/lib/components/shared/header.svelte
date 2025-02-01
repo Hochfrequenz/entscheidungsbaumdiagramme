@@ -3,9 +3,7 @@
   import {
     EbdInput,
     EbdNavigation,
-    FilterChapterSelect,
-    FilterRoleSelect,
-    FilterSectionInput,
+    FilterPanel,
     FormatVersionSelect,
     IconLogo,
   } from "$lib/components";
@@ -28,6 +26,9 @@
   export let onChapterSelect: (chapters: string[]) => void;
   export let metadata: Record<string, Record<string, MetaData>> = {};
   export let onSectionSelect: (ebdCode: string) => void;
+
+  let hasForatVersionSelected = selectedFormatVersion !== "";
+  $: hasForatVersionSelected = selectedFormatVersion !== "";
 </script>
 
 <header class="bg-primary">
@@ -45,24 +46,24 @@
         <span class="text-xl text-black/70 whitespace-nowrap">
           Entscheidungsbaumdiagramme
         </span>
-        <div class="min-w-[150px] flex items-center pl-1 pb-1">
+        <div class="min-w-[245px] flex items-center pl-1 pb-1">
           <FormatVersionSelect
             {formatVersions}
             selectedVersion={selectedFormatVersion}
             onSelect={onFormatVersionSelect}
           />
         </div>
-        <div class="flex items-center gap-1 pb-1">
-          <div class="min-w-[150px] flex items-center">
+        <div class="flex items-center gap-1 pl-[2px] pb-1">
+          <div class="min-w-[298px] flex items-center">
             <EbdInput
               ebds={ebdList}
-              disabled={!selectedFormatVersion}
+              disabled={!hasForatVersionSelected}
               selectedEbdCode={selectedEbd}
-              formatVersionChanged={false}
+              formatVersionChanged={hasForatVersionSelected}
               onSelect={onEbdSelect}
             />
           </div>
-          <div class="flex items-center pt-2">
+          <div class="flex items-center gap-2 pt-2">
             <EbdNavigation
               currentEbds={ebdList}
               selectedEbdCode={selectedEbd}
@@ -70,42 +71,26 @@
               onSelect={onEbdSelect}
               isDisabled={!selectedFormatVersion || !selectedEbd}
             />
+            <FilterPanel
+              isDisabled={!selectedFormatVersion}
+              formatVersion={selectedFormatVersion}
+              {roles}
+              {selectedRoles}
+              {onRoleSelect}
+              {chapters}
+              {selectedChapters}
+              {onChapterSelect}
+              {metadata}
+              {onSectionSelect}
+            />
           </div>
         </div>
       </div>
 
       <div class="flex-1"></div>
 
-      <div class="flex items-center gap-4">
-        <div class="min-w-[150px]">
-          <FilterRoleSelect
-            isDisabled={!selectedFormatVersion}
-            formatVersion={selectedFormatVersion}
-            {roles}
-            onSelect={onRoleSelect}
-            initialRoles={selectedRoles}
-          />
-        </div>
-        <div class="min-w-[150px]">
-          <FilterChapterSelect
-            isDisabled={!selectedFormatVersion}
-            formatVersion={selectedFormatVersion}
-            chapter={chapters}
-            onSelect={onChapterSelect}
-            initialChapters={selectedChapters}
-          />
-        </div>
-        <div class="min-w-[150px]">
-          <FilterSectionInput
-            {metadata}
-            formatVersion={selectedFormatVersion}
-            disabled={!selectedFormatVersion}
-            onSelect={onSectionSelect}
-          />
-        </div>
-        <div class="ml-4 flex items-center">
-          <slot name="actions" />
-        </div>
+      <div class="flex items-center">
+        <slot name="actions" />
       </div>
     </nav>
   </div>

@@ -77,12 +77,12 @@
     </label>
 
     <div
-      class="border-2 border-white rounded-lg bg-secondary p-3 flex flex-wrap items-center gap-2"
+      class="border-2 border-white rounded-lg bg-primary p-3 flex items-center gap-2 overflow-x-auto whitespace-nowrap"
     >
       {#if selectedRoles.size === 0 && !isSelectFocused}
         <button
           type="button"
-          class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-black disabled:opacity-25"
+          class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-white disabled:opacity-25"
           on:click={removePlaceholderChip}
           disabled={isDisabled}
         >
@@ -101,7 +101,7 @@
         {#each [...selectedRoles] as role}
           <button
             type="button"
-            class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-black"
+            class="inline-flex items-center border-2 border-tint rounded-full px-3 py-1 text-sm text-white"
             on:click={() => removeRole(role)}
             disabled={isDisabled}
           >
@@ -126,7 +126,7 @@
         on:focus={handleFocus}
         on:blur={handleBlur}
         disabled={isDisabled}
-        class="flex-1 min-w-[120px] bg-transparent text-black disabled:text-black/25 cursor-pointer disabled:cursor-not-allowed appearance-none focus:outline-none"
+        class="flex-1 min-w-[120px] bg-transparent text-white disabled:text-black/25 cursor-pointer disabled:cursor-not-allowed appearance-none focus:outline-none"
       >
         <option value="" class="hidden"> </option>
         {#each availableRoles as role}

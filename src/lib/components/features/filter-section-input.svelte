@@ -97,7 +97,7 @@
       on:focus={handleFocus}
       on:blur={handleBlur}
       placeholder={isFocused ? "" : 'z.B. "Lieferbeginn"'}
-      class="inline-block border-2 border-white rounded-lg bg-secondary py-[9.5px] px-2 ps-3 pe-10 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25 text-base leading-relaxed cursor-pointer"
+      class="inline-block border-2 border-white rounded-lg bg-primary py-[15px] px-2 ps-3 pe-10 focus:outline-none w-full placeholder-white disabled:placeholder-opacity-25 text-base leading-relaxed cursor-pointer text-white"
     />
     {#if inputValue && !disabled}
       <button
@@ -128,7 +128,7 @@
 
   {#if showOptions && !disabled}
     <div
-      class="absolute top-full left-0 w-full bg-white border border-gray-200 rounded-b-lg shadow-lg max-h-60 overflow-y-auto z-50 mt-1"
+      class="absolute top-full left-0 w-full bg-white border text-black border-gray-200 rounded-b-lg shadow-lg max-h-60 overflow-y-auto z-50 mt-1"
     >
       {#each filteredSections as section}
         <button
