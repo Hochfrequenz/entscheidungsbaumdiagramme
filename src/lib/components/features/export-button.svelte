@@ -10,12 +10,32 @@
 
   let isExportReady = true;
   let cooldownTimer: ReturnType<typeof setTimeout>;
+  let remainingSeconds = 0;
+  let downloadStarted = false;
 
   onMount(() => {
     return () => {
       if (cooldownTimer) clearTimeout(cooldownTimer);
     };
   });
+
+  // 5 seconds cooldown to prevent download from being spammed
+  function startCooldownTimer() {
+    remainingSeconds = 5;
+    downloadStarted = true;
+
+    const updateTimer = () => {
+      if (remainingSeconds > 0) {
+        remainingSeconds--;
+        cooldownTimer = setTimeout(updateTimer, 1000);
+      } else {
+        isExportReady = true;
+        downloadStarted = false;
+      }
+    };
+
+    cooldownTimer = setTimeout(updateTimer, 1000);
+  }
 
   async function handleExport() {
     if (isDisabled || !isExportReady || !currentFormatVersion || !currentEbd)
@@ -40,21 +60,25 @@
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+
+      startCooldownTimer();
     } catch (err) {
       console.error(`error exporting svg: ${err}`);
-    }
-
-    cooldownTimer = setTimeout(() => {
       isExportReady = true;
-    }, 5000); // 5 seconds cooldown to prevent spamming the download button
+    }
   }
 </script>
 
 <button
   on:click={handleExport}
-  class="flex flex-row items-center gap-2 rounded-full bg-secondary text-[16px] py-4 px-5 text-black transition-opacity duration-200 whitespace-nowrap"
-  class:opacity-30={isDisabled}
-  disabled={isDisabled}
+  class="flex flex-row items-center gap-2 rounded-full bg-secondary text-[16px] py-4 px-5 text-black transition-opacity duration-200 whitespace-nowrap min-w-[150px] justify-center"
+  class:opacity-30={isDisabled || !isExportReady}
+  class:cursor-not-allowed={!isExportReady}
+  disabled={isDisabled || !isExportReady}
 >
-  <IconDownload /> Export SVG
+  {#if downloadStarted}
+    {remainingSeconds} s
+  {:else}
+    <IconDownload /> Export SVG
+  {/if}
 </button>
