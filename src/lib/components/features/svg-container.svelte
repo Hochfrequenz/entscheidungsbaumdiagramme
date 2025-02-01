@@ -48,7 +48,7 @@
         bind:this={svgContainer}
       >
         <!-- tesa affiliate -->
-        <div class="relative w-full pb-10">
+        <div class="relative w-full pb-3">
           <!-- left strip -->
           <div
             class="absolute -rotate-45 bg-white opacity-50"
