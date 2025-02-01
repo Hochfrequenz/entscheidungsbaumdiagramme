@@ -55,17 +55,17 @@
   <button
     on:click={handleNavigation}
     class="cursor-pointer"
-    class:opacity-35={isLastEbd || isDisabled}
+    class:opacity-35={isFirstEbd || isDisabled}
     disabled={isDisabled}
   >
-    <IconArrow id="nextEbd" />
+    <IconArrow id="previousEbd" />
   </button>
   <button
     on:click={handleNavigation}
     class="cursor-pointer"
-    class:opacity-35={isFirstEbd || isDisabled}
+    class:opacity-35={isLastEbd || isDisabled}
     disabled={isDisabled}
   >
-    <IconArrow orientation="rotate-180" id="previousEbd" />
+    <IconArrow orientation="rotate-180" id="nextEbd" />
   </button>
 </div>
