@@ -7,7 +7,6 @@ export default {
         primary: "#8ba2d7",
         secondary: "#c2cee9",
         off_white: "#e7e6e5",
-        white: "#ffffff",
         ahb_primary: "#EBBEC1",
         ahb_secondary: "#F4E0E1",
         bedingungsbaum_primary: "#E5BD5C",
