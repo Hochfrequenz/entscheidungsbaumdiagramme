@@ -17,7 +17,7 @@
 </script>
 
 <section class="bg-primary flex-grow flex items-center justify-center">
-  <div class="rounded-lg bg-secondary p-12 shadow-md w-1/2">
+  <div class="rounded-3xl bg-secondary p-12 shadow-md w-1/2">
     <h2
       class="border-b border-secondary inline-block pb-[10px] text-2xl uppercase w-full"
     >
