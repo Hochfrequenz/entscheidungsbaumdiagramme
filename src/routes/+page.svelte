@@ -23,13 +23,13 @@
     >
       Entscheidungsbaumdiagramme - als Diagramme
     </h2>
-    <p class="text-base pt-[20px] font-normal">
+    <p class="text-base pt-[20px]">
       Wer mit den vom BDEW veröffentlichten Entscheidungsbaumdiagrammen (EBDs)
       arbeitet weiß: Die tabellarische Form ist sperrig und mindestens
       unübersichtlich. Unsere automatisch generierten EBDs von Hochfrequenz sind
       hingegen echte Diagramme - lesbar und nutzungsfreundlich.
     </p>
-    <p class="text-base pt-[20px] font-normal">
+    <p class="text-base pt-[20px]">
       Die auf
       <a href="https://bdew-mako.de" class="text-base pt-[20px] text-primary">
         bdew-mako.de
@@ -43,7 +43,7 @@
       Stelle Implementierungsaufwände anfallen, ohne dabei den Gesamtprozess aus
       den Augen zu verlieren.
     </p>
-    <p class="text-base pt-[20px] font-normal">
+    <p class="text-base pt-[20px]">
       Die Diagramme können entweder als SVG-Dateien heruntergeladen werden, oder
       auch als puml, um entsprechend eigene Erweiterungen, Notizen usw. darin
       abzubilden.
