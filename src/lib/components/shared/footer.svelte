@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
 
   import { base } from "$app/paths";
-  import { IconHeart, IconLogo } from "$lib/components";
+  import { IconHeart, IconLogoWithText } from "$lib/components";
 
   let currentYear = new Date().getFullYear();
 
@@ -22,7 +22,7 @@
 
 <footer class="flex justify-between items-center bg-secondary px-6 py-2.5">
   <a href="{base}/" title="landingpage" class="flex-none items-center">
-    <IconLogo size={24} />
+    <IconLogoWithText width={160} />
   </a>
   <div class="flex items-center text-sm text-black space-x-1">
     <p class="flex items-center flex-wrap">
