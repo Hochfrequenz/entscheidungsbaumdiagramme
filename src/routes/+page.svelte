@@ -17,7 +17,7 @@
 </script>
 
 <section class="bg-primary flex-grow flex items-center justify-center">
-  <div class="rounded-3xl bg-secondary p-12 shadow-md w-2/5">
+  <div class="rounded-3xl bg-secondary p-12 shadow-md w-1/3">
     <h1 class="text-3xl text-black/70 pb-5">Entscheidungsbaumdiagramme</h1>
     <h2
       class="flex text-lg border-b border-primary text-black/70 pb-3 mb-5 uppercase"
@@ -25,29 +25,14 @@
       als Diagramme
     </h2>
     <p class="text-black/70">
-      Wer mit den vom BDEW veröffentlichten Entscheidungsbaumdiagrammen (EBDs)
-      arbeitet weiß: Die tabellarische Form ist sperrig und mindestens
-      unübersichtlich. Unsere automatisch generierten EBDs von Hochfrequenz sind
-      hingegen echte Diagramme - lesbar und nutzungsfreundlich.
-    </p>
-    <p class="text-base pt-[20px]">
-      Die auf
+      Wer mit den vom BDEW unter
       <a href="https://bdew-mako.de" class="text-base pt-[20px] text-primary">
         bdew-mako.de
       </a>
-      veröffentlichten Word-Dateien werden von uns vollautomatisch ausgelesen. Aus
-      den so gewonnenen Rohdaten erstellt unsere Software anschließend ebenso automatisiert
-      Diagramme, welche inhaltlich zu 100% den offiziellen BDEW-Dokumenten entsprechen.
-      Diese Diagramme sollen Fachbereichen und Menschen mit Prozess-Expertise dabei
-      unterstützen, ihre Systeme fit für neue oder angepasste Prüflogiken zu machen.
-      Auf Grundlage echter Diagramme lässt sich viel leichter überblicken, an welcher
-      Stelle Implementierungsaufwände anfallen, ohne dabei den Gesamtprozess aus
-      den Augen zu verlieren.
-    </p>
-    <p class="text-base pt-[20px]">
-      Die Diagramme können entweder als SVG-Dateien heruntergeladen werden, oder
-      auch als puml, um entsprechend eigene Erweiterungen, Notizen usw. darin
-      abzubilden.
+      veröffentlichten Entscheidungsbaumdiagrammen (EBDs) arbeitet weiß: Die tabellarische
+      Form ist sperrig und mindestens unübersichtlich. Unsere automatisch generierten
+      EBDs von Hochfrequenz sind hingegen echte Diagramme - lesbar, übersichtlich
+      und nutzungsfreundlich.
     </p>
     <p
       class="flex justify-center text-sm border-secondary pb-3 mb-5 uppercase"

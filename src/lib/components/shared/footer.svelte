@@ -20,18 +20,20 @@
   });
 </script>
 
-<footer class="flex justify-between items-center bg-secondary px-6 py-2.5">
-  <a href="{base}/" title="landingpage" class="flex-none items-center">
+<footer class="relative flex items-center bg-secondary px-6 py-4">
+  <a href="{base}/" title="landingpage" class="absolute left-6">
     <IconLogoWithText width={160} />
   </a>
-  <div class="flex items-center text-sm text-black space-x-1">
+  <div
+    class="flex-1 flex justify-center items-center text-sm text-black space-x-1"
+  >
     <p class="flex items-center flex-wrap">
       © {currentYear}
       {#if versionInfo}
         <span class="mx-1"> - </span>
         <a
           href="/version.json"
-          class="mx-1, cursor: pointer"
+          class="mx-1 cursor-pointer"
           title="commit {versionInfo.commit_hash} built on {versionInfo.build_date}"
           >{versionInfo.build_branch_or_tag}
         </a>
@@ -70,5 +72,4 @@
       >
     </p>
   </div>
-  <div class="w-[23px]"></div>
 </footer>
