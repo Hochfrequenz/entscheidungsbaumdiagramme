@@ -17,13 +17,14 @@
 </script>
 
 <section class="bg-primary flex-grow flex items-center justify-center">
-  <div class="rounded-3xl bg-secondary p-12 shadow-md w-1/2">
+  <div class="rounded-3xl bg-secondary p-12 shadow-md w-2/5">
+    <h1 class="text-3xl text-black/70 pb-5">Entscheidungsbaumdiagramme</h1>
     <h2
-      class="border-b border-primary inline-block pb-[10px] text-2xl uppercase w-full"
+      class="flex text-lg border-b border-primary text-black/70 pb-3 mb-5 uppercase"
     >
-      Entscheidungsbaumdiagramme - als Diagramme
+      als Diagramme
     </h2>
-    <p class="text-base pt-[20px]">
+    <p class="text-black/70">
       Wer mit den vom BDEW veröffentlichten Entscheidungsbaumdiagrammen (EBDs)
       arbeitet weiß: Die tabellarische Form ist sperrig und mindestens
       unübersichtlich. Unsere automatisch generierten EBDs von Hochfrequenz sind
