@@ -63,7 +63,7 @@
               onSelect={onEbdSelect}
             />
           </div>
-          <div class="flex items-center gap-2 pt-2">
+          <div class="flex items-center gap-2 pt-2 pl-1.5">
             <EbdNavigation
               currentEbds={ebdList}
               selectedEbdCode={selectedEbd}

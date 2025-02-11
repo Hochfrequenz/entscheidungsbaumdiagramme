@@ -1,19 +1,21 @@
 <script lang="ts">
   export let orientation: string = "rotate-0";
   export let id: string;
+  export let size: string = "16px";
 </script>
 
 <svg
   xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
+  width={size}
+  height={size}
+  viewBox="0 0 20.7 12.86"
   fill="none"
   stroke="white"
-  stroke-width="2"
+  stroke-width="2.5"
   stroke-linecap="round"
-  stroke-linejoin="round"
+  stroke-miterlimit="10"
   {id}
-  class={`lucide lucide-arrow-up size-6 ${orientation}`}
-  ><path d="m5 12 7-7 7 7" /><path d="M12 19V5" /></svg
+  class={orientation}
+  ><path d="M2 10.86L10.31 2" />
+  <path d="M18.7 10.82L10.31 2.03" /></svg
 >
