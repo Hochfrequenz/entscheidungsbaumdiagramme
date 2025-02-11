@@ -28,7 +28,7 @@
 <div class="inline-block">
   <button
     on:click={togglePanel}
-    class="mt-1.5 px-4 cursor-pointer disabled:cursor-not-allowed"
+    class="flex flex-row justify-center items-center gap-2 rounded-full bg-secondary mt-1.5 p-3 transition-opacity duration-200 whitespace-nowrap cursor-pointer disabled:cursor-not-allowed"
     class:opacity-30={isDisabled}
     disabled={isDisabled}
   >
