@@ -51,7 +51,7 @@
   }
 </script>
 
-<div class="flex flex-col gap-1">
+<div class="flex flex-col gap-2.5">
   <button
     on:click={handleNavigation}
     class="cursor-pointer"
