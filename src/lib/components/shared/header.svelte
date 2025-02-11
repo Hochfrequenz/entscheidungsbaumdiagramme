@@ -63,14 +63,17 @@
               onSelect={onEbdSelect}
             />
           </div>
-          <div class="flex items-center gap-2 pt-2 pl-1.5">
-            <EbdNavigation
-              currentEbds={ebdList}
-              selectedEbdCode={selectedEbd}
-              currentFormatVersion={selectedFormatVersion}
-              onSelect={onEbdSelect}
-              isDisabled={!selectedFormatVersion || !selectedEbd}
-            />
+          <div class="flex items-center gap-4 pl-1.5">
+            <div class="pt-2">
+              <EbdNavigation
+                currentEbds={ebdList}
+                selectedEbdCode={selectedEbd}
+                currentFormatVersion={selectedFormatVersion}
+                onSelect={onEbdSelect}
+                isDisabled={!selectedFormatVersion || !selectedEbd}
+              />
+            </div>
+
             <FilterPanel
               isDisabled={!selectedFormatVersion}
               formatVersion={selectedFormatVersion}
