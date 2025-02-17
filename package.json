@@ -35,7 +35,7 @@
     "lucide-svelte": "^0.474.0",
     "playwright": "^1.49.1",
     "postcss": "^8.5.1",
-    "prettier": "^3.4.2",
+    "prettier": "^3.5.1",
     "prettier-plugin-svelte": "^3.3.3",
     "sass": "^1.84.0",
     "scss": "^0.2.4",
