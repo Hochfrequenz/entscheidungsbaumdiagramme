@@ -39,13 +39,8 @@
         text-[16px]
         py-3
         px-5
-        shadow-md
         ring-1
-        ring-black/5
-        transition-all
-        duration-300
-        ease-in-out
-        hover:scale-105"
+        ring-black/5"
     >
       Ausloggen <IconLogout />
     </button>
