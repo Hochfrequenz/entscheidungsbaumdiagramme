@@ -223,12 +223,14 @@
     onSectionSelect={handleSectionSelect}
   >
     <svelte:fragment slot="actions">
-      <ExportButton
-        currentFormatVersion={selectedFormatVersion}
-        currentEbd={selectedEbd}
-        isDisabled={!selectedFormatVersion || !selectedEbd || !svgContent}
-      />
-      <AuthButton />
+      <div class="flex gap-4">
+        <ExportButton
+          currentFormatVersion={selectedFormatVersion}
+          currentEbd={selectedEbd}
+          isDisabled={!selectedFormatVersion || !selectedEbd || !svgContent}
+        />
+        <AuthButton />
+      </div>
     </svelte:fragment>
   </Header>
 
