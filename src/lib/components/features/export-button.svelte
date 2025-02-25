@@ -71,7 +71,7 @@
 
 <button
   on:click={handleExport}
-  class="flex flex-row items-center gap-2 rounded-full bg-secondary text-[16px] py-3 px-5 text-black transition-opacity duration-200 whitespace-nowrap min-w-[150px] justify-center"
+  class="flex flex-row items-center gap-2 rounded-full bg-secondary text-[16px] py-3 px-5 text-black/70 transition-opacity duration-200 whitespace-nowrap min-w-[150px] justify-center"
   class:opacity-30={isDisabled || !isExportReady}
   class:cursor-not-allowed={!isExportReady}
   disabled={isDisabled || !isExportReady}
