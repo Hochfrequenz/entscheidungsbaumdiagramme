@@ -40,7 +40,7 @@
     <div class="mt-10 flex justify-center">
       <button
         on:click={checkAuthentication}
-        class="flex flex-row items-center gap-2 rounded-full bg-primary text-white px-5 py-2 shadow-md no-underline transition-transform duration-300 ease-in-out hover:scale-110"
+        class="flex flex-row items-center gap-2 rounded-full bg-primary text-white px-5 py-2 shadow-md no-underline"
       >
         <IconLogin /> Jetzt öffnen
       </button>
