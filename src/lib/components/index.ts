@@ -5,7 +5,6 @@ export { default as Footer } from "$lib/components/shared/footer.svelte";
 export { default as FooterTools } from "$lib/components/shared/footer-tools.svelte";
 export { default as Header } from "$lib/components/shared/header.svelte";
 export { default as IconArrow } from "$lib/components/shared/icon-arrow.svelte";
-export { default as IconBack } from "$lib/components/shared/icon-back.svelte";
 export { default as IconDownload } from "$lib/components/shared/icon-download.svelte";
 export { default as IconFilter } from "$lib/components/shared/icon-filter.svelte";
 export { default as IconHeart } from "$lib/components/shared/icon-heart.svelte";
