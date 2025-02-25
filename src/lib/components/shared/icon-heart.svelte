@@ -1,15 +1,65 @@
 <svg
+  viewBox="0 0 43.759998 42.867897"
+  width="16"
+  height="16"
   xmlns="http://www.w3.org/2000/svg"
-  width="20"
-  height="20"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  class="lucide lucide-heart"
-  ><path
-    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
-  /></svg
 >
+  <defs>
+    <style>
+      .cls-1,
+      .cls-2 {
+        fill: none;
+      }
+      .cls-3 {
+        clip-path: url(#clippath-1);
+      }
+      .cls-2 {
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+        stroke-width: 4px;
+      }
+      .cls-4 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect
+        class="cls-1"
+        x="13.12"
+        y="13.56"
+        width="21.879999"
+        height="42.869999"
+      />
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect
+        class="cls-1"
+        x="35"
+        y="13.56"
+        width="21.879999"
+        height="42.869999"
+      />
+    </clipPath>
+  </defs>
+  <g
+    class="cls-4"
+    clip-path="url(#clippath)"
+    transform="translate(-13.12,-13.562102)"
+  >
+    <path
+      class="cls-2"
+      d="m 35.33,54.44 c 0,0 -22.6,-13.13 -20,-29.7 0.89,-5.67 5.54,-9.47 10.36,-9.16 6.1,0.39 9.3,7.56 9.3,7.56"
+    />
+  </g>
+  <g
+    class="cls-3"
+    clip-path="url(#clippath-1)"
+    transform="translate(-13.12,-13.562102)"
+  >
+    <path
+      class="cls-2"
+      d="m 34.67,54.44 c 0,0 22.6,-13.13 20,-29.7 -0.89,-5.67 -5.54,-9.47 -10.36,-9.16 -6.1,0.39 -9.3,7.56 -9.3,7.56"
+    />
+  </g>
+</svg>
