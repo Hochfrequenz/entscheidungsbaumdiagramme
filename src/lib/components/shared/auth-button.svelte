@@ -5,7 +5,7 @@
   import auth from "$src/auth/authService";
   import { isAuthenticated } from "$src/store";
 
-  export let background = "bg-white";
+  export let background = "bg-secondary";
   export let textColor = "text-black/70";
 
   onMount(async () => {

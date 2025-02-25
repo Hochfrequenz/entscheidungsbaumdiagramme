@@ -4,6 +4,7 @@
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import {
+    AuthButton,
     ErrorMsg,
     ExportButton,
     Header,
@@ -227,6 +228,7 @@
         currentEbd={selectedEbd}
         isDisabled={!selectedFormatVersion || !selectedEbd || !svgContent}
       />
+      <AuthButton />
     </svelte:fragment>
   </Header>
 
