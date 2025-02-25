@@ -3,7 +3,7 @@
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { IconSquareArrow } from "$lib/components";
+  import { IconLogin } from "$lib/components";
   import auth from "$src/auth/authService";
   import { isAuthenticated } from "$src/store";
 
@@ -42,7 +42,7 @@
         on:click={checkAuthentication}
         class="flex flex-row items-center gap-2 rounded-full bg-primary text-white px-5 py-2 shadow-md no-underline transition-transform duration-300 ease-in-out hover:scale-110"
       >
-        <IconSquareArrow /> Jetzt öffnen
+        <IconLogin /> Jetzt öffnen
       </button>
     </div>
   </div>

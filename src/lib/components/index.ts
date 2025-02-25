@@ -14,7 +14,6 @@ export { default as IconLogo } from "$lib/components/shared/icon-logo.svelte";
 export { default as IconLogoWithText } from "$lib/components/shared/icon-logo-with-text.svelte";
 export { default as IconLogout } from "$lib/components/shared/icon-logout.svelte";
 export { default as IconPlant } from "$lib/components/shared/icon-plant.svelte";
-export { default as IconSquareArrow } from "$lib/components/shared/icon-square-arrow.svelte";
 
 // features
 export { default as EbdInput } from "$lib/components/features/ebd-input.svelte";

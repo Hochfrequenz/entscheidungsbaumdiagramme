@@ -1,15 +1,28 @@
 <svg
+  viewBox="0 0 44.67 45.04"
+  width="18"
+  height="18"
   xmlns="http://www.w3.org/2000/svg"
-  width="22"
-  height="22"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  class="lucide lucide-log-in"
-  ><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" /><polyline
-    points="10 17 15 12 10 7"
-  /><line x1="15" x2="3" y1="12" y2="12" /></svg
 >
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-linejoin: round;
+      }
+      .cls-1,
+      .cls-2 {
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-width: 4px;
+      }
+      .cls-2 {
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <path class="cls-2" d="M2,22.52H28.34" />
+  <path class="cls-2" d="m21.08,12.77 7.25,9.75" />
+  <path class="cls-2" d="m21.08,32.27 7.25,-9.75" />
+  <path class="cls-1" d="m28.27,2.08 14.4,-0.08V43.04c0,0-14.9,0-14.9,0" />
+</svg>
