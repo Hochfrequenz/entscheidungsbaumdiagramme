@@ -1,11 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import { IconLogin, IconLogout } from "$lib/components";
+  import { IconLogout } from "$lib/components";
   import auth from "$src/auth/authService";
-  import { isAuthenticated, user } from "$src/store";
+  import { isAuthenticated } from "$src/store";
 
-  let userEmail: string = "";
+  export let background = "bg-secondary";
+  export let textColor = "text-black/70";
 
   onMount(async () => {
     if (
@@ -19,38 +20,29 @@
     await auth.checkAuth();
   });
 
-  $: if ($isAuthenticated && $user) {
-    userEmail = $user.email || "";
-  } else {
-    userEmail = "";
-  }
-
-  async function login() {
-    await auth.loginWithRedirect();
-  }
-
   async function logout() {
     await auth.logout();
   }
 </script>
 
 <div class="flex items-center gap-4">
-  {#if $isAuthenticated && userEmail}
-    <span class="text-[16px] text-white">{userEmail}</span>
-  {/if}
   {#if $isAuthenticated}
     <button
       on:click={logout}
-      class="flex items-center gap-2 rounded-full bg-tint text-[16px] py-3 px-5 text-secondary"
+      class="
+        flex
+        items-center
+        gap-2
+        rounded-full
+        {background}
+        {textColor}
+        text-[16px]
+        py-3
+        px-5
+        ring-1
+        ring-black/5"
     >
-      Abmelden <IconLogout />
-    </button>
-  {:else}
-    <button
-      on:click={login}
-      class="flex items-center gap-2 rounded-full bg-tint text-[16px] py-3 px-5 text-secondary"
-    >
-      Anmelden <IconLogin />
+      Ausloggen <IconLogout />
     </button>
   {/if}
 </div>

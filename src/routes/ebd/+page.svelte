@@ -4,6 +4,7 @@
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import {
+    AuthButton,
     ErrorMsg,
     ExportButton,
     Header,
@@ -222,11 +223,14 @@
     onSectionSelect={handleSectionSelect}
   >
     <svelte:fragment slot="actions">
-      <ExportButton
-        currentFormatVersion={selectedFormatVersion}
-        currentEbd={selectedEbd}
-        isDisabled={!selectedFormatVersion || !selectedEbd || !svgContent}
-      />
+      <div class="flex gap-4">
+        <ExportButton
+          currentFormatVersion={selectedFormatVersion}
+          currentEbd={selectedEbd}
+          isDisabled={!selectedFormatVersion || !selectedEbd || !svgContent}
+        />
+        <AuthButton />
+      </div>
     </svelte:fragment>
   </Header>
 
