@@ -8,6 +8,29 @@
   export let selectedVersion: string = "";
   export let onSelect: (version: string) => void;
 
+  import { onMount } from "svelte";
+
+  // set default format version to FV2410 if currentDate < 06.06.2025
+  function getDefaultFormatVersion(): string {
+    const currentDate = new Date();
+    const cutoffDate = new Date(2025, 5, 6);
+
+    if (currentDate < cutoffDate) {
+      const fv2404 = formatVersions.find((v) => v.code === "FV2404");
+      return fv2404?.code || "";
+    } else {
+      const fv2504 = formatVersions.find((v) => v.code === "FV2504");
+      return fv2504?.code || "";
+    }
+  }
+
+  onMount(() => {
+    if (!selectedVersion && formatVersions.length > 0) {
+      selectedVersion = getDefaultFormatVersion();
+      onSelect(selectedVersion);
+    }
+  });
+
   function handleSelect() {
     onSelect(selectedVersion);
   }
@@ -20,7 +43,6 @@
     on:change={handleSelect}
     class="inline-block border-2 border-white rounded-lg bg-secondary h-[50px] px-2 ps-3 pe-4 focus:outline-none w-full cursor-pointer text-base leading-relaxed"
   >
-    <option value="">Bitte auswählen</option>
     {#each formatVersions as version}
       <option value={version.code}>{version.detailedFormatVersion}</option>
     {/each}
