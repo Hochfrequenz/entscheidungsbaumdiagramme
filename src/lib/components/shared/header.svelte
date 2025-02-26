@@ -38,7 +38,7 @@
       aria-label="Global"
     >
       <div class="flex items-center gap-4">
-        <div class="flex pt-1">
+        <div class="flex pt-1 pr-4">
           <a href="{base}/" title="landingpage">
             <IconLogo size={23} />
           </a>
@@ -64,7 +64,7 @@
             />
           </div>
           <div class="flex items-center gap-4 pl-1.5">
-            <div class="pt-2">
+            <div class="pt-2 pr-2">
               <EbdNavigation
                 currentEbds={ebdList}
                 selectedEbdCode={selectedEbd}
