@@ -42,20 +42,20 @@
       return;
 
     isExportReady = false;
-    const ebdPath = `${base}/ebd/${currentFormatVersion}/${currentEbd}.svg`;
+    const pumlPath = `${base}/ebd/${currentFormatVersion}/${currentEbd}.puml`;
 
     try {
-      const response = await fetch(ebdPath);
+      const response = await fetch(pumlPath);
       if (!response.ok) {
         throw new Error(`http error: ${response.status}`);
       }
-      const svgContent = await response.text();
+      const pumlContent = await response.text();
 
-      const blob = new Blob([svgContent], { type: "image/svg+xml" });
+      const blob = new Blob([pumlContent], { type: "text/plain" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `${currentFormatVersion}-${currentEbd}.svg`;
+      a.download = `${currentFormatVersion}_${currentEbd}.puml`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -63,7 +63,7 @@
 
       startCooldownTimer();
     } catch (err) {
-      console.error(`error exporting svg: ${err}`);
+      console.error(`error exporting puml: ${err}`);
       isExportReady = true;
     }
   }
@@ -79,6 +79,6 @@
   {#if downloadStarted}
     {remainingSeconds} s
   {:else}
-    <IconDownload /> Export SVG
+    <IconDownload /> Export PUML
   {/if}
 </button>
