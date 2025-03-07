@@ -63,7 +63,7 @@ export function getFormatVersions(): FormatVersion[] {
         uniqueFormatVersion.add(version.code);
         return true;
       })
-      .sort((a, b) => b.code.localeCompare(a.code));
+      .sort((a, b) => a.code.localeCompare(b.code));
   } catch (error) {
     console.error("error reading format versions from submodule:", error);
     return [];
