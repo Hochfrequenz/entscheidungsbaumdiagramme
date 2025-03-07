@@ -2,7 +2,9 @@
   export let background = "bg-white";
 </script>
 
-<footer class="flex items-center {background}">
+<div class="w-full py-7 bg-secondary relative z-10"></div>
+
+<footer class="flex items-center {background} relative z-20">
   <div class="flex-1 flex justify-center p-[0.5em]">
     <div class="flex items-center text-sm text-black/70 text-center">
       <a
