@@ -55,7 +55,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `${currentFormatVersion}-${currentEbd}.svg`;
+      a.download = `${currentFormatVersion}_${currentEbd}.svg`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
