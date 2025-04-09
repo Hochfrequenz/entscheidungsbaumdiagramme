@@ -34,6 +34,10 @@
       EBDs von Hochfrequenz sind hingegen echte Diagramme - lesbar, übersichtlich
       und nutzungsfreundlich.
     </p>
+    <p class="text-black/70">
+      Wir geben unser Bestes, dass alle Daten korrekt und vollständig sind,
+      können es aber leider nicht garantieren.
+    </p>
     <p
       class="flex justify-center text-sm border-secondary pb-3 mb-5 uppercase"
     ></p>
