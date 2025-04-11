@@ -20,11 +20,13 @@
   <div class="rounded-3xl bg-secondary p-12 shadow-md w-1/3">
     <h1 class="text-3xl text-black/70 pb-5">Entscheidungsbaumdiagramme</h1>
     <h2
-      class="flex text-lg border-b border-primary text-black/70 pb-3 mb-5 uppercase"
+      class="flex text-lg border-b-2 border-primary text-black/70 pb-3 mb-5 uppercase"
     >
       als Diagramme
     </h2>
-    <p class="text-black/70">
+    <p
+      class="text-black/70 space-y-3 border-b-2 border-dashed border-primary pb-5"
+    >
       Wer mit den vom BDEW unter
       <a href="https://bdew-mako.de" class="text-base pt-[20px] text-primary">
         bdew-mako.de
@@ -34,10 +36,11 @@
       EBDs von Hochfrequenz sind hingegen echte Diagramme - lesbar, übersichtlich
       und nutzungsfreundlich.
     </p>
-    <p class="text-black/70">
-      Wir geben unser Bestes, dass alle Daten korrekt und vollständig sind,
-      können es aber leider nicht garantieren.
-    </p>
+    <div class="text-hf-weiches-schwarz text-sm mt-5 opacity-50 italic">
+      <span class="font-medium">DISCLAIMER:</span> Wir geben unser Bestes, dass alle
+      Daten korrekt und vollständig sind – können aber trotzdem nicht ausschließen,
+      dass sich vereinzelt Fehler einschleichen.
+    </div>
     <p
       class="flex justify-center text-sm border-secondary pb-3 mb-5 uppercase"
     ></p>
