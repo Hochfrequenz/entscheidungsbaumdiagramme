@@ -15,7 +15,7 @@ const formatVersionMap: Record<string, string> = {
   "2310": "Oktober 2023",
   "2404": "April 2024",
   "2410": "Oktober 2024",
-  "2504": "April 2025",
+  "2504": "Juni 2025",
   "2510": "Oktober 2025",
 };
 
