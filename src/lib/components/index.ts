@@ -17,7 +17,8 @@ export { default as IconPlant } from "$lib/components/shared/icon-plant.svelte";
 // features
 export { default as EbdInput } from "$lib/components/features/ebd-input.svelte";
 export { default as EbdNavigation } from "$lib/components/features/ebd-navigation.svelte";
-export { default as ExportButton } from "$lib/components/features/export-button.svelte";
+export { default as ExportPumlButton } from "$lib/components/features/export-puml-button.svelte";
+export { default as ExportSvgButton } from "$lib/components/features/export-svg-button.svelte";
 export { default as FilterChapterSelect } from "$lib/components/features/filter-chapter-select.svelte";
 export { default as FilterPanel } from "$lib/components/features/filter-panel.svelte";
 export { default as FilterRoleSelect } from "$lib/components/features/filter-role-select.svelte";

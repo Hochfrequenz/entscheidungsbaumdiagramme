@@ -6,7 +6,8 @@
   import {
     AuthButton,
     ErrorMsg,
-    ExportButton,
+    ExportPumlButton,
+    ExportSvgButton,
     Header,
     SvgContainer,
   } from "$lib/components";
@@ -224,7 +225,12 @@
   >
     <svelte:fragment slot="actions">
       <div class="flex gap-4">
-        <ExportButton
+        <ExportSvgButton
+          currentFormatVersion={selectedFormatVersion}
+          currentEbd={selectedEbd}
+          isDisabled={!selectedFormatVersion || !selectedEbd || !svgContent}
+        />
+        <ExportPumlButton
           currentFormatVersion={selectedFormatVersion}
           currentEbd={selectedEbd}
           isDisabled={!selectedFormatVersion || !selectedEbd || !svgContent}
