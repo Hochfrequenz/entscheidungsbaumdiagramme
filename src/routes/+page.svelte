@@ -18,7 +18,9 @@
 
 <section class="bg-primary flex-grow flex items-center justify-center">
   <div class="rounded-3xl bg-secondary p-12 shadow-md w-1/3">
-    <h1 class="text-3xl text-black/70 pb-5">Entscheidungsbaumdiagramme</h1>
+    <h1 class="text-3xl text-black/70 pb-5 break-all">
+      Entscheidungsbaumdiagramme
+    </h1>
     <h2
       class="flex text-lg border-b-2 border-primary text-black/70 pb-3 mb-5 uppercase"
     >
