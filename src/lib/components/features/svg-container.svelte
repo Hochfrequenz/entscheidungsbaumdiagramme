@@ -44,7 +44,7 @@
   {:else if svgContent}
     <div class="flex-1 overflow-auto relative">
       <div
-        class="absolute inset-0 min-h-min w-full p-20 pt-32 flex items-start justify-center"
+        class="absolute inset-0 min-h-min w-full p-20 pt-10 flex items-start justify-center"
         bind:this={svgContainer}
       >
         <!-- tesa affiliate -->

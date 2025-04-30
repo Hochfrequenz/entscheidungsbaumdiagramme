@@ -240,6 +240,8 @@
     </svelte:fragment>
   </Header>
 
+  <div class="w-full py-12 bg-secondary relative z-10"></div>
+
   <div class="flex-1 overflow-hidden bg-secondary">
     {#if error}
       <ErrorMsg />
