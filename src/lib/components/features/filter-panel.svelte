@@ -25,10 +25,10 @@
   }
 </script>
 
-<div class="inline-block">
+<div class="inline-block pr-4">
   <button
     on:click={togglePanel}
-    class="flex flex-row justify-center items-center gap-2 rounded-full bg-secondary mt-1.5 p-3 transition-opacity duration-200 whitespace-nowrap cursor-pointer disabled:cursor-not-allowed"
+    class="flex flex-row justify-center items-center gap-2 rounded-full bg-secondary mt-1.5 p-3 transition-opacity duration-200 whitespace-nowrap cursor-pointer disabled:cursor-not-allowed w-11 h-11"
     class:opacity-30={isDisabled}
     disabled={isDisabled}
   >
