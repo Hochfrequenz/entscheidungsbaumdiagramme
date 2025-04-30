@@ -5,7 +5,7 @@
 </script>
 
 <img
-  class="me-5"
+  class=""
   style:width="{size}px"
   style:height="{size}px"
   width={size}

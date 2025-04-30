@@ -38,11 +38,11 @@
       aria-label="Global"
     >
       <div class="flex items-center gap-4">
-        <div class="flex pt-1 pr-4">
-          <a href="{base}/" title="landingpage">
+        <div class="flex pt-1">
+          <a href="{base}/" class="w-7 h-7" title="landingpage">
             <IconLogo size={23} />
           </a>
-          <span class="text-xl text-black/70 whitespace-nowrap">
+          <span class="text-xl px-4 text-black/70 whitespace-nowrap">
             Entscheidungsbaumdiagramme
           </span>
         </div>
