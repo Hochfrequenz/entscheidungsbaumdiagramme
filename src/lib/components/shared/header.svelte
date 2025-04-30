@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
+
   import { base } from "$app/paths";
   import {
     EbdInput,
@@ -8,6 +10,15 @@
     IconLogo,
   } from "$lib/components";
   import type { EbdNameExtended, MetaData } from "$lib/types/metadata";
+
+  type PanelToggleEvent = {
+    detail: {
+      isOpen: boolean;
+    };
+  };
+  const dispatch = createEventDispatcher<{
+    panelToggle: { isOpen: boolean };
+  }>();
 
   export let formatVersions: Array<{
     code: string;
@@ -29,6 +40,10 @@
 
   let hasForatVersionSelected = selectedFormatVersion !== "";
   $: hasForatVersionSelected = selectedFormatVersion !== "";
+
+  function handlePanelToggle(event: PanelToggleEvent) {
+    dispatch("panelToggle", event.detail);
+  }
 </script>
 
 <header class="bg-primary">
@@ -85,6 +100,7 @@
               {onChapterSelect}
               {metadata}
               {onSectionSelect}
+              on:panelToggle={handlePanelToggle}
             />
           </div>
         </div>

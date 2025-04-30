@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
+
   import {
     FilterChapterSelect,
     FilterRoleSelect,
@@ -6,6 +8,10 @@
     IconFilter,
   } from "$lib/components";
   import type { MetaData } from "$lib/types/metadata";
+
+  const dispatch = createEventDispatcher<{
+    panelToggle: { isOpen: boolean };
+  }>();
 
   export let isDisabled: boolean = false;
   export let formatVersion: string = "";
@@ -22,6 +28,7 @@
 
   function togglePanel() {
     isOpen = !isOpen;
+    dispatch("panelToggle", { isOpen });
   }
 </script>
 

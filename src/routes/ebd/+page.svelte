@@ -204,6 +204,12 @@
       return matchesRole && matchesChapter && matchesSection;
     });
   }
+
+  let isFilterPanelOpen = false;
+
+  function handlePanelToggle(event: CustomEvent<{ isOpen: boolean }>) {
+    isFilterPanelOpen = event.detail.isOpen;
+  }
 </script>
 
 <div class="flex flex-col h-full overflow-hidden">
@@ -222,6 +228,7 @@
     onChapterSelect={handleChapterSelect}
     metadata={data.metadata}
     onSectionSelect={handleSectionSelect}
+    on:panelToggle={handlePanelToggle}
   >
     <svelte:fragment slot="actions">
       <div class="flex gap-4">
@@ -240,7 +247,9 @@
     </svelte:fragment>
   </Header>
 
-  <div class="w-full py-12 bg-secondary relative z-10"></div>
+  {#if isFilterPanelOpen}
+    <div class="w-full py-12 bg-secondary relative z-10"></div>
+  {/if}
 
   <div class="flex-1 overflow-hidden bg-secondary">
     {#if error}
