@@ -3,6 +3,7 @@
 
   import { base } from "$app/paths";
   import { IconDownload } from "$lib/components";
+  import { isMissingEbd } from "$lib/data/missing-ebds";
 
   export let currentFormatVersion: string = "";
   export let currentEbd: string = "";
@@ -27,6 +28,11 @@
 
   async function checkPumlAvailability() {
     if (!currentFormatVersion || !currentEbd) {
+      isPumlAvailable = false;
+      return;
+    }
+
+    if (isMissingEbd(currentFormatVersion, currentEbd)) {
       isPumlAvailable = false;
       return;
     }
