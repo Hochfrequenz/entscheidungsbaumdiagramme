@@ -73,7 +73,6 @@
     const rolesParam = searchParams.get("rolle");
     const chaptersParam = searchParams.get("chapter");
 
-    // Only override if URL parameters exist
     if (formatVersion) selectedFormatVersion = formatVersion;
     if (ebd) selectedEbd = ebd;
     if (rolesParam) {
