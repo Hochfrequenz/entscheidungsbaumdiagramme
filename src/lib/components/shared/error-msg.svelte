@@ -1,5 +1,8 @@
 <script lang="ts">
   import IconPlant from "$lib/components/shared/icon-plant.svelte";
+
+  export let formatVersion: string; // e.g. 'FV2410'
+  export let ebdCode: string; // e.g. 'E_0404'
 </script>
 
 <div class="flex flex-col h-full">
@@ -18,9 +21,13 @@
 
       <span class="block text-xl pb-10">
         <p>
-          Es kann leider vorkommen, dass EBDs nicht auf dieser Website verfügbar
-          sind. Mögliche Ursachen könnten z.B. Probleme beim Auslesen der
-          Word-Tabellen aus den BDEW-Dokumenten sein, oder Prüflogiken, die
+          Es kann leider vorkommen, dass EBDs (wie in diesem Fall <span
+            class="font-bold">{{ ebdCode }}</span
+          >
+          in der Version <span class="font-bold">{{ formatVersion }}</span>)
+          nicht auf dieser Website verfügbar sind. Mögliche Ursachen könnten
+          z.B. Probleme beim Auslesen der Word-Tabellen aus den BDEW-Dokumenten
+          sein, oder Prüflogiken, die
           <span
             title="Und damit keine Bäume oder DAGs, sondern zyklische Graphen sind."
             >Schleifen enthalten</span
