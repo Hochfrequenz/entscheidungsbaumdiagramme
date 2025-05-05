@@ -10,7 +10,7 @@
     class="flex flex-grow flex-col overflow-hidden items-center justify-center"
   >
     <div class="max-w-[50%] w-full">
-      <div class="flex flex-wrap flex-row items-center gap-2 pb-10">
+      <div class="flex flex-wrap flex-row items-center gap-2 pb-10 justify-center">
         <span class="text-2xl">
           Der gesuchte Entscheidungsbaum muss erst noch gepflanzt werden.
         </span>
@@ -19,25 +19,24 @@
         </div>
       </div>
 
+      <div class="rounded-3xl bg-primary p-8 shadow-md mb-10 justify-center">
+        <p class="text-xl text-black/70 text-center">
+          Für das EBD <span class="font-bold">{ebdCode}</span>
+          der Formatversion <span class="font-bold">{formatVersion}</span> ist aktuell
+          leider kein Diagramm vorhanden.
+        </p>
+      </div>
+
       <span class="block text-xl pb-10">
         <p>
-          Es kann leider vorkommen, dass EBDs (wie in diesem Fall <span
-            class="font-bold">{ebdCode}</span
-          >
-          in der Version <span class="font-bold">{formatVersion}</span>) nicht
-          auf dieser Website verfügbar sind. Mögliche Ursachen könnten z.B.
-          Probleme beim Auslesen der Word-Tabellen aus den BDEW-Dokumenten sein,
-          oder Prüflogiken, die
+          Mögliche Ursachen können z.B. Probleme beim Auslesen der Tabellen aus
+          den Dokumenten des BDEW sein, sowie Prüflogiken, welche
           <span
-            title="Und damit keine Bäume oder DAGs, sondern zyklische Graphen sind."
+            title="und damit keine Bäume oder DAGs, sondern zyklische Graphen sind."
             >Schleifen enthalten</span
-          >.
-        </p>
-        <p><br /></p>
-        <p>
-          Falls du ein EBD nicht finden konntest oder fehlerhafte Prüfschritte
-          entdeckt hast, arbeite gerne mit uns zusammen und trag zur
-          Verbesserung unserer Backends
+          >. Falls du ein EBD nicht finden konntest oder fehlerhafte
+          Prüfschritte entdeckt hast, arbeite gemeinsam mit uns an einer Lösung und trage
+          zur Verbesserung unserer Backends
           <a
             href="https://github.com/Hochfrequenz/ebdamame/"
             target="_blank"
@@ -51,20 +50,21 @@
             rel="noopener noreferrer"
             class="hover:underline text-primary font-medium mx-1">rebdhuhn</a
           >
-          bei. Schreib uns einfach direkt über Github oder unser Kontaktformular
-          und wir helfen gerne beim Einstieg.
+          bei.
         </p>
-      </span>
-      <span class="block text-xl pb-10">
-        Unterstütze uns auch gerne bei weiteren
-        <a
-          href="https://github.com/Hochfrequenz/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:underline text-primary font-medium mx-1"
-          >Open-Source-Projekten</a
-        >
-        von Hochfrequenz.
+        <p>
+          <br/>
+          Schreib uns einfach direkt über Github oder unser Kontaktformular
+          und wir helfen gerne beim Einstieg. Unterstütze uns auch gerne bei weiteren
+          <a
+            href="https://github.com/Hochfrequenz/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:underline text-primary font-medium mx-1"
+            >Open-Source-Projekten</a
+          >
+          von Hochfrequenz.
+        </p>
       </span>
     </div>
   </div>
