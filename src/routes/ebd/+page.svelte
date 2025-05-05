@@ -267,7 +267,7 @@
 
   <div class="flex-1 overflow-hidden bg-secondary">
     {#if error}
-      <ErrorMsg />
+      <ErrorMsg ebdCode={selectedEbd} formatVersion={selectedFormatVersion} />
     {:else}
       <SvgContainer {svgContent} {isLoading} />
     {/if}
