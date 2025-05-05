@@ -22,7 +22,7 @@
       </div>
 
       <div class="rounded-3xl bg-primary p-8 mb-10 justify-center">
-        <p class="text-xl text-black/70 text-center">
+        <p class="text-xl text-black text-center">
           Für das EBD <span class="font-bold">{ebdCode}</span>
           der Formatversion <span class="font-bold">{formatVersion}</span> ist aktuell
           leider kein Diagramm vorhanden.
@@ -56,8 +56,8 @@
         </p>
         <p>
           <br />
-          Schreib uns einfach direkt über Github oder unser Kontaktformular und wir
-          helfen gerne beim Einstieg. Unterstütze uns auch gerne bei weiteren
+          Melde dich bei uns einfach direkt über Github oder unser Kontaktformular
+          und wir helfen dir beim Einstieg. Unterstütze uns auch gerne bei weiteren
           <a
             href="https://github.com/Hochfrequenz/"
             target="_blank"
