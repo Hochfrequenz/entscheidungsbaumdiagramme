@@ -11,6 +11,7 @@
     Header,
     SvgContainer,
   } from "$lib/components";
+  import { isMissingEbd } from "$lib/data/missing-ebds";
   import type { EbdNameExtended } from "$lib/types/metadata";
   import { extractSectionHeading } from "$lib/types/metadata";
 
@@ -30,7 +31,7 @@
 
   let svgContent = "";
   let isLoading = false;
-  let error: string | null = null;
+  let error: boolean = false;
 
   $: if (selectedFormatVersion) {
     ebdList = filterEbds(
@@ -96,19 +97,26 @@
       return;
     }
 
+    if (isMissingEbd(selectedFormatVersion, selectedEbd)) {
+      svgContent = "";
+      isLoading = false;
+      error = true;
+      return;
+    }
+
     isLoading = true;
-    error = null;
+    error = false;
     const ebdPath = `${base}/ebd/${selectedFormatVersion}/${selectedEbd}.svg`;
 
     try {
       const response = await fetch(ebdPath);
       if (!response.ok) {
-        error = "EBD konnte nicht gefunden.";
+        error = true;
         return;
       }
       svgContent = await response.text();
     } catch {
-      error = "EBD konnte nicht gefunden.";
+      error = true;
       svgContent = "";
     } finally {
       isLoading = false;
@@ -235,12 +243,18 @@
         <ExportSvgButton
           currentFormatVersion={selectedFormatVersion}
           currentEbd={selectedEbd}
-          isDisabled={!selectedFormatVersion || !selectedEbd || !svgContent}
+          isDisabled={!selectedFormatVersion ||
+            !selectedEbd ||
+            !svgContent ||
+            isMissingEbd(selectedFormatVersion, selectedEbd)}
         />
         <ExportPumlButton
           currentFormatVersion={selectedFormatVersion}
           currentEbd={selectedEbd}
-          isDisabled={!selectedFormatVersion || !selectedEbd || !svgContent}
+          isDisabled={!selectedFormatVersion ||
+            !selectedEbd ||
+            !svgContent ||
+            isMissingEbd(selectedFormatVersion, selectedEbd)}
         />
         <AuthButton />
       </div>
@@ -255,7 +269,7 @@
     {#if error}
       <ErrorMsg />
     {:else}
-      <SvgContainer {svgContent} {isLoading} {error} />
+      <SvgContainer {svgContent} {isLoading} />
     {/if}
   </div>
 </div>

@@ -1,6 +1,10 @@
 import { readdirSync, readFileSync } from "fs";
 import { join } from "path";
 
+import {
+  FV2504_MISSING_EBD,
+  FV2504_MISSING_EBD_CODES,
+} from "$lib/data/missing-ebds";
 import type { EbdNameExtended, MetaData } from "$lib/types/metadata";
 
 let ebdFiles: Record<string, string[]> | null = null;
@@ -37,6 +41,14 @@ function getEbds(): Record<string, string[]> {
         .filter((file) => file.endsWith(".svg"))
         .map((file) => file.replace(".svg", ""))
         .sort((a, b) => a.localeCompare(b));
+
+      // include hardcoded missing EBDs in sorting algorithm
+      if (formatVersion === "FV2504") {
+        ebds[formatVersion] = [
+          ...ebds[formatVersion],
+          ...FV2504_MISSING_EBD_CODES,
+        ].sort((a, b) => a.localeCompare(b));
+      }
     }
 
     ebdFiles = ebds;
@@ -64,6 +76,16 @@ export function getEbdNames(): Record<string, EbdNameExtended[]> {
 
     result[formatVersion] = ebdCodes.map((ebdCode) => {
       let ebd_name = ebdCode; // by default, display ebd_code if ebd_name is n/a
+
+      // include names of hardcoded missing EBDs of FV2504
+      if (formatVersion === "FV2504") {
+        const missingEbd = FV2504_MISSING_EBD.find(
+          (ebd) => ebd.ebd_code === ebdCode,
+        );
+        if (missingEbd) {
+          return missingEbd;
+        }
+      }
 
       try {
         const jsonPath = join(versionPath, `${ebdCode}.json`);
