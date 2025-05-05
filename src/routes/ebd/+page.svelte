@@ -149,13 +149,11 @@
       return;
     }
 
-    // Check if this is one of our special EBDs that don't have actual SVG files
     if (
       selectedFormatVersion === "FV2504" &&
       specialEbds.includes(selectedEbd)
     ) {
       svgContent = "";
-      error = "Dieses EBD hat kein verfügbares Diagramm.";
       isLoading = false;
       return;
     }
