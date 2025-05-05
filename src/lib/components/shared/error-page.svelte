@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <div class="rounded-3xl bg-primary p-8 shadow-md mb-10 justify-center">
+      <div class="rounded-3xl bg-primary p-8 mb-10 justify-center">
         <p class="text-xl text-black/70 text-center">
           Für das EBD <span class="font-bold">{ebdCode}</span>
           der Formatversion <span class="font-bold">{formatVersion}</span> ist aktuell
@@ -31,8 +31,8 @@
 
       <span class="block text-xl pb-10">
         <p>
-          Mögliche Ursachen können z.B. Probleme beim Auslesen der Tabellen aus
-          den Dokumenten des BDEW sein, sowie Prüflogiken, welche
+          Mögliche Ursachen können beispielsweise Probleme beim Auslesen der
+          Tabellen aus den Dokumenten des BDEW sein, sowie Prüflogiken, welche
           <span
             title="und damit keine Bäume oder DAGs, sondern zyklische Graphen sind."
             >Schleifen enthalten</span
