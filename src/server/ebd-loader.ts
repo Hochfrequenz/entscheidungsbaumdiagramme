@@ -13,6 +13,11 @@ const skippedFormatVersionToInsteadFormatVersionMap: Record<string, string> = {
   FV2410: "FV2404",
 };
 
+// hardcoded missing EBDs of FV2504
+const missingEbds: Record<string, EbdNameExtended[]> = {
+  FV2504: [{ ebd_code: "E_0594", ebd_name: "E_0594_Anfrage vom LF prüfen" }],
+};
+
 // fetches EBD files and associated metadata
 function getEbds(): Record<string, string[]> {
   if (ebdFiles) return ebdFiles;
@@ -37,6 +42,17 @@ function getEbds(): Record<string, string[]> {
         .filter((file) => file.endsWith(".svg"))
         .map((file) => file.replace(".svg", ""))
         .sort((a, b) => a.localeCompare(b));
+
+      // include hardcoded missing EBDs in sorting algorithm
+      if (formatVersion === "FV2504" && missingEbds["FV2504"]) {
+        const additionalEbdCodes = missingEbds["FV2504"].map(
+          (ebd) => ebd.ebd_code,
+        );
+        ebds[formatVersion] = [
+          ...ebds[formatVersion],
+          ...additionalEbdCodes,
+        ].sort((a, b) => a.localeCompare(b));
+      }
     }
 
     ebdFiles = ebds;
@@ -64,6 +80,16 @@ export function getEbdNames(): Record<string, EbdNameExtended[]> {
 
     result[formatVersion] = ebdCodes.map((ebdCode) => {
       let ebd_name = ebdCode; // by default, display ebd_code if ebd_name is n/a
+
+      // include names of hardcoded missing EBDs of FV2504
+      if (formatVersion === "FV2504" && missingEbds["FV2504"]) {
+        const additionalEbd = missingEbds["FV2504"].find(
+          (ebd) => ebd.ebd_code === ebdCode,
+        );
+        if (additionalEbd) {
+          return additionalEbd;
+        }
+      }
 
       try {
         const jsonPath = join(versionPath, `${ebdCode}.json`);
