@@ -22,12 +22,12 @@
       <span class="block text-xl pb-10">
         <p>
           Es kann leider vorkommen, dass EBDs (wie in diesem Fall <span
-            class="font-bold">{{ ebdCode }}</span
+            class="font-bold">{ebdCode}</span
           >
-          in der Version <span class="font-bold">{{ formatVersion }}</span>)
-          nicht auf dieser Website verfügbar sind. Mögliche Ursachen könnten
-          z.B. Probleme beim Auslesen der Word-Tabellen aus den BDEW-Dokumenten
-          sein, oder Prüflogiken, die
+          in der Version <span class="font-bold">{formatVersion}</span>) nicht
+          auf dieser Website verfügbar sind. Mögliche Ursachen könnten z.B.
+          Probleme beim Auslesen der Word-Tabellen aus den BDEW-Dokumenten sein,
+          oder Prüflogiken, die
           <span
             title="Und damit keine Bäume oder DAGs, sondern zyklische Graphen sind."
             >Schleifen enthalten</span
