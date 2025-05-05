@@ -32,6 +32,59 @@
   let isLoading = false;
   let error: string | null = null;
 
+  // missing EBDs of FV2504 (required to exclude them from SVG fetching attempts)
+  const specialEbds = [
+    "E_0026",
+    "E_0042",
+    "E_0043",
+    "E_0055",
+    "E_0058",
+    "E_0060",
+    "E_0061",
+    "E_0077",
+    "E_0084",
+    "E_0210",
+    "E_0218",
+    "E_0256",
+    "E_0259",
+    "E_0264",
+    "E_0266",
+    "E_0406",
+    "E_0407",
+    "E_0408",
+    "E_0409",
+    "E_0410",
+    "E_0412",
+    "E_0415",
+    "E_0452",
+    "E_0515",
+    "E_0517",
+    "E_0519",
+    "E_0521",
+    "E_0524",
+    "E_0531",
+    "E_0552",
+    "E_0553",
+    "E_0554",
+    "E_0566",
+    "E_0568",
+    "E_0572",
+    "E_0574",
+    "E_0578",
+    "E_0583",
+    "E_0594",
+    "E_0595",
+    "E_0607",
+    "E_0608",
+    "E_0610",
+    "E_0611",
+    "E_0612",
+    "E_0614",
+    "E_0622",
+    "E_0639",
+    "E_0802",
+  ];
+
   $: if (selectedFormatVersion) {
     ebdList = filterEbds(
       selectedFormatVersion,
@@ -93,6 +146,17 @@
   async function loadSvg() {
     if (!selectedFormatVersion || !selectedEbd) {
       svgContent = "";
+      return;
+    }
+
+    // Check if this is one of our special EBDs that don't have actual SVG files
+    if (
+      selectedFormatVersion === "FV2504" &&
+      specialEbds.includes(selectedEbd)
+    ) {
+      svgContent = "";
+      error = "Dieses EBD hat kein verfügbares Diagramm.";
+      isLoading = false;
       return;
     }
 
@@ -235,12 +299,20 @@
         <ExportSvgButton
           currentFormatVersion={selectedFormatVersion}
           currentEbd={selectedEbd}
-          isDisabled={!selectedFormatVersion || !selectedEbd || !svgContent}
+          isDisabled={!selectedFormatVersion ||
+            !selectedEbd ||
+            !svgContent ||
+            (selectedFormatVersion === "FV2504" &&
+              specialEbds.includes(selectedEbd))}
         />
         <ExportPumlButton
           currentFormatVersion={selectedFormatVersion}
           currentEbd={selectedEbd}
-          isDisabled={!selectedFormatVersion || !selectedEbd || !svgContent}
+          isDisabled={!selectedFormatVersion ||
+            !selectedEbd ||
+            !svgContent ||
+            (selectedFormatVersion === "FV2504" &&
+              specialEbds.includes(selectedEbd))}
         />
         <AuthButton />
       </div>
