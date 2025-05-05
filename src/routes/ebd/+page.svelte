@@ -32,6 +32,7 @@
   let svgContent = "";
   let isLoading = false;
   let error: boolean = false;
+  let isInitialLoad = true;
 
   $: if (selectedFormatVersion) {
     ebdList = filterEbds(
@@ -42,6 +43,9 @@
   }
 
   function updateURL() {
+    // make sure URL updates only if the initial load phase is over
+    if (isInitialLoad) return;
+
     const params = new URLSearchParams();
 
     if (selectedFormatVersion) {
@@ -69,6 +73,7 @@
     const rolesParam = searchParams.get("rolle");
     const chaptersParam = searchParams.get("chapter");
 
+    // Only override if URL parameters exist
     if (formatVersion) selectedFormatVersion = formatVersion;
     if (ebd) selectedEbd = ebd;
     if (rolesParam) {
@@ -89,6 +94,8 @@
     if (selectedFormatVersion && selectedEbd) {
       await loadSvg();
     }
+
+    isInitialLoad = false;
   });
 
   async function loadSvg() {
