@@ -1,6 +1,6 @@
 // shared components
 export { default as AuthButton } from "$lib/components/shared/auth-button.svelte";
-export { default as ErrorMsg } from "$lib/components/shared/error-msg.svelte";
+export { default as ErrorPage } from "$lib/components/shared/error-page.svelte";
 export { default as Footer } from "$lib/components/shared/footer.svelte";
 export { default as FooterTools } from "$lib/components/shared/footer-tools.svelte";
 export { default as Header } from "$lib/components/shared/header.svelte";

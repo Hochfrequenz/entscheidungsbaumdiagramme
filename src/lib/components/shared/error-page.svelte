@@ -10,7 +10,9 @@
     class="flex flex-grow flex-col overflow-hidden items-center justify-center"
   >
     <div class="max-w-[50%] w-full">
-      <div class="flex flex-wrap flex-row items-center gap-2 pb-10 justify-center">
+      <div
+        class="flex flex-wrap flex-row items-center gap-2 pb-10 justify-center"
+      >
         <span class="text-2xl">
           Der gesuchte Entscheidungsbaum muss erst noch gepflanzt werden.
         </span>
@@ -35,8 +37,8 @@
             title="und damit keine Bäume oder DAGs, sondern zyklische Graphen sind."
             >Schleifen enthalten</span
           >. Falls du ein EBD nicht finden konntest oder fehlerhafte
-          Prüfschritte entdeckt hast, arbeite gemeinsam mit uns an einer Lösung und trage
-          zur Verbesserung unserer Backends
+          Prüfschritte entdeckt hast, arbeite gemeinsam mit uns an einer Lösung
+          und trage zur Verbesserung unserer Backends
           <a
             href="https://github.com/Hochfrequenz/ebdamame/"
             target="_blank"
@@ -53,9 +55,9 @@
           bei.
         </p>
         <p>
-          <br/>
-          Schreib uns einfach direkt über Github oder unser Kontaktformular
-          und wir helfen gerne beim Einstieg. Unterstütze uns auch gerne bei weiteren
+          <br />
+          Schreib uns einfach direkt über Github oder unser Kontaktformular und wir
+          helfen gerne beim Einstieg. Unterstütze uns auch gerne bei weiteren
           <a
             href="https://github.com/Hochfrequenz/"
             target="_blank"

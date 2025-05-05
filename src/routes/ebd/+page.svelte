@@ -5,7 +5,7 @@
   import { base } from "$app/paths";
   import {
     AuthButton,
-    ErrorMsg,
+    ErrorPage,
     ExportPumlButton,
     ExportSvgButton,
     Header,
@@ -267,7 +267,7 @@
 
   <div class="flex-1 overflow-hidden bg-secondary">
     {#if error}
-      <ErrorMsg ebdCode={selectedEbd} formatVersion={selectedFormatVersion} />
+      <ErrorPage ebdCode={selectedEbd} formatVersion={selectedFormatVersion} />
     {:else}
       <SvgContainer {svgContent} {isLoading} />
     {/if}
