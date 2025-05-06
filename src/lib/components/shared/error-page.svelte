@@ -13,7 +13,7 @@
     class="flex flex-grow flex-col overflow-hidden items-center justify-center"
   >
     <div class="max-w-[50%] w-full">
-      <div class="flex flex-wrap flex-row items-center gap-2 pb-10">
+      <div class="flex flex-wrap flex-row items-center gap-2 py-10">
         <span class="text-xl">
           Der gesuchte Entscheidungsbaum muss erst noch gepflanzt werden.
         </span>
@@ -31,17 +31,19 @@
       </div>
 
       {#if isMaloIdent}
-        <div class="mb-10 w-full">
-          <div class="flex aspect-w-16 aspect-h-9 w-full justify-center">
-            <iframe
-              class="w-[446px] h-[250px] rounded-lg shadow-lg"
-              src="https://www.youtube.com/embed/mHB6pEl5ik4"
-              title="YouTube Video Player"
-              frameborder="0"
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            >
-            </iframe>
+        <div class="mb-10 w-full flex justify-center">
+          <div class="w-[600px]">
+            <div class="relative pt-[50%]">
+              <iframe
+                class="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
+                src="https://www.youtube.com/embed/mHB6pEl5ik4"
+                title="YouTube Video Player"
+                frameborder="0"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              >
+              </iframe>
+            </div>
           </div>
         </div>
       {/if}
