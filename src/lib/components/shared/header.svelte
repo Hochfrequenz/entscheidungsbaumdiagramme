@@ -38,8 +38,8 @@
   export let metadata: Record<string, Record<string, MetaData>> = {};
   export let onSectionSelect: (ebdCode: string) => void;
 
-  let hasForatVersionSelected = selectedFormatVersion !== "";
-  $: hasForatVersionSelected = selectedFormatVersion !== "";
+  let hasFormatVersionSelected = selectedFormatVersion !== "";
+  $: hasFormatVersionSelected = selectedFormatVersion !== "";
 
   function handlePanelToggle(event: PanelToggleEvent) {
     dispatch("panelToggle", event.detail);
@@ -72,9 +72,9 @@
           <div class="min-w-[298px] flex items-center">
             <EbdInput
               ebds={ebdList}
-              disabled={!hasForatVersionSelected}
+              disabled={!hasFormatVersionSelected}
               selectedEbdCode={selectedEbd}
-              formatVersionChanged={hasForatVersionSelected}
+              formatVersionChanged={hasFormatVersionSelected}
               onSelect={onEbdSelect}
             />
           </div>
