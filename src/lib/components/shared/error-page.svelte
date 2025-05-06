@@ -3,6 +3,9 @@
 
   export let formatVersion: string; // e.g. 'FV2410'
   export let ebdCode: string; // e.g. 'E_0404'
+
+  // check for E_0594 to embed "HF erklärt - MaLoIdent-Prozess" youtube video
+  $: isMaloIdent = formatVersion === "FV2504" && ebdCode === "E_0594";
 </script>
 
 <div class="flex flex-col h-full">
@@ -26,6 +29,22 @@
           leider kein Diagramm vorhanden.
         </p>
       </div>
+
+      {#if isMaloIdent}
+        <div class="mb-10 w-full">
+          <div class="aspect-w-16 aspect-h-9 w-full">
+            <iframe
+              class="w-[446px] h-[250px] rounded-lg shadow-lg"
+              src="https://www.youtube.com/embed/mHB6pEl5ik4"
+              title="YouTube Video Player"
+              frameborder="0"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            >
+            </iframe>
+          </div>
+        </div>
+      {/if}
 
       <span class="block text-xl pb-10">
         <p>
