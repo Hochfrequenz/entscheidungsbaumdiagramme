@@ -14,7 +14,7 @@
   >
     <div class="max-w-[50%] w-full">
       <div class="flex flex-wrap flex-row items-center gap-2 pb-10">
-        <span class="text-2xl">
+        <span class="text-xl">
           Der gesuchte Entscheidungsbaum muss erst noch gepflanzt werden.
         </span>
         <div class="-mt-3">
@@ -22,8 +22,8 @@
         </div>
       </div>
 
-      <div class="rounded-3xl bg-primary px-6 py-8 mb-10 justify-center">
-        <p class="text-xl text-black">
+      <div class="rounded-3xl bg-primary px-6 py-7 mb-10 justify-center">
+        <p class="text-lg text-black">
           Für das EBD <span class="font-bold">{ebdCode}</span>
           der Formatversion <span class="font-bold">{formatVersion}</span> ist aktuell
           leider kein Diagramm vorhanden.
@@ -32,7 +32,7 @@
 
       {#if isMaloIdent}
         <div class="mb-10 w-full">
-          <div class="aspect-w-16 aspect-h-9 w-full">
+          <div class="flex aspect-w-16 aspect-h-9 w-full justify-center">
             <iframe
               class="w-[446px] h-[250px] rounded-lg shadow-lg"
               src="https://www.youtube.com/embed/mHB6pEl5ik4"
@@ -46,7 +46,7 @@
         </div>
       {/if}
 
-      <span class="block text-xl pb-10">
+      <span class="block text-lg pb-10">
         <p>
           Mögliche Ursachen können beispielsweise Probleme beim Auslesen der
           Tabellen aus den Dokumenten des BDEW sein, sowie Prüflogiken, welche
