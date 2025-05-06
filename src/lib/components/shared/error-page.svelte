@@ -10,9 +10,7 @@
     class="flex flex-grow flex-col overflow-hidden items-center justify-center"
   >
     <div class="max-w-[50%] w-full">
-      <div
-        class="flex flex-wrap flex-row items-center gap-2 pb-10 justify-center"
-      >
+      <div class="flex flex-wrap flex-row items-center gap-2 pb-10">
         <span class="text-2xl">
           Der gesuchte Entscheidungsbaum muss erst noch gepflanzt werden.
         </span>
@@ -21,8 +19,8 @@
         </div>
       </div>
 
-      <div class="rounded-3xl bg-primary p-8 mb-10 justify-center">
-        <p class="text-xl text-black text-center">
+      <div class="rounded-3xl bg-primary px-6 py-8 mb-10 justify-center">
+        <p class="text-xl text-black">
           Für das EBD <span class="font-bold">{ebdCode}</span>
           der Formatversion <span class="font-bold">{formatVersion}</span> ist aktuell
           leider kein Diagramm vorhanden.
