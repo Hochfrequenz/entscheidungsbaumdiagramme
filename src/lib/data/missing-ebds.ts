@@ -104,11 +104,6 @@ export const FV2504_MISSING_EBD: EbdData[] = [
     ebd_code: "E_0521",
     ebd_name: "E_0521_erneut Rechnung der Leistungen des Preisblatts A prüfen",
   },
-  { ebd_code: "E_0524", ebd_name: "E_0524_Anfrage prüfen" },
-  { ebd_code: "E_0531", ebd_name: "E_0531_Anfrage prüfen" },
-  { ebd_code: "E_0552", ebd_name: "E_0552_Reklamation prüfen" },
-  { ebd_code: "E_0553", ebd_name: "E_0553_Reklamation prüfen" },
-  { ebd_code: "E_0554", ebd_name: "E_0554_Reklamation prüfen" },
   {
     ebd_code: "E_0566",
     ebd_name:
@@ -138,8 +133,6 @@ export const FV2504_MISSING_EBD: EbdData[] = [
     ebd_name:
       "E_0583_Änderung vom MSB prüfen (Basiert auf EBD: E_0408_Änderung vom NB prüfen)",
   },
-  { ebd_code: "E_0594", ebd_name: "E_0594_Anfrage vom LF prüfen" }, // PRIO 1 FIX
-  { ebd_code: "E_0595", ebd_name: "E_0595_Bestellung prüfen" },
   { ebd_code: "E_0607", ebd_name: "E_0607_Abmeldung prüfen" },
   { ebd_code: "E_0608", ebd_name: "E_0608_Anmeldung einer Zuordnung" },
   {
@@ -166,7 +159,6 @@ export const FV2504_MISSING_EBD: EbdData[] = [
     ebd_name:
       "E_0639_Änderung vom MSB prüfen (Basiert auf EBD: E_0408_Änderung vom NB prüfen)",
   },
-  { ebd_code: "E_0802", ebd_name: "E_0802_aggregierte MMM-Rechnung prüfen" },
 ];
 
 // extract only EBD codes (required for handling of GET requests of SVGs/PUML)
