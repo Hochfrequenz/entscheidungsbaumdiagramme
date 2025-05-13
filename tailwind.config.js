@@ -20,6 +20,15 @@ export default {
         weichesschwarz: "#25241D",
       },
     },
+    fontFamily: {
+      sans: ["Roboto", "Helvetica", "Arial", "sans-serif"],
+      mono: ["Roboto Mono", "monospace"],
+    },
+    fontWeight: {
+      normal: 400,
+      medium: 500,
+      bold: 700,
+    },
   },
   plugins: [],
 };
