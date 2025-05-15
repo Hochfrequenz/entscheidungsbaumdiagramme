@@ -43,8 +43,8 @@
     <p>Loading...</p>
   </div>
 {:else}
-  <div class="flex flex-col h-screen">
-    <main class="flex-grow flex flex-col overflow-hidden">
+  <div class="flex flex-col min-h-screen">
+    <main class="flex-grow flex flex-col">
       <slot />
     </main>
     <Footer />
