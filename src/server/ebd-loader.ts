@@ -11,12 +11,6 @@ let ebdFiles: Record<string, string[]> | null = null;
 let ebdFullName: Record<string, EbdNameExtended[]> | null = null;
 let ebdMetadata: Record<string, Record<string, MetaData>> | null = null;
 
-// mapping of FVs where the BDEW skipped EBD related updates
-const skippedFormatVersionToInsteadFormatVersionMap: Record<string, string> = {
-  // key = skipped format version; value = previous (still valid) format version
-  FV2410: "FV2404",
-};
-
 // fetches EBD files and associated metadata
 function getEbds(): Record<string, string[]> {
   if (ebdFiles) return ebdFiles;
@@ -30,10 +24,6 @@ function getEbds(): Record<string, string[]> {
       .map((dirent) => dirent.name);
 
     for (const formatVersion of formatVersions) {
-      if (skippedFormatVersionToInsteadFormatVersionMap[formatVersion]) {
-        continue;
-      }
-
       const versionPath = join(staticPath, formatVersion);
       const files = readdirSync(versionPath);
 
