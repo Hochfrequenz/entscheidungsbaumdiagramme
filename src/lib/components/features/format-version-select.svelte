@@ -16,8 +16,8 @@
     const cutoffDate = new Date(2025, 5, 6);
 
     if (currentDate < cutoffDate) {
-      const fv2404 = formatVersions.find((v) => v.code === "FV2404");
-      return fv2404?.code || "";
+      const fv2410 = formatVersions.find((v) => v.code === "FV2410");
+      return fv2410?.code || "";
     } else {
       const fv2504 = formatVersions.find((v) => v.code === "FV2504");
       return fv2504?.code || "";
