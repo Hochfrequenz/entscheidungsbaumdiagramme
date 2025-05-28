@@ -13,14 +13,14 @@
   // set default format version to FV2410 if currentDate < 06.06.2025
   function getDefaultFormatVersion(): string {
     const currentDate = new Date();
-    const cutoffDate = new Date(2025, 5, 6);
+    const cutoffDate = new Date(2025, 10, 1);
 
     if (currentDate < cutoffDate) {
-      const fv2410 = formatVersions.find((v) => v.code === "FV2410");
-      return fv2410?.code || "";
-    } else {
       const fv2504 = formatVersions.find((v) => v.code === "FV2504");
       return fv2504?.code || "";
+    } else {
+      const fv2510 = formatVersions.find((v) => v.code === "FV2510");
+      return fv2510?.code || "";
     }
   }
 
