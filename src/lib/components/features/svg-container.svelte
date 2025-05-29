@@ -25,14 +25,14 @@
 
   $: stripWidth = Math.max(svgWidth * 0.08, 0);
   $: stripHeight = Math.max(svgWidth * 0.03, 0);
-  $: stripTop = Math.max(svgWidth * 0.035, 0);
+  $: stripTop = Math.max(svgWidth * 0.035, 0); // calculate <top> positioning of strips relative to SVG height (SVG width is fixed)
 
   $: if (svgContent) {
     setTimeout(updateSvgSize, 0);
   }
 </script>
 
-<div class="flex flex-col h-full w-full">
+<div class="h-full w-full flex flex-col relative">
   {#if isLoading}
     <div class="flex items-center justify-center h-full">
       <p>EBD wird geladen...</p>
@@ -44,7 +44,7 @@
   {:else if svgContent}
     <div class="flex-1 overflow-auto relative">
       <div
-        class="w-full h-full p-20 flex items-start justify-center"
+        class="absolute inset-0 min-h-min w-full p-20 flex items-start justify-center"
         bind:this={svgContainer}
       >
         <!-- tesa affiliate -->

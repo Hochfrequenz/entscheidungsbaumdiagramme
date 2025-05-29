@@ -36,6 +36,8 @@
   $: if (!$isAuthenticated && !isLoading && $page.url.pathname !== `${base}/`) {
     goto(`${base}/`);
   }
+
+  $: isEbdRoute = $page.url.pathname.startsWith(`${base}/ebd`);
 </script>
 
 {#if isLoading}
@@ -43,11 +45,17 @@
     <p>Loading...</p>
   </div>
 {:else}
-  <div class="flex flex-col min-h-screen">
-    <main class="flex-grow flex flex-col">
+  <div
+    class="flex flex-col"
+    class:min-h-screen={!isEbdRoute}
+    class:h-screen={isEbdRoute}
+  >
+    <main class="flex-grow flex flex-col" class:overflow-hidden={isEbdRoute}>
       <slot />
     </main>
-    <Footer />
+    {#if !isEbdRoute}
+      <Footer />
+    {/if}
   </div>
 {/if}
 
