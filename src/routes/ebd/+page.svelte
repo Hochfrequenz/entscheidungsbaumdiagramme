@@ -226,7 +226,7 @@
   }
 </script>
 
-<div class="flex flex-col h-full overflow-hidden">
+<div class="flex flex-col flex-1">
   <Header
     formatVersions={data.formatVersions}
     {selectedFormatVersion}
@@ -271,7 +271,7 @@
     <div class="w-full py-12 bg-secondary relative z-10"></div>
   {/if}
 
-  <div class="flex-1 overflow-hidden bg-secondary">
+  <div class="flex-1 bg-secondary">
     {#if error}
       <ErrorPage ebdCode={selectedEbd} formatVersion={selectedFormatVersion} />
     {:else}

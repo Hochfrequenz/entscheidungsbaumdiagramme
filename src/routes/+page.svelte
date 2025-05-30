@@ -16,8 +16,8 @@
   }
 </script>
 
-<section class="bg-primary flex-grow flex items-center justify-center">
-  <div class="rounded-3xl bg-secondary p-12 shadow-md w-1/3">
+<section class="bg-primary flex-grow p-4 flex items-center justify-center">
+  <div class="rounded-3xl bg-secondary p-8 sm:p-12 shadow-md w-full max-w-2xl">
     <h1 class="text-3xl text-black/70 pb-5 break-all">
       Entscheidungsbaumdiagramme
     </h1>
@@ -46,7 +46,7 @@
     <p
       class="flex justify-center text-sm border-secondary pb-3 mb-5 uppercase"
     ></p>
-    <div class="mt-10 flex justify-center">
+    <div class="mt-6 sm:mt-10 flex justify-center">
       <button
         on:click={checkAuthentication}
         class="flex flex-row items-center gap-2 rounded-full bg-primary text-white px-5 py-2 shadow-md no-underline"

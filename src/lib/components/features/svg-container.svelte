@@ -53,8 +53,8 @@
           <div
             class="absolute -rotate-45 bg-white opacity-50"
             style="
-              width: {stripWidth}px; 
-              height: {stripHeight}px; 
+              width: {stripWidth}px;
+              height: {stripHeight}px;
               top: {stripTop}px;
               left: -2%;
               transform-origin: top left;"
@@ -63,8 +63,8 @@
           <div
             class="absolute rotate-45 bg-white opacity-50"
             style="
-              width: {stripWidth}px; 
-              height: {stripHeight}px; 
+              width: {stripWidth}px;
+              height: {stripHeight}px;
               top: {stripTop}px;
               right: -2%;
               transform-origin: top right;"
