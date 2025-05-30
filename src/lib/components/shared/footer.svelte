@@ -29,14 +29,14 @@
     </div>
 
     <div
-      class="flex-1 flex justify-center items-center text-sm text-black min-w-0 px-4"
+      class="flex-1 flex justify-center items-center text-sm text-black min-w-0 px-4 pt-0.5"
     >
       <p
         class="flex items-center flex-wrap justify-center space-x-1 text-center"
       >
         © {currentYear}
         {#if versionInfo}
-          <span class="mx-1"> - </span>
+          <span class="ml-1">-</span>
           <a
             href="/version.json"
             class="mx-1 cursor-pointer"
@@ -49,32 +49,31 @@
         <span class="mx-1"> by </span>
         <a class="font-bold mr-2" href="https://hochfrequenz.de">Hochfrequenz</a
         >
-        |
-        <span class="ml-2">powered by</span>
+        <span class="ml-2">| powered by</span>
         <a
           class="font-mono mx-1"
           href="https://github.com/hochfrequenz/ebdamame"
           ><code>ebdamame</code></a
         >
-        &amp;
+        <span> &amp; </span>
         <a
           class="font-mono ml-1 mr-2"
           href="https://github.com/hochfrequenz/rebdhuhn"
           ><code>rebdhuhn</code></a
         >
-        |
+        <span> | </span>
         <a
           class="mx-2"
           target="_blank"
           href="https://www.hochfrequenz.de/datenschutz/">Datenschutz</a
         >
-        |
+        <span> | </span>
         <a
           class="mx-2"
           target="_blank"
           href="https://www.hochfrequenz.de/impressum/">Impressum</a
         >
-        |
+        <span> | </span>
         <a
           class="mx-2"
           target="_blank"
