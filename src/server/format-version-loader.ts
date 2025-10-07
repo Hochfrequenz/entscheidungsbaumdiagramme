@@ -19,6 +19,16 @@ const formatVersionMap: Record<string, string> = {
   "2510": "Oktober 2025",
 };
 
+// older FVs < FV2404 that are excluded from <selects>
+const EXCLUDED_FORMAT_VERSIONS = [
+  "FV2104",
+  "FV2110",
+  "FV2204",
+  "FV2210",
+  "FV2304",
+  "FV2310",
+];
+
 function formatVersion(version: string): FormatVersion {
   const formattedVersion = version.startsWith("FV") ? version : `FV${version}`;
   const mappedVersion = formattedVersion;
@@ -42,9 +52,9 @@ export function getFormatVersions(): FormatVersion[] {
       .filter((dirent) => dirent.isDirectory())
       .map((dirent) => formatVersion(dirent.name))
       .filter((version) => {
-        if (uniqueFormatVersion.has(version.code)) {
-          return false;
-        }
+        if (EXCLUDED_FORMAT_VERSIONS.includes(version.code)) return false;
+
+        if (uniqueFormatVersion.has(version.code)) return false;
         uniqueFormatVersion.add(version.code);
         return true;
       })
