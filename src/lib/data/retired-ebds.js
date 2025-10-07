@@ -1,4 +1,4 @@
-import { existsSync,rmSync } from "fs";
+import { existsSync, rmSync } from "fs";
 import { join } from "path";
 
 const exclude = ["FV2104", "FV2110", "FV2204", "FV2210", "FV2304", "FV2310"];
