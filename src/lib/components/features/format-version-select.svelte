@@ -10,17 +10,17 @@
 
   import { onMount } from "svelte";
 
-  // set default format version to FV2410 if currentDate < 06.06.2025
+  // set default format version to FV2604 if currentDate < 01.10.2026
   function getDefaultFormatVersion(): string {
     const currentDate = new Date();
-    const cutoffDate = new Date(2025, 10, 1);
+    const cutoffDate = new Date(2026, 10, 1);
 
     if (currentDate < cutoffDate) {
-      const fv2504 = formatVersions.find((v) => v.code === "FV2504");
-      return fv2504?.code || "";
+      const fv2604 = formatVersions.find((v) => v.code === "FV2604");
+      return fv2604?.code || "";
     } else {
-      const fv2510 = formatVersions.find((v) => v.code === "FV2510");
-      return fv2510?.code || "";
+      const fv2610 = formatVersions.find((v) => v.code === "FV2610");
+      return fv2610?.code || "";
     }
   }
 
