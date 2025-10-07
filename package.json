@@ -8,7 +8,7 @@
   "scripts": {
     "start": "vite dev --open",
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "node src/lib/data/retired-ebds.js && vite build",
     "serve": "vite build && npx http-server ./build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
