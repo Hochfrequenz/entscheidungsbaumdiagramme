@@ -11,6 +11,7 @@ let ebdFiles: Record<string, string[]> | null = null;
 let ebdFullName: Record<string, EbdNameExtended[]> | null = null;
 let ebdMetadata: Record<string, Record<string, MetaData>> | null = null;
 
+// EBDs belonging to older FVs < FV2404 that are excluded from <selects>
 const EXCLUDED_FORMAT_VERSIONS = [
   "FV2104",
   "FV2110",

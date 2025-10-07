@@ -19,6 +19,7 @@ const formatVersionMap: Record<string, string> = {
   "2510": "Oktober 2025",
 };
 
+// older FVs < FV2404 that are excluded from <selects>
 const EXCLUDED_FORMAT_VERSIONS = [
   "FV2104",
   "FV2110",
