@@ -13,7 +13,7 @@
   // set default format version to FV2604 if currentDate < 01.10.2026
   function getDefaultFormatVersion(): string {
     const currentDate = new Date();
-    const cutoffDate = new Date(2025, 10, 1);
+    const cutoffDate = new Date(2026, 10, 1);
 
     if (currentDate < cutoffDate) {
       const fv2604 = formatVersions.find((v) => v.code === "FV2604");
