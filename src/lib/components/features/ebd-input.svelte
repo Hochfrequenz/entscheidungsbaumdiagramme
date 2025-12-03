@@ -10,6 +10,7 @@
   export let onSelect: (ebdCode: string) => void;
 
   let inputValue: string = ""; // preselected EBD on dynamic routes
+  let searchQuery: string = ""; // preserves user's search text across selections
   let filteredEbds: EbdNameExtended[] = ebds; // by default (without filter), the list of filtered EBDs is equivalent to a list containing all fetched EBDs
   let showOptions: boolean = false; // used for setting the visibility state of the window containing the selectable EBDs
   let isFocused: boolean = false; // used for setting the focus state of the EBD input to show/hide the window containing the selectable EBDs
@@ -20,6 +21,7 @@
       selectedEbdCode = "";
       selectedEbdNameExtended = undefined;
       inputValue = "";
+      searchQuery = "";
       filteredEbds = ebds;
     }
   }
@@ -31,6 +33,7 @@
         selectedEbdCode = "";
         selectedEbdNameExtended = undefined;
         inputValue = "";
+        searchQuery = "";
       }
     }
   }
@@ -55,6 +58,7 @@
   function handleInput(event: Event) {
     const input = event.target as HTMLInputElement;
     inputValue = input.value;
+    searchQuery = input.value;
     filteredEbds = ebds.filter((ebd) =>
       ebd.ebd_name.toUpperCase().includes(inputValue.toUpperCase()),
     );
@@ -72,8 +76,12 @@
   function handleFocus() {
     isFocused = true;
     showOptions = true;
-    inputValue = "";
-    filteredEbds = ebds;
+    inputValue = searchQuery;
+    filteredEbds = searchQuery
+      ? ebds.filter((ebd) =>
+          ebd.ebd_name.toUpperCase().includes(searchQuery.toUpperCase()),
+        )
+      : ebds;
   }
 
   // closes list of selectable EBDs when removing focus
@@ -85,21 +93,52 @@
       inputValue = selectedInfo?.ebd_name ?? selectedEbdCode;
     }, 200);
   }
+
+  function clearInput(event: MouseEvent) {
+    event.preventDefault();
+    inputValue = "";
+    searchQuery = "";
+    selectedEbdCode = "";
+    selectedEbdNameExtended = undefined;
+    filteredEbds = ebds;
+    showOptions = false;
+    onSelect("");
+  }
 </script>
 
 <!-- py-[9.5px] is required to match py-3 of <select> since the browser renders <input> and <select> slightly differently -->
 <div class="flex flex-col items-start mt-2 w-full relative">
-  <input
-    type="text"
-    id="ebd-input"
-    {disabled}
-    value={inputValue}
-    on:input={handleInput}
-    on:focus={handleFocus}
-    on:blur={handleBlur}
-    placeholder={isFocused ? "" : "Bitte auswählen"}
-    class="inline-block border-2 border-white rounded-lg bg-secondary h-[50px] px-2 ps-3 pe-4 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25 text-base leading-relaxed cursor-pointer"
-  />
+  <div class="relative w-full">
+    <input
+      type="text"
+      id="ebd-input"
+      {disabled}
+      value={inputValue}
+      on:input={handleInput}
+      on:focus={handleFocus}
+      on:blur={handleBlur}
+      placeholder={isFocused ? "" : "Bitte auswählen"}
+      class="inline-block border-2 border-white rounded-lg bg-secondary h-[50px] px-2 ps-3 pe-10 focus:outline-none w-full placeholder-black disabled:placeholder-opacity-25 text-base leading-relaxed cursor-pointer"
+    />
+    {#if inputValue && !disabled}
+      <button
+        type="button"
+        class="absolute right-3 top-1/2 -translate-y-1/2"
+        on:mousedown|preventDefault={clearInput}
+        aria-label="Suche zurücksetzen"
+      >
+        <svg
+          class="w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    {/if}
+  </div>
 
   <label
     for="ebd-input"
