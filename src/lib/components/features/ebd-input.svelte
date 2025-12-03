@@ -94,13 +94,13 @@
     }, 200);
   }
 
-  function clearInput(event: MouseEvent) {
-    event.preventDefault();
+  function clearInput() {
     inputValue = "";
     searchQuery = "";
     selectedEbdCode = "";
     selectedEbdNameExtended = undefined;
     filteredEbds = ebds;
+    isFocused = false;
     showOptions = false;
     onSelect("");
   }
@@ -125,6 +125,7 @@
         type="button"
         class="absolute right-3 top-1/2 -translate-y-1/2"
         on:mousedown|preventDefault={clearInput}
+        on:click={clearInput}
         aria-label="Suche zurücksetzen"
       >
         <svg
