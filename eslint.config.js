@@ -1,11 +1,11 @@
 import js from "@eslint/js";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
+import prettierConfig from "eslint-config-prettier";
+import importPlugin from "eslint-plugin-import";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 import sveltePlugin from "eslint-plugin-svelte";
 import svelteParser from "svelte-eslint-parser";
-import prettierConfig from "eslint-config-prettier";
-import simpleImportSort from "eslint-plugin-simple-import-sort";
-import importPlugin from "eslint-plugin-import";
 
 export default [
   js.configs.recommended,
@@ -45,6 +45,8 @@ export default [
         HTMLInputElement: "readonly",
         HTMLSelectElement: "readonly",
         MouseEvent: "readonly",
+        WheelEvent: "readonly",
+        navigator: "readonly",
         // Node.js globals
         process: "readonly",
       },
