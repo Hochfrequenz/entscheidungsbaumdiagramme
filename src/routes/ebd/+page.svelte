@@ -271,7 +271,7 @@
     <div class="w-full py-12 bg-secondary relative z-10"></div>
   {/if}
 
-  <div class="flex-1 bg-secondary">
+  <div class="flex-1 bg-secondary p-4">
     {#if error}
       <ErrorPage ebdCode={selectedEbd} formatVersion={selectedFormatVersion} />
     {:else}
