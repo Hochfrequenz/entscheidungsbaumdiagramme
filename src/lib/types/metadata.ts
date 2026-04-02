@@ -1,3 +1,8 @@
+export interface EbdPruefidentifikator {
+  format_version: string;
+  pruefidentifikator: string;
+}
+
 export interface MetaData {
   metadata: {
     chapter: string; // Netznutzungsthema
@@ -6,12 +11,14 @@ export interface MetaData {
     role: string; // prüfende Rolle
     section: string; // "1.1.: AD: [...]"
     remark: string; // no table provided by BDEW: "Derzeit ist für diese Entscheidung kein Entscheidungsbaum notwendig, da keine Antwort gegeben wird."
+    pruefidentifikatoren?: EbdPruefidentifikator[] | null;
   };
 }
 
 export interface EbdNameExtended {
   ebd_code: string;
   ebd_name: string;
+  pruefidentifikatoren: string[]; // just the 5-digit IDs for search
 }
 
 // remove section number prefix and "AD:" pattern from meta data
