@@ -162,7 +162,9 @@
         >
           <span>{ebd.ebd_name}</span>
           {#if ebd.pruefidentifikatoren?.length}
-            <span class="text-xs text-slate-400 ml-2">PI: {ebd.pruefidentifikatoren.join(", ")}</span>
+            <span class="text-xs text-slate-400 ml-2"
+              >PI: {ebd.pruefidentifikatoren.join(", ")}</span
+            >
           {/if}
         </button>
       {/each}

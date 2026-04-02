@@ -103,9 +103,10 @@ export function getEbdNames(): Record<string, EbdNameExtended[]> {
           ebd_name = `${parseMetaData.metadata.ebd_name}`;
         }
         if (parseMetaData.metadata.pruefidentifikatoren) {
-          pruefidentifikatoren = parseMetaData.metadata.pruefidentifikatoren.map(
-            (p) => p.pruefidentifikator,
-          );
+          pruefidentifikatoren =
+            parseMetaData.metadata.pruefidentifikatoren.map(
+              (p) => p.pruefidentifikator,
+            );
         }
       } catch (error) {
         console.warn(`no metadata available for ${ebdCode}: ${error}`);
