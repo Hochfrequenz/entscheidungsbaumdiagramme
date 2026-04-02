@@ -55,13 +55,18 @@
     }
   }
 
+  function matchesSearch(ebd: EbdNameExtended, query: string): boolean {
+    const q = query.toUpperCase();
+    if (ebd.ebd_name.toUpperCase().includes(q)) return true;
+    if (ebd.pruefidentifikatoren?.some((pi) => pi.includes(query))) return true;
+    return false;
+  }
+
   function handleInput(event: Event) {
     const input = event.target as HTMLInputElement;
     inputValue = input.value;
     searchQuery = input.value;
-    filteredEbds = ebds.filter((ebd) =>
-      ebd.ebd_name.toUpperCase().includes(inputValue.toUpperCase()),
-    );
+    filteredEbds = ebds.filter((ebd) => matchesSearch(ebd, inputValue));
     showOptions = true;
   }
 
@@ -78,9 +83,7 @@
     showOptions = true;
     inputValue = searchQuery;
     filteredEbds = searchQuery
-      ? ebds.filter((ebd) =>
-          ebd.ebd_name.toUpperCase().includes(searchQuery.toUpperCase()),
-        )
+      ? ebds.filter((ebd) => matchesSearch(ebd, searchQuery))
       : ebds;
   }
 
@@ -157,7 +160,10 @@
           on:mousedown={() => handleSelect(ebd)}
           class="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
         >
-          {ebd.ebd_name}
+          <span>{ebd.ebd_name}</span>
+          {#if ebd.pruefidentifikatoren?.length}
+            <span class="text-xs text-slate-400 ml-2">PI: {ebd.pruefidentifikatoren.join(", ")}</span>
+          {/if}
         </button>
       {/each}
     </div>
