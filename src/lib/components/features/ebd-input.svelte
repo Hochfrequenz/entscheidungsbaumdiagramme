@@ -58,7 +58,7 @@
   function matchesSearch(ebd: EbdNameExtended, query: string): boolean {
     const q = query.toUpperCase();
     if (ebd.ebd_name.toUpperCase().includes(q)) return true;
-    if (ebd.pruefidentifikatoren?.some((pi) => pi.includes(q))) return true;
+    if (ebd.pruefidentifikatoren?.some((pid) => pid.includes(q))) return true;
     return false;
   }
 
@@ -163,7 +163,7 @@
           <span>{ebd.ebd_name}</span>
           {#if ebd.pruefidentifikatoren?.length}
             <span class="text-xs text-slate-400 ml-2"
-              >PI: {ebd.pruefidentifikatoren.join(", ")}</span
+              >PID: {ebd.pruefidentifikatoren.join(", ")}</span
             >
           {/if}
         </button>
