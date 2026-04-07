@@ -88,10 +88,11 @@ export function getEbdNames(): Record<string, EbdNameExtended[]> {
           (ebd) => ebd.ebd_code === ebdCode,
         );
         if (missingEbd) {
-          return missingEbd;
+          return { ...missingEbd, pruefidentifikatoren: [] };
         }
       }
 
+      let pruefidentifikatoren: string[] = [];
       try {
         const jsonPath = join(versionPath, `${ebdCode}.json`);
         const parseMetaData = JSON.parse(
@@ -101,11 +102,17 @@ export function getEbdNames(): Record<string, EbdNameExtended[]> {
         if (parseMetaData.metadata.ebd_name?.trim()) {
           ebd_name = `${parseMetaData.metadata.ebd_name}`;
         }
+        if (parseMetaData.metadata.pruefidentifikatoren) {
+          pruefidentifikatoren =
+            parseMetaData.metadata.pruefidentifikatoren.map(
+              (p) => p.pruefidentifikator,
+            );
+        }
       } catch (error) {
         console.warn(`no metadata available for ${ebdCode}: ${error}`);
       }
 
-      return { ebd_code: ebdCode, ebd_name };
+      return { ebd_code: ebdCode, ebd_name, pruefidentifikatoren };
     });
   }
 
