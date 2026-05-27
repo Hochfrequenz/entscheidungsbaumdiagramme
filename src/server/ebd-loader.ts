@@ -11,15 +11,7 @@ let ebdFiles: Record<string, string[]> | null = null;
 let ebdFullName: Record<string, EbdNameExtended[]> | null = null;
 let ebdMetadata: Record<string, Record<string, MetaData>> | null = null;
 
-// EBDs belonging to older FVs < FV2404 that are excluded from <selects>
-const EXCLUDED_FORMAT_VERSIONS = [
-  "FV2104",
-  "FV2110",
-  "FV2204",
-  "FV2210",
-  "FV2304",
-  "FV2310",
-];
+import { EXCLUDED_FORMAT_VERSIONS } from "./excluded-format-versions";
 
 // fetches EBD files and associated metadata
 function getEbds(): Record<string, string[]> {
@@ -34,7 +26,7 @@ function getEbds(): Record<string, string[]> {
         (dirent) =>
           dirent.isDirectory() &&
           dirent.name.startsWith("FV") &&
-          !EXCLUDED_FORMAT_VERSIONS.includes(dirent.name),
+          !(EXCLUDED_FORMAT_VERSIONS as string[]).includes(dirent.name),
       )
       .map((dirent) => dirent.name);
 
