@@ -71,13 +71,20 @@
 
     let formatVersion = searchParams.get("formatversion");
     if (formatVersion?.toLowerCase() === "current") {
-      formatVersion = getCurrentEdifactFormatVersion();
-      const resolved = new URLSearchParams(searchParams);
-      resolved.set("formatversion", formatVersion);
-      goto(`${base}/ebd/?${resolved.toString()}`, {
-        replaceState: true,
-        keepFocus: true,
-      });
+      const currentVersion = getCurrentEdifactFormatVersion();
+      // Fall back to latest available version if the static build doesn't yet include currentVersion
+      const availableCodes = data.formatVersions.map((fv) => fv.code);
+      formatVersion = availableCodes.includes(currentVersion)
+        ? currentVersion
+        : (availableCodes[availableCodes.length - 1] ?? null);
+      if (formatVersion) {
+        const resolved = new URLSearchParams(searchParams);
+        resolved.set("formatversion", formatVersion);
+        await goto(`${base}/ebd/?${resolved.toString()}`, {
+          replaceState: true,
+          keepFocus: true,
+        });
+      }
     }
 
     const ebd = searchParams.get("ebd");
