@@ -1,6 +1,9 @@
 import { readdirSync } from "fs";
 import { join } from "path";
-import { EdifactFormatVersion, getEdifactFormatVersionLabel } from "@hochfrequenz/efoli";
+import {
+  EdifactFormatVersion,
+  getEdifactFormatVersionLabel,
+} from "@hochfrequenz/efoli";
 import { EXCLUDED_FORMAT_VERSIONS } from "./excluded-format-versions";
 
 type FormatVersion = {
@@ -33,7 +36,8 @@ export function getFormatVersions(): FormatVersion[] {
       .filter((dirent) => dirent.isDirectory())
       .map((dirent) => formatVersion(dirent.name))
       .filter((version) => {
-        if ((EXCLUDED_FORMAT_VERSIONS as string[]).includes(version.code)) return false;
+        if ((EXCLUDED_FORMAT_VERSIONS as string[]).includes(version.code))
+          return false;
 
         if (uniqueFormatVersion.has(version.code)) return false;
         uniqueFormatVersion.add(version.code);
