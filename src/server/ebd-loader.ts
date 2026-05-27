@@ -7,11 +7,11 @@ import {
 } from "$lib/data/missing-ebds";
 import type { EbdNameExtended, MetaData } from "$lib/types/metadata";
 
+import { EXCLUDED_FORMAT_VERSIONS } from "./excluded-format-versions";
+
 let ebdFiles: Record<string, string[]> | null = null;
 let ebdFullName: Record<string, EbdNameExtended[]> | null = null;
 let ebdMetadata: Record<string, Record<string, MetaData>> | null = null;
-
-import { EXCLUDED_FORMAT_VERSIONS } from "./excluded-format-versions";
 
 // fetches EBD files and associated metadata
 function getEbds(): Record<string, string[]> {

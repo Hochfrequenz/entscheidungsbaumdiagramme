@@ -1,9 +1,10 @@
-import { readdirSync } from "fs";
-import { join } from "path";
 import {
   EdifactFormatVersion,
   getEdifactFormatVersionLabel,
 } from "@hochfrequenz/efoli";
+import { readdirSync } from "fs";
+import { join } from "path";
+
 import { EXCLUDED_FORMAT_VERSIONS } from "./excluded-format-versions";
 
 type FormatVersion = {

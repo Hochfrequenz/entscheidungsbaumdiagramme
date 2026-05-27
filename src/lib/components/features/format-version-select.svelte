@@ -8,8 +8,8 @@
   export let selectedVersion: string = "";
   export let onSelect: (version: string) => void;
 
-  import { onMount } from "svelte";
   import { getCurrentEdifactFormatVersion } from "@hochfrequenz/efoli";
+  import { onMount } from "svelte";
 
   onMount(() => {
     if (!selectedVersion && formatVersions.length > 0) {
