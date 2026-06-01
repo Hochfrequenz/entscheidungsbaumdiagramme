@@ -1,45 +1,28 @@
+import {
+  EdifactFormatVersion,
+  getEdifactFormatVersionLabel,
+} from "@hochfrequenz/efoli";
 import { readdirSync } from "fs";
 import { join } from "path";
+
+import { EXCLUDED_FORMAT_VERSIONS } from "./excluded-format-versions";
 
 type FormatVersion = {
   code: string;
   detailedFormatVersion: string;
 };
 
-const formatVersionMap: Record<string, string> = {
-  "2104": "April 2021",
-  "2110": "Oktober 2021",
-  "2204": "April 2022",
-  "2210": "Oktober 2022",
-  "2304": "April 2023",
-  "2310": "Oktober 2023",
-  "2404": "April 2024",
-  "2410": "Oktober 2024",
-  "2504": "Juni 2025",
-  "2510": "Oktober 2025",
-  "2604": "April 2026",
-  "2610": "Oktober 2026",
-};
-
-// older FVs < FV2404 that are excluded from <selects>
-const EXCLUDED_FORMAT_VERSIONS = [
-  "FV2104",
-  "FV2110",
-  "FV2204",
-  "FV2210",
-  "FV2304",
-  "FV2310",
-];
-
 function formatVersion(version: string): FormatVersion {
-  const formattedVersion = version.startsWith("FV") ? version : `FV${version}`;
-  const mappedVersion = formattedVersion;
-  const versionNumber = mappedVersion.replace("FV", "");
-  const formatVersionDate = formatVersionMap[versionNumber];
-
+  const code = version.startsWith("FV") ? version : `FV${version}`;
+  let label: string;
+  try {
+    label = getEdifactFormatVersionLabel(code as EdifactFormatVersion);
+  } catch {
+    label = code;
+  }
   return {
-    code: mappedVersion,
-    detailedFormatVersion: `${formatVersionDate} (${mappedVersion})`,
+    code,
+    detailedFormatVersion: `${label} (${code})`,
   };
 }
 
@@ -54,7 +37,8 @@ export function getFormatVersions(): FormatVersion[] {
       .filter((dirent) => dirent.isDirectory())
       .map((dirent) => formatVersion(dirent.name))
       .filter((version) => {
-        if (EXCLUDED_FORMAT_VERSIONS.includes(version.code)) return false;
+        if ((EXCLUDED_FORMAT_VERSIONS as string[]).includes(version.code))
+          return false;
 
         if (uniqueFormatVersion.has(version.code)) return false;
         uniqueFormatVersion.add(version.code);

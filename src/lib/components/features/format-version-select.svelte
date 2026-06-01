@@ -8,25 +8,14 @@
   export let selectedVersion: string = "";
   export let onSelect: (version: string) => void;
 
+  import { getCurrentEdifactFormatVersion } from "@hochfrequenz/efoli";
   import { onMount } from "svelte";
-
-  // set default format version to FV2604 if currentDate < 01.10.2026
-  function getDefaultFormatVersion(): string {
-    const currentDate = new Date();
-    const cutoffDate = new Date(2026, 10, 1);
-
-    if (currentDate < cutoffDate) {
-      const fv2604 = formatVersions.find((v) => v.code === "FV2604");
-      return fv2604?.code || "";
-    } else {
-      const fv2610 = formatVersions.find((v) => v.code === "FV2610");
-      return fv2610?.code || "";
-    }
-  }
 
   onMount(() => {
     if (!selectedVersion && formatVersions.length > 0) {
-      selectedVersion = getDefaultFormatVersion();
+      const currentVersion = getCurrentEdifactFormatVersion();
+      const match = formatVersions.find((v) => v.code === currentVersion);
+      selectedVersion = match?.code || "";
       onSelect(selectedVersion);
     }
   });
