@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { getCurrentEdifactFormatVersion } from "@hochfrequenz/efoli";
   import { onMount } from "svelte";
 
   import { goto } from "$app/navigation";
@@ -68,7 +69,24 @@
   onMount(async () => {
     const searchParams = new URLSearchParams(window.location.search);
 
-    const formatVersion = searchParams.get("formatversion");
+    let formatVersion = searchParams.get("formatversion");
+    if (formatVersion?.toLowerCase() === "current") {
+      const currentVersion = getCurrentEdifactFormatVersion();
+      // Fall back to latest available version if the static build doesn't yet include currentVersion
+      const availableCodes = data.formatVersions.map((fv) => fv.code);
+      formatVersion = availableCodes.includes(currentVersion)
+        ? currentVersion
+        : (availableCodes[availableCodes.length - 1] ?? null);
+      if (formatVersion) {
+        const resolved = new URLSearchParams(searchParams);
+        resolved.set("formatversion", formatVersion);
+        await goto(`${base}/ebd/?${resolved.toString()}`, {
+          replaceState: true,
+          keepFocus: true,
+        });
+      }
+    }
+
     const ebd = searchParams.get("ebd");
     const rolesParam = searchParams.get("rolle");
     const chaptersParam = searchParams.get("chapter");
