@@ -73,12 +73,6 @@
           target="_blank"
           href="https://www.hochfrequenz.de/impressum/">Impressum</a
         >
-        <span> | </span>
-        <a
-          class="mx-2"
-          target="_blank"
-          href="https://www.hochfrequenz.de/kontakt/">Kontakt</a
-        >
       </p>
     </div>
 
