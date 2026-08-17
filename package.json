@@ -46,7 +46,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@auth0/auth0-spa-js": "^2.23.0",
+    "@auth0/auth0-spa-js": "^2.24.1",
     "@hochfrequenz/efoli": "^0.0.8"
   }
 }
