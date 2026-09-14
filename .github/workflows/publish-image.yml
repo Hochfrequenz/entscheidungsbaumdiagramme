@@ -36,6 +36,19 @@ jobs:
           # site is missing its diagrams and company styles.
           submodules: recursive
 
+      # The app serves static/version.json. The Azure workflow sed-patches it before
+      # building; without the same step the published image ships the literal
+      # {{BUILD_DATE}} placeholders — in a workflow whose only trigger is the version tag.
+      - name: Stamp build metadata into version.json
+        run: |
+          BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          COMMIT_HASH=$(git rev-parse HEAD)
+          BUILD_BRANCH_OR_TAG=${GITHUB_REF_NAME}
+          sed -i "s|\"build_date\": \"{{BUILD_DATE}}\"|\"build_date\": \"$BUILD_DATE\"|" static/version.json
+          sed -i "s|\"commit_hash\": \"{{COMMIT_HASH}}\"|\"commit_hash\": \"$COMMIT_HASH\"|" static/version.json
+          sed -i "s|\"build_branch_or_tag\": \"{{BUILD_BRANCH_OR_TAG}}\"|\"build_branch_or_tag\": \"$BUILD_BRANCH_OR_TAG\"|" static/version.json
+          cat static/version.json
+
       - name: Lowercase the image name
         id: image
         run: echo "name=${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
