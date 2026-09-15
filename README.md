@@ -62,7 +62,17 @@ flowchart TD
     into main| E("ebd.stage.hochfrequenz.de")
     C -->|Github Actions
     trigger: release| F("ebd.hochfrequenz.de")
+    C -->|Github Actions
+    trigger: release published| G("ghcr.io/hochfrequenz/
+    entscheidungsbaumdiagramme 🐳")
+    G -->|compose stack in
+    hf-apps-collection| H("ebd.hochfrequenz.app")
 ```
+
+> A GitHub **release** now produces two things: the Azure Static Web App deployment as before, and a
+> container image on GHCR that the self-hosted
+> [hf-apps-collection](https://github.com/Hochfrequenz/hf-apps-collection) platform deploys. Both run
+> in parallel until the migration off Azure is finished.
 
 ### 🔐 Auth0 authentication
 
@@ -89,9 +99,13 @@ This app is deployed as a container on the self-hosted
 [hf-apps-collection](https://github.com/Hochfrequenz/hf-apps-collection) platform, alongside its
 Azure Static Web App deployment.
 
-**Releases are cut by tagging.** Pushing a `vX.Y.Z` tag builds and pushes
-`ghcr.io/hochfrequenz/entscheidungsbaumdiagramme`; a `-rc` tag is a staging release, a plain version tag is
-production. The workflow prints the image digest to pin in the deployment repo.
+**Releases are cut by publishing a GitHub release**, not by pushing a bare tag. The release's
+_pre-release_ checkbox decides the channel: ticked means a staging image, unticked means production
+and moves `latest`. The formatting, linting and build/e2e workflows must pass first — a release cut
+from an unprotected branch cannot skip them. The workflow prints the image digest to pin in the
+deployment repo.
+
+Image: `ghcr.io/hochfrequenz/entscheidungsbaumdiagramme`.
 
 ```sh
 $ git tag v1.2.3 && git push origin v1.2.3       # release
