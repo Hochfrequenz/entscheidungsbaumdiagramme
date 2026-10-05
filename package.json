@@ -33,7 +33,7 @@
     "eslint-plugin-simple-import-sort": "^14.0.0",
     "eslint-plugin-svelte": "^3.17.1",
     "postcss": "^8.5.16",
-    "prettier": "^3.8.3",
+    "prettier": "^3.9.9",
     "prettier-plugin-svelte": "^4.1.0",
     "sass": "^1.104.1",
     "scss": "^0.2.4",
