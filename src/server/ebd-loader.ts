@@ -14,7 +14,7 @@ let ebdFullName: Record<string, EbdNameExtended[]> | null = null;
 let ebdMetadata: Record<string, Record<string, MetaData>> | null = null;
 
 // only E_dddd.json are EBD tables; the format version directories also contain
-// other JSON files (index.json, pruefi_to_key.json, *.schema.json, E_dddd.outcomes.json)
+// other JSON files (index.json, pruefi_to_key.json, export_report.json, *.schema.json, E_dddd.outcomes.json)
 function isEbdTableFile(fileName: string): boolean {
   return /^E_\d{4}\.json$/.test(fileName);
 }

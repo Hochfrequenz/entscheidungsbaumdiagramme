@@ -17,7 +17,7 @@ for (const version of exclude) {
 // Revisit when the UI starts using the outcomes files.
 const unusedRootFiles = ["format_versions.json", "llms.txt"];
 const unusedFormatVersionFile =
-  /^(E_\d{4}\.outcomes\.json|.+\.schema\.json|index\.json|pruefi_to_key\.json)$/;
+  /^(E_\d{4}\.outcomes\.json|.+\.schema\.json|index\.json|pruefi_to_key\.json|export_report\.json)$/;
 
 for (const file of unusedRootFiles) {
   const path = join(ebdDir, file);
