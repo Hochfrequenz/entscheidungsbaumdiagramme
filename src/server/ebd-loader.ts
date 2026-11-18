@@ -13,6 +13,12 @@ let ebdFiles: Record<string, string[]> | null = null;
 let ebdFullName: Record<string, EbdNameExtended[]> | null = null;
 let ebdMetadata: Record<string, Record<string, MetaData>> | null = null;
 
+// only E_dddd.json are EBD tables; the format version directories also contain
+// other JSON files (index.json, pruefi_to_key.json, *.schema.json, E_dddd.outcomes.json)
+function isEbdTableFile(fileName: string): boolean {
+  return /^E_\d{4}\.json$/.test(fileName);
+}
+
 // fetches EBD files and associated metadata
 function getEbds(): Record<string, string[]> {
   if (ebdFiles) return ebdFiles;
@@ -124,7 +130,7 @@ export function getEbdMetadata(): Record<string, Record<string, MetaData>> {
 
     try {
       const files = readdirSync(versionPath);
-      const jsonFiles = files.filter((file) => file.endsWith(".json"));
+      const jsonFiles = files.filter(isEbdTableFile);
 
       for (const jsonFile of jsonFiles) {
         const ebdCode = jsonFile.replace(".json", "");
@@ -155,7 +161,7 @@ function getRolesForFormatVersion(formatVersion: string): string[] {
 
   try {
     const files = readdirSync(versionPath);
-    const jsonFiles = files.filter((file) => file.endsWith(".json"));
+    const jsonFiles = files.filter(isEbdTableFile);
 
     for (const jsonFile of jsonFiles) {
       const jsonPath = join(versionPath, jsonFile);
@@ -190,7 +196,7 @@ function getChaptersForFormatVersion(formatVersion: string): string[] {
 
   try {
     const files = readdirSync(versionPath);
-    const jsonFiles = files.filter((file) => file.endsWith(".json"));
+    const jsonFiles = files.filter(isEbdTableFile);
 
     for (const jsonFile of jsonFiles) {
       const jsonPath = join(versionPath, jsonFile);
