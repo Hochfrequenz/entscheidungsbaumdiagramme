@@ -40,8 +40,10 @@ export default [
         ResizeObserver: "readonly",
         // DOM types
         Event: "readonly",
+        Element: "readonly",
         EventTarget: "readonly",
         HTMLElement: "readonly",
+        KeyboardEvent: "readonly",
         HTMLInputElement: "readonly",
         HTMLSelectElement: "readonly",
         MouseEvent: "readonly",
