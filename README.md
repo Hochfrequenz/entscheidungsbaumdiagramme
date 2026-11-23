@@ -62,7 +62,17 @@ flowchart TD
     into main| E("ebd.stage.hochfrequenz.de")
     C -->|Github Actions
     trigger: release| F("ebd.hochfrequenz.de")
+    C -->|Github Actions
+    trigger: release published| G("ghcr.io/hochfrequenz/
+    entscheidungsbaumdiagramme 🐳")
+    G -->|compose stack in
+    hf-apps-collection| H("ebd.hochfrequenz.app")
 ```
+
+> A GitHub **release** now produces two things: the Azure Static Web App deployment as before, and a
+> container image on GHCR that the self-hosted
+> [hf-apps-collection](https://github.com/Hochfrequenz/hf-apps-collection) platform deploys. Both run
+> in parallel until the migration off Azure is finished.
 
 ### 🔐 Auth0 authentication
 
@@ -82,3 +92,45 @@ To get past the landing page when navigating through the staging environment [`h
 [machine-readable EBDs](https://github.com/Hochfrequenz/machine-readable_entscheidungsbaumdiagramme/)
 
 [BDEW](https://www.edi-energy.de/index.php?id=38&tx_bdew_bdew%5Bview%5D=future&tx_bdew_bdew%5Baction%5D=list&tx_bdew_bdew%5Bcontroller%5D=Dokument&cHash=325de212fe24061e83e018a2223e6185)
+
+### 🐳 Container image
+
+This app is deployed as a container on the self-hosted
+[hf-apps-collection](https://github.com/Hochfrequenz/hf-apps-collection) platform, alongside its
+Azure Static Web App deployment.
+
+**Releases are cut by publishing a GitHub release**, not by pushing a bare tag. The release's
+_pre-release_ checkbox decides the channel: ticked means a staging image, unticked means production
+and moves `latest`. The formatting, linting and build/e2e workflows must pass first — a release cut
+from an unprotected branch cannot skip them. The workflow prints the image digest to pin in the
+deployment repo.
+
+Image: `ghcr.io/hochfrequenz/entscheidungsbaumdiagramme`.
+
+```sh
+$ git tag v1.2.3 && git push origin v1.2.3       # release
+$ git submodule update --init --recursive        # needed before building locally
+$ docker build -t ebd .
+$ docker run --rm -p 8080:8080 \
+    -e APP_AUTH0_CLIENT_ID=<client-id> ebd
+```
+
+**Configuration is injected at runtime**, not baked into the bundle: the entrypoint writes
+`/config.js` from `APP_*` environment variables and the app reads `window.__APP_CONFIG__`, falling
+back to the build-time `VITE_AUTH0_CLIENT_ID` value. That is why one image serves both staging and
+production, and why `npm run dev` and Cloudflare Pages previews keep working unchanged.
+
+> Note: the image is built **without** `VITE_AUTH0_CLIENT_ID`, so inside the container there is no
+> build-time fallback — if `APP_AUTH0_CLIENT_ID` is missing, login is simply broken. The compose
+> stack declares it as required, so a real deployment fails before starting.
+>
+> When testing locally on `localhost`, `auth_config.ts` treats the app as being in dev mode and
+> forces an empty client ID, so the runtime value cannot be exercised through a plain
+> `localhost:8080` — reach the container under a non-localhost hostname to test it.
+
+| File                           | Purpose                                                |
+| ------------------------------ | ------------------------------------------------------ |
+| `Dockerfile`                   | two-stage build: node 20 → nginx                       |
+| `docker/nginx.conf`            | serving rules                                          |
+| `docker/entrypoint.sh`         | renders `/config.js` from the environment              |
+| `docker/security-headers.conf` | headers included into every location that sets its own |

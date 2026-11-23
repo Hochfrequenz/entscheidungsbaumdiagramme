@@ -10,9 +10,11 @@
     ExportPumlButton,
     ExportSvgButton,
     Header,
+    ResultSelect,
     SvgContainer,
   } from "$lib/components";
   import { isMissingEbd } from "$lib/data/missing-ebds";
+  import type { ResultGroup } from "$lib/ebd-way";
   import type { EbdNameExtended } from "$lib/types/metadata";
   import { extractSectionHeading } from "$lib/types/metadata";
 
@@ -34,6 +36,14 @@
   let isLoading = false;
   let error: boolean = false;
   let isInitialLoad = true;
+  // result boxes of the shown diagram and the highlighted one (kept by SvgContainer, chosen here or by a click)
+  let resultGroups: ResultGroup[] = [];
+  let selectedResult = "";
+
+  $: if (!svgContent || error) {
+    resultGroups = [];
+    selectedResult = "";
+  }
 
   $: if (selectedFormatVersion) {
     ebdList = filterEbds(
@@ -153,12 +163,14 @@
     selectedChapters = [];
     selectedEbd = "";
     svgContent = "";
+    selectedResult = "";
     ebdList = version ? filterEbds(version, [], []) : [];
     updateURL();
   }
 
   function handleEbdInput(ebdCode: string) {
     selectedEbd = ebdCode;
+    selectedResult = "";
     loadSvg();
     updateURL();
   }
@@ -264,6 +276,12 @@
   >
     <svelte:fragment slot="actions">
       <div class="flex gap-4">
+        <ResultSelect
+          groups={resultGroups}
+          selected={selectedResult}
+          isDisabled={isLoading || !svgContent}
+          onSelect={(key) => (selectedResult = key)}
+        />
         <ExportSvgButton
           currentFormatVersion={selectedFormatVersion}
           currentEbd={selectedEbd}
@@ -293,7 +311,12 @@
     {#if error}
       <ErrorPage ebdCode={selectedEbd} formatVersion={selectedFormatVersion} />
     {:else}
-      <SvgContainer {svgContent} {isLoading} />
+      <SvgContainer
+        {svgContent}
+        {isLoading}
+        bind:groups={resultGroups}
+        bind:selectedGroup={selectedResult}
+      />
     {/if}
   </div>
 </div>

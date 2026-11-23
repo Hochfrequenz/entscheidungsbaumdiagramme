@@ -24,4 +24,5 @@ export { default as FilterPanel } from "$lib/components/features/filter-panel.sv
 export { default as FilterRoleSelect } from "$lib/components/features/filter-role-select.svelte";
 export { default as FilterSectionInput } from "$lib/components/features/filter-section-input.svelte";
 export { default as FormatVersionSelect } from "$lib/components/features/format-version-select.svelte";
+export { default as ResultSelect } from "$lib/components/features/result-select.svelte";
 export { default as SvgContainer } from "$lib/components/features/svg-container.svelte";
