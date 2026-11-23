@@ -59,9 +59,9 @@ flowchart TD
     trigger: PR created/updated| D("deployment preview")
     C -->|Github Actions
     trigger: PR merged
-    into main| E("ebd-stage.hochfrequenz.app")
+    into main| E("ebd.stage.hochfrequenz.de")
     C -->|Github Actions
-    trigger: release| F("ebd.hochfrequenz.app")
+    trigger: release| F("ebd.hochfrequenz.de")
     C -->|Github Actions
     trigger: release published| G("ghcr.io/hochfrequenz/
     entscheidungsbaumdiagramme 🐳")
