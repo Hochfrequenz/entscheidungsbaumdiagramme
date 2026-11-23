@@ -59,9 +59,9 @@ flowchart TD
     trigger: PR created/updated| D("deployment preview")
     C -->|Github Actions
     trigger: PR merged
-    into main| E("ebd.stage.hochfrequenz.de")
+    into main| E("ebd-stage.hochfrequenz.app")
     C -->|Github Actions
-    trigger: release| F("ebd.hochfrequenz.de")
+    trigger: release| F("ebd.hochfrequenz.app")
     C -->|Github Actions
     trigger: release published| G("ghcr.io/hochfrequenz/
     entscheidungsbaumdiagramme 🐳")
@@ -79,7 +79,7 @@ flowchart TD
 > [!NOTE]
 > During local development, authentication is currently not required. Instead, a dummy account `local@development.com` will be already logged in at both local dev server startup as well as build preview.
 
-To get past the landing page when navigating through the staging environment [`https://ebd.stage.hochfrequenz.de`](https://ebd.stage.hochfrequenz.de) and production environment [`https://ebd.hochfrequenz.de`](https://ebd.hochfrequenz.de), users need to authenticate using their Hochfrequenz login credentials.
+To get past the landing page when navigating through the staging environment [`https://ebd-stage.hochfrequenz.app`](https://ebd-stage.hochfrequenz.app) and production environment [`https://ebd.hochfrequenz.app`](https://ebd.hochfrequenz.app), users need to authenticate using their Hochfrequenz login credentials.
 
 ### 🔗 Links
 
